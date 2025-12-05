@@ -123,3 +123,7 @@ th {
   display: block;
   width: 100%;
 }
+
+ul li{
+  line-height: 2.3;
+}

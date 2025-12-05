@@ -2,30 +2,25 @@
 <!-- Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations. -->
 <!-- computer graphics, graphics fundamentals, CG basics, vectors in graphics, transformations, rendering pipeline, 3D graphics, 2D graphics
  -->
-# Introduction
+# Why these docs?
 
-Feeling lost in the world of Computer Graphics and not sure where to begin?
-You’re in the right place.
+When I started out to learn Computer Graphics I struggled a lot to find a clear step by step resource to learn, I fidgeted between youtube tutorials, medium articles, books, websites etc. to learn it.
 
-CG-Docs is designed to guide you through the core foundations of computer graphics — which we’ll simply call CG from here on. The content follows a clear, chronological roadmap so you always know what comes next and why.
-
-We’ll start with the essential mathematics for CG, move on to the basics of HTML canvas with the 2D context, and then step into WebGL to harness the GPU for fast, interactive graphics.
-
-However, even though we focus on WebGL, the underlying concepts remain the same and can be applied to a wide range of graphics engines. This means the skills you learn here are transferable to other platforms, engines, or frameworks.
-
-Whether you're a beginner or revisiting fundamentals, CG-Docs will take you from the basics to GPU-level graphics in a structured, practical, and enjoyable way.
+ After doing all this, I realized that the resources for learning Computer Graphics are so scattered that it becomes overwhelming for a beginner to even know where to start, so I decided to write these docs in a beginner friendly and chronological manner, so that anyone could learn it easily. 
 
 ## Why Computer Graphics
 
-So before starting, let’s understand why learning Computer Graphics is worth it.
+Before we dive into Computer Graphics, let’s answer the big question — why even learn it?<br>The following points will explain:
 
-- It’s the foundation of almost every game you play.
-- You can build cool simulations and visual demos.
-- It helps you see your ideas come to life on a screen.
-- You can create animations, effects, and interactive visuals.
-- It makes programming feel more fun and creative.
+- Got an Idea for a **game**? Now you can make it without using any game engine
+- Like to see **fluid or smoke simulations**? Now you can code it
+- Bad at drawing? I got your back, now you can make drawings impossible to draw by hand
+- Curious about what secret sauce powers Unity and Unreal? Well… why not cook up your own **game engine** from scratch? <sup>**1**</sup>
+- And many more things but it will take whole day to write them all, so I am quitting it here ; )
 
-To keep up your motivation let me show you some of the creations I made learning CG, you can click on any of these to explore them live.
+**I know you’re motivated — that’s why you’ve made it this far.**
+And trust me, you’ll soon be able to build projects like these — *maybe even better!*  
+So, to keep that motivation going, here are some of the visual creations I’ve built along the way.
 
 <div style="
   width: 100%;
@@ -34,47 +29,51 @@ To keep up your motivation let me show you some of the creations I made learning
   gap: 15px;
 ">
   <a href="https://alienworld-himanshu.vercel.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1752429226/fractals/dhxwr4svvhqmi6fcwgm2.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1752429226/fractals/dhxwr4svvhqmi6fcwgm2.png" alt="Alien World" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://factory-himanshu.vercel.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764065331/ve1hqosh3dbx6dxpdbfa.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764065331/ve1hqosh3dbx6dxpdbfa.png" alt="Factory" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://alienworld-himanshu.vercel.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1752406386/fractals/j9uyx25t2v9m4f0inrsq.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1752406386/fractals/j9uyx25t2v9m4f0inrsq.png" alt="Alien World" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://sketchy-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764065984/swgpt6lhanvxx9rln1yk.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764065984/swgpt6lhanvxx9rln1yk.png" alt="Sketchy" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://dda-himanshu-gupta.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066170/vn4y68c9tn4boa2v2scl.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066170/vn4y68c9tn4boa2v2scl.png" alt="DDA Algorithm" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://fourier-grapher-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066416/s6hwj1qiskywbdlnnal5.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066416/s6hwj1qiskywbdlnnal5.png" alt="Fourier Grapher" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://pythaorean-tree-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070935/pjil5majln44jye9peeo.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070935/pjil5majln44jye9peeo.png" alt="Pythagorean Tree" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://conways-game-of-life-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066429/dc4v69scuwiiomivpcdr.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066429/dc4v69scuwiiomivpcdr.png" alt="Conway's Game of Life" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://wave-animations-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066798/aeklk7fcd8illhrz4wvy.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066798/aeklk7fcd8illhrz4wvy.png" alt="Wave Animations" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://mandelbrot-explorer.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070898/resmc0nnqlwu3zofh7hv.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070898/resmc0nnqlwu3zofh7hv.png" alt="Mandelbrot Explorer" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://tree-fractal-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070412/lkvdabtxzg0tkhwfpaoy.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070412/lkvdabtxzg0tkhwfpaoy.png" alt="Tree Fractal" style="width:100%; border-radius: 8px;" />
   </a>
   <a href="https://julia-set-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070715/x6mqolvcrlc9nkuu0epz.png" style="width:100%; border-radius: 8px;" />
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070715/x6mqolvcrlc9nkuu0epz.png" alt="Julia Set" style="width:100%; border-radius: 8px;" />
   </a>
 </div>
 
 ## How to use the docs
 
-To get the best learning experience, follow a simple and consistent approach.
-Create a reading schedule, practice side-by-side, and make short handwritten or digital notes as you go.
-Move through the topics in chronological order, since each concept builds on the previous one.
+When studying CG <sup>**2**</sup> do not forget to keep a notes copy and pen, the more you write the more you learn and make sure you don't skip over any of the chapters untill you are sure enough that you know it well because each chapter is built one over the other.   
 
 Stay consistent, explore deeply, and most importantly — ***Happy Learning!***
+
+<hr>
+
+<sup>1</sup> Not to demotivate you or anything, but creating a full game engine by yourself is a loooong quest — like final-boss-level long
+
+<sup>2</sup> I will say Computer Graphics as CG from now onwards as it takes too long to type it, and programers are lazy you know

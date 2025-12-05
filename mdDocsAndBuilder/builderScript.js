@@ -1,4 +1,3 @@
-const DOMAIN_NAME = "https://graphicsdocs.himanshugupta.in";
 import { readdir, readFile, mkdir, writeFile, stat } from "fs/promises";
 import path from "path";
 import { marked } from "marked";
@@ -8,20 +7,17 @@ import { fileURLToPath } from "url";
 import fs from "fs";
 import getSortedFolderStructure from "./sortedFolderStr.js";
 import generateSidebarHTML from "./sideBarGenerator.js";
+import envVariables from "./env.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const inputDir = path.resolve(__dirname, "docs");
 const srcRoot = inputDir;
-const outputDir = path.resolve(__dirname, "../dist/docs");
+const outputDir = path.resolve(__dirname, "../cg-docs/docs");
 const templatePath = path.resolve(__dirname, "template.html");
 let folderStr = {};
 let flattenedIndexList = [];
 let sidebarHTML = "";
-let BUILD_TYPE = "PROD";
-if (process.argv.includes("--dev")) {
-  BUILD_TYPE = "DEV";
-}
-const URL_PREPEND_STRING = BUILD_TYPE === "DEV" ? "/dist" : "/cg-docs";
+
 const templateHTML = await readFile(templatePath, "utf-8");
 marked.use({
   extensions: [
@@ -92,7 +88,8 @@ function wrapHTML(
     .replace(/{pageTitle}/g, pageTitle)
     .replace(/{pageDescription}/g, pageDescription)
     .replace(/{pageKeywords}/g, pageKeywords)
-    .replace(/{pageUrl}/g, pageUrl);
+    .replace(/{pageUrl}/g, pageUrl)
+    .replace(/<!--[\s\S]*?-->/g, "");
 }
 
 async function processFile(srcPath) {
@@ -112,7 +109,8 @@ async function processFile(srcPath) {
     lines[1]?.replace(/^<!--\s*|\s*-->$/g, "").trim() || "";
   const pageKeywords = lines[2]?.replace(/^<!--\s*|\s*-->$/g, "").trim() || "";
   const pageUrl =
-    `${DOMAIN_NAME}/docs/` + relative.replace(".md", ".html").toLowerCase();
+    `${envVariables.DOMAIN_NAME}/docs/` +
+    relative.replace(".md", ".html").toLowerCase();
   const html = marked.parse(md);
   const { prev, next } = getPrevNextMD(relative, folderStr);
   await writeFile(
@@ -154,7 +152,7 @@ async function processDir(src, dest) {
 
 async function buildAll() {
   console.log("Building documentation...");
-  folderStr = await getSortedFolderStructure(inputDir, URL_PREPEND_STRING);
+  folderStr = await getSortedFolderStructure(inputDir);
   sidebarHTML = generateSidebarHTML(folderStr);
   flattenedIndexList = flatten(folderStr);
   await processDir(inputDir, outputDir, folderStr);
@@ -179,7 +177,7 @@ function watch() {
 
   watcher.on("change", async (file) => {
     try {
-      folderStr = await getSortedFolderStructure(inputDir, URL_PREPEND_STRING);
+      folderStr = await getSortedFolderStructure(inputDir);
       sidebarHTML = generateSidebarHTML(folderStr);
       flattenedIndexList = flatten(folderStr);
       await processFile(file);
@@ -235,7 +233,7 @@ function flatten(struct) {
 }
 
 function getPrevNextMD(mdPath) {
-  const targetPath = `${URL_PREPEND_STRING}/docs/` + normalizePath(mdPath);
+  const targetPath = `/cg-docs/docs/` + normalizePath(mdPath);
   const list = flattenedIndexList;
 
   const index = list.indexOf(targetPath);

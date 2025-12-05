@@ -1,5 +1,6 @@
 import { readdir, stat } from "fs/promises";
 import path from "path";
+import envVariables from "./env.js";
 
 function formatName(name) {
   return name
@@ -7,7 +8,7 @@ function formatName(name) {
     .replace(/(^\w|-\w)/g, (m) => m.replace("-", "").toUpperCase());
 }
 const mdDocsBuilderDir = path.resolve("./");
-async function getSortedFolderStructure(dir, URL_PREPEND_STRING = "") {
+async function getSortedFolderStructure(dir) {
   const items = await readdir(dir);
   const entries = [];
 
@@ -21,13 +22,12 @@ async function getSortedFolderStructure(dir, URL_PREPEND_STRING = "") {
         key: formatName(item),
         type: "folder",
         created: stats.birthtimeMs,
-        children: await getSortedFolderStructure(fullPath, URL_PREPEND_STRING),
+        children: await getSortedFolderStructure(fullPath),
       });
     } else if (isMD) {
       const relative = path.relative(mdDocsBuilderDir, fullPath);
       const processedPath =
-        `${URL_PREPEND_STRING}/` +
-        relative.replace(/\.md$/, ".html").toLowerCase();
+        `/cg-docs/` + relative.replace(/\.md$/, ".html").toLowerCase();
 
       entries.push({
         key: formatName(item),
