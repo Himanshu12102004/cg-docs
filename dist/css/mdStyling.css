@@ -40,6 +40,7 @@ h1::after, h2::after {
   width: 100%;
   height: 1px;
   background-color: var(--hr);
+  transition: background-color var(--transition-time) ease;
 }
 p {
   line-height: 1.9;

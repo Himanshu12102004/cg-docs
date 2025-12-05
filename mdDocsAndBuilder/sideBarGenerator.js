@@ -29,7 +29,7 @@ function generateSidebarHTML(structure) {
     <div class="sidebarLogoContainer">
     <img
     class="logo-phone"
-    src="{cssAndJsFileLocation}assets/logo.svg"
+    src="{cssAndJsFileLocation}assets/images/logo.svg"
     alt="logo"
     />
     <h1 class="sidebarTitle">CG Docs</h1>
