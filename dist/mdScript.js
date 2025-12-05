@@ -8,13 +8,12 @@ function formatName(name) {
 }
 function putUrlInOpenFolders() {
   const currentUrl = window.location.href;
-  const docsIndex = currentUrl.indexOf("docs/");
+  const docsIndex = currentUrl.indexOf("/docs/");
   let currentDocPath = "";
   let whereAmIElement = document.querySelector(".whereAmI");
   if (docsIndex !== -1) {
-    currentDocPath = currentUrl.substring(docsIndex + 5);
+    currentDocPath = currentUrl.substring(docsIndex + 6);
   }
-  console.log("Current Doc Path:", formatName(currentDocPath));
   let folderParts = currentDocPath.split("/");
   const formattedParts = folderParts.map((part) => formatName(part));
   const mergedParts = formattedParts.join("/").replace(".html", "");

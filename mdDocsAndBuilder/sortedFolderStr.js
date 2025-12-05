@@ -21,7 +21,7 @@ async function getSortedFolderStructure(dir, URL_PREPEND_STRING = "") {
         key: formatName(item),
         type: "folder",
         created: stats.birthtimeMs,
-        children: await getSortedFolderStructure(fullPath),
+        children: await getSortedFolderStructure(fullPath, URL_PREPEND_STRING),
       });
     } else if (isMD) {
       const relative = path.relative(mdDocsBuilderDir, fullPath);
