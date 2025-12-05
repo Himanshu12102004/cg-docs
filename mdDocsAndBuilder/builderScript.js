@@ -17,6 +17,11 @@ const templatePath = path.resolve(__dirname, "template.html");
 let folderStr = {};
 let flattenedIndexList = [];
 let sidebarHTML = "";
+let BUILD_TYPE = "PROD";
+if (process.argv.includes("--dev")) {
+  BUILD_TYPE = "DEV";
+}
+const URL_PREPEND_STRING = BUILD_TYPE === "DEV" ? "/dist" : "/cg-docs";
 const templateHTML = await readFile(templatePath, "utf-8");
 marked.use({
   extensions: [
@@ -107,8 +112,7 @@ async function processFile(srcPath) {
     lines[1]?.replace(/^<!--\s*|\s*-->$/g, "").trim() || "";
   const pageKeywords = lines[2]?.replace(/^<!--\s*|\s*-->$/g, "").trim() || "";
   const pageUrl =
-    `${DOMAIN_NAME}/dist/docs/` +
-    relative.replace(".md", ".html").toLowerCase();
+    `${DOMAIN_NAME}/docs/` + relative.replace(".md", ".html").toLowerCase();
   const html = marked.parse(md);
   const { prev, next } = getPrevNextMD(relative, folderStr);
   await writeFile(
@@ -150,7 +154,7 @@ async function processDir(src, dest) {
 
 async function buildAll() {
   console.log("Building documentation...");
-  folderStr = await getSortedFolderStructure(inputDir);
+  folderStr = await getSortedFolderStructure(inputDir, URL_PREPEND_STRING);
   sidebarHTML = generateSidebarHTML(folderStr);
   flattenedIndexList = flatten(folderStr);
   await processDir(inputDir, outputDir, folderStr);
@@ -175,7 +179,7 @@ function watch() {
 
   watcher.on("change", async (file) => {
     try {
-      folderStr = await getSortedFolderStructure(inputDir);
+      folderStr = await getSortedFolderStructure(inputDir, URL_PREPEND_STRING);
       sidebarHTML = generateSidebarHTML(folderStr);
       flattenedIndexList = flatten(folderStr);
       await processFile(file);
@@ -231,7 +235,7 @@ function flatten(struct) {
 }
 
 function getPrevNextMD(mdPath) {
-  const targetPath = "/dist/docs/" + normalizePath(mdPath);
+  const targetPath = `${URL_PREPEND_STRING}/docs/` + normalizePath(mdPath);
   const list = flattenedIndexList;
 
   const index = list.indexOf(targetPath);

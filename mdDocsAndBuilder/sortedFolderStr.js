@@ -7,7 +7,7 @@ function formatName(name) {
     .replace(/(^\w|-\w)/g, (m) => m.replace("-", "").toUpperCase());
 }
 const mdDocsBuilderDir = path.resolve("./");
-async function getSortedFolderStructure(dir) {
+async function getSortedFolderStructure(dir, URL_PREPEND_STRING = "") {
   const items = await readdir(dir);
   const entries = [];
 
@@ -25,9 +25,9 @@ async function getSortedFolderStructure(dir) {
       });
     } else if (isMD) {
       const relative = path.relative(mdDocsBuilderDir, fullPath);
-      const processedPath = "/dist/"+relative
-        .replace(/\.md$/, ".html")
-        .toLowerCase();
+      const processedPath =
+        `${URL_PREPEND_STRING}/` +
+        relative.replace(/\.md$/, ".html").toLowerCase();
 
       entries.push({
         key: formatName(item),
