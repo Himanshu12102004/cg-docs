@@ -16,7 +16,7 @@ function putUrlInOpenFolders() {
   }
   let folderParts = currentDocPath.split("/");
   const formattedParts = folderParts.map((part) => formatName(part));
-  const mergedParts = formattedParts.join("/").replace(".html", "");
+  const mergedParts = formattedParts.join("/").split(".html")[0];
   console.log("Merged Parts:", mergedParts);
   const openedFile = document.querySelector(
     `[data-key-path="${mergedParts}"]`
