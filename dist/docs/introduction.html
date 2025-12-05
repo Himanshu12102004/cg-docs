@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic Meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta -->
+    <title>CG Docs – Introduction</title>
+    <meta name="description" content="Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations." />
+    <meta name="keywords" content="computer graphics, graphics fundamentals, CG basics, vectors in graphics, transformations, rendering pipeline, 3D graphics, 2D graphics" />
+    <meta name="author" content="Himanshu Gupta" />
+
+    <!-- OpenGraph for Better Sharing -->
+    <meta property="og:title" content="CG Docs – Introduction" />
+    <meta property="og:description" content="Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/dist/docs/introduction.html" />
+    <meta property="og:image" content="../assets/logo.svg" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CG Docs – Introduction" />
+    <meta name="twitter:description" content="Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations." />
+    <meta
+      name="twitter:image"
+      content="../assets/preview.png"
+    />
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/dist/docs/introduction.html" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="../assets/favicon.ico" />
+
+    <!-- Stylesheets -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+    />
+    <link rel="stylesheet" href="../css/theming.css" />
+    <link
+      rel="stylesheet"
+      href="../css/articleStyling.css"
+    />
+    <link rel="stylesheet" href="../css/mdStyling.css" />
+
+    <!-- Structured Data (Schema) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Introduction",
+        "description": "Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations.",
+        "author": {
+          "@type": "Person",
+          "name": "Himanshu Gupta"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CG Docs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Theme handling moved inside <body> to improve CLS -->
+    <script>
+      const root = document.documentElement;
+      let savedTheme = localStorage.getItem("theme");
+      if (!savedTheme) {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        savedTheme = prefersDark ? "dark" : "light";
+        localStorage.setItem("theme", savedTheme);
+      }
+      if (savedTheme === "light") {
+        root.classList.add("light");
+      }
+    </script>
+    <div class="overlay"></div>
+    <nav>
+      <div>
+        <img
+          class="logo"
+          src="../assets/logo.svg"
+          alt="logo"
+        />
+        <svg
+          class="hamburgerMenu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="searchBar">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 256 256"
+          class="searchIcon"
+        >
+          <path
+            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+          ></path>
+        </svg>
+
+        <input
+          type="text"
+          class="searchInput"
+          placeholder="Search docs..."
+          aria-label="Search docs"
+        />
+      </div>
+      <div class="githubAndLightToggler">
+        <!-- Git Hub Icon -->
+        <svg
+          class="gitHub"
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width="240.000000pt"
+          height="240.000000pt"
+          viewBox="0 0 240.000000 240.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g
+            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+            stroke="none"
+          >
+            <path
+              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+-1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
+118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
+-144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
+49 -10 94 -6 162 14 9 3 21 24 27 48 6 23 22 58 35 77 l24 35 -81 16 c-170 35
+-275 96 -344 200 -64 96 -85 179 -86 334 0 146 16 206 79 288 28 36 31 47 23
+68 -15 36 -11 188 5 234 13 34 20 40 47 43 45 5 129 -24 214 -72 l73 -42 64
+15 c91 21 364 20 446 0 l62 -16 58 35 c77 46 175 82 224 82 39 0 39 -1 55 -52
+17 -59 20 -166 5 -217 -8 -30 -6 -39 16 -68 109 -144 121 -383 29 -579 -62
+-129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
+-15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
+-419 518 -733 602 -137 36 -395 44 -525 15z"
+            />
+          </g>
+        </svg>
+        <!-- Sun Icon -->
+        <div class="theme-toggler">
+          <svg
+            class="sun theme-icon hide"
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M277.3 32h-42.7v64h42.7V32zm129.1 43.7L368 114.1l29.9 29.9 38.4-38.4-29.9-29.9zm-300.8 0l-29.9 29.9 38.4 38.4 29.9-29.9-38.4-38.4zM256 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128zm224 106.7h-64v42.7h64v-42.7zm-384 0H32v42.7h64v-42.7zM397.9 368L368 397.9l38.4 38.4 29.9-29.9-38.4-38.4zm-283.8 0l-38.4 38.4 29.9 29.9 38.4-38.4-29.9-29.9zm163.2 48h-42.7v64h42.7v-64z"
+            ></path>
+          </svg>
+          <!-- Moon Svg -->
+          <svg
+            class="moon theme-icon"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M195 125c0-26.3 5.3-51.3 14.9-74.1C118.7 73 51 155.1 51 253c0 114.8 93.2 208 208 208 97.9 0 180-67.7 202.1-158.9-22.8 9.6-47.9 14.9-74.1 14.9-106 0-192-86-192-192z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </nav>
+    <main class="layout">
+      <aside class="layout__sidebar">
+    <div class="sidebar">
+    <div class="sidebarHeader">
+    <div class="sidebarLogoContainer">
+    <img
+    class="logo-phone"
+    src="../assets/logo.svg"
+    alt="logo"
+    />
+    <h1 class="sidebarTitle">CG Docs</h1>
+    </div>
+    <svg class="menuClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+    </div> 
+      <ul class="level-0">
+          <li><a href="/dist/docs/introduction.html" data-key-path=Introduction>Introduction</a></li>
+        
+          <li><a href="/dist/docs/basics.html" data-key-path=Basics>Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path=Maths/>Maths</span>
+            <ul class="level-1">
+          <li><a href="/dist/docs/maths/basics.html" data-key-path=Maths/Basics>Basics</a></li>
+        </ul>
+          </li>
+        </ul>
+    </div>
+  </aside>
+
+      <section class="layout__content">
+        <div class="whereAmI">{Where Am I}</div>
+        <!-- Introduction -->
+<!-- Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations. -->
+<!-- computer graphics, graphics fundamentals, CG basics, vectors in graphics, transformations, rendering pipeline, 3D graphics, 2D graphics
+ -->
+<h1>Introduction</h1>
+<p>Feeling lost in the world of Computer Graphics and not sure where to begin?
+You’re in the right place.</p>
+<p>CG-Docs is designed to guide you through the core foundations of computer graphics — which we’ll simply call CG from here on. The content follows a clear, chronological roadmap so you always know what comes next and why.</p>
+<p>We’ll start with the essential mathematics for CG, move on to the basics of HTML canvas with the 2D context, and then step into WebGL to harness the GPU for fast, interactive graphics.</p>
+<p>However, even though we focus on WebGL, the underlying concepts remain the same and can be applied to a wide range of graphics engines. This means the skills you learn here are transferable to other platforms, engines, or frameworks.</p>
+<p>Whether you&#39;re a beginner or revisiting fundamentals, CG-Docs will take you from the basics to GPU-level graphics in a structured, practical, and enjoyable way.</p>
+<h2>Why Computer Graphics</h2>
+<p>So before starting, let’s understand why learning Computer Graphics is worth it.</p>
+<ul>
+<li>It’s the foundation of almost every game you play.</li>
+<li>You can build cool simulations and visual demos.</li>
+<li>It helps you see your ideas come to life on a screen.</li>
+<li>You can create animations, effects, and interactive visuals.</li>
+<li>It makes programming feel more fun and creative.</li>
+</ul>
+<p>To keep up your motivation let me show you some of the creations I made learning CG, you can click on any of these to explore them live.</p>
+<div style="
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+">
+  <a href="https://alienworld-himanshu.vercel.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1752429226/fractals/dhxwr4svvhqmi6fcwgm2.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://factory-himanshu.vercel.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764065331/ve1hqosh3dbx6dxpdbfa.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://alienworld-himanshu.vercel.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1752406386/fractals/j9uyx25t2v9m4f0inrsq.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://sketchy-himanshu.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764065984/swgpt6lhanvxx9rln1yk.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://dda-himanshu-gupta.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066170/vn4y68c9tn4boa2v2scl.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://fourier-grapher-himanshu.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066416/s6hwj1qiskywbdlnnal5.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://pythaorean-tree-himanshu.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070935/pjil5majln44jye9peeo.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://conways-game-of-life-himanshu.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066429/dc4v69scuwiiomivpcdr.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://wave-animations-himanshu.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066798/aeklk7fcd8illhrz4wvy.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://mandelbrot-explorer.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070898/resmc0nnqlwu3zofh7hv.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://tree-fractal-himanshu.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070412/lkvdabtxzg0tkhwfpaoy.png" style="width:100%; border-radius: 8px;" />
+  </a>
+  <a href="https://julia-set-himanshu.netlify.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070715/x6mqolvcrlc9nkuu0epz.png" style="width:100%; border-radius: 8px;" />
+  </a>
+</div>
+
+<h2>How to use the docs</h2>
+<p>To get the best learning experience, follow a simple and consistent approach.
+Create a reading schedule, practice side-by-side, and make short handwritten or digital notes as you go.
+Move through the topics in chronological order, since each concept builds on the previous one.</p>
+<p>Stay consistent, explore deeply, and most importantly — <em><strong>Happy Learning!</strong></em></p>
+
+        <div class="nextPrev">
+          <i>
+            <a href="#">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"
+                  ></path>
+                </svg>
+              </span>
+              <span style="padding-bottom: 4px"> Previous </span>
+            </a>
+          </i>
+          <i>
+            <a href="/dist/docs/basics.html">
+              <span style="padding-bottom: 4px"> Next </span>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+          </i>
+        </div>
+      </section>
+    </main>
+
+    <script src="../mdScript.js"></script>
+  </body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic Meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta -->
+    <title>CG Docs – {pageTitle}</title>
+    <meta name="description" content="{pageDescription}" />
+    <meta name="keywords" content="{pageKeywords}" />
+    <meta name="author" content="Himanshu Gupta" />
+
+    <!-- OpenGraph for Better Sharing -->
+    <meta property="og:title" content="CG Docs – {pageTitle}" />
+    <meta property="og:description" content="{pageDescription}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{pageUrl}" />
+    <meta property="og:image" content="{cssAndJsFileLocation}assets/logo.svg" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CG Docs – {pageTitle}" />
+    <meta name="twitter:description" content="{pageDescription}" />
+    <meta
+      name="twitter:image"
+      content="{cssAndJsFileLocation}assets/preview.png"
+    />
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="{pageUrl}" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="{cssAndJsFileLocation}assets/favicon.ico" />
+
+    <!-- Stylesheets -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+    />
+    <link rel="stylesheet" href="{cssAndJsFileLocation}css/theming.css" />
+    <link
+      rel="stylesheet"
+      href="{cssAndJsFileLocation}css/articleStyling.css"
+    />
+    <link rel="stylesheet" href="{cssAndJsFileLocation}css/mdStyling.css" />
+
+    <!-- Structured Data (Schema) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "{pageTitle}",
+        "description": "{pageDescription}",
+        "author": {
+          "@type": "Person",
+          "name": "Himanshu Gupta"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CG Docs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Theme handling moved inside <body> to improve CLS -->
+    <script>
+      const root = document.documentElement;
+      let savedTheme = localStorage.getItem("theme");
+      if (!savedTheme) {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        savedTheme = prefersDark ? "dark" : "light";
+        localStorage.setItem("theme", savedTheme);
+      }
+      if (savedTheme === "light") {
+        root.classList.add("light");
+      }
+    </script>
+    <div class="overlay"></div>
+    <nav>
+      <div>
+        <img
+          class="logo"
+          src="{cssAndJsFileLocation}assets/logo.svg"
+          alt="logo"
+        />
+        <svg
+          class="hamburgerMenu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="searchBar">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 256 256"
+          class="searchIcon"
+        >
+          <path
+            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+          ></path>
+        </svg>
+
+        <input
+          type="text"
+          class="searchInput"
+          placeholder="Search docs..."
+          aria-label="Search docs"
+        />
+      </div>
+      <div class="githubAndLightToggler">
+        <!-- Git Hub Icon -->
+        <svg
+          class="gitHub"
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width="240.000000pt"
+          height="240.000000pt"
+          viewBox="0 0 240.000000 240.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g
+            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+            stroke="none"
+          >
+            <path
+              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+-1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
+118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
+-144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
+49 -10 94 -6 162 14 9 3 21 24 27 48 6 23 22 58 35 77 l24 35 -81 16 c-170 35
+-275 96 -344 200 -64 96 -85 179 -86 334 0 146 16 206 79 288 28 36 31 47 23
+68 -15 36 -11 188 5 234 13 34 20 40 47 43 45 5 129 -24 214 -72 l73 -42 64
+15 c91 21 364 20 446 0 l62 -16 58 35 c77 46 175 82 224 82 39 0 39 -1 55 -52
+17 -59 20 -166 5 -217 -8 -30 -6 -39 16 -68 109 -144 121 -383 29 -579 -62
+-129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
+-15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
+-419 518 -733 602 -137 36 -395 44 -525 15z"
+            />
+          </g>
+        </svg>
+        <!-- Sun Icon -->
+        <div class="theme-toggler">
+          <svg
+            class="sun theme-icon hide"
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M277.3 32h-42.7v64h42.7V32zm129.1 43.7L368 114.1l29.9 29.9 38.4-38.4-29.9-29.9zm-300.8 0l-29.9 29.9 38.4 38.4 29.9-29.9-38.4-38.4zM256 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128zm224 106.7h-64v42.7h64v-42.7zm-384 0H32v42.7h64v-42.7zM397.9 368L368 397.9l38.4 38.4 29.9-29.9-38.4-38.4zm-283.8 0l-38.4 38.4 29.9 29.9 38.4-38.4-29.9-29.9zm163.2 48h-42.7v64h42.7v-64z"
+            ></path>
+          </svg>
+          <!-- Moon Svg -->
+          <svg
+            class="moon theme-icon"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M195 125c0-26.3 5.3-51.3 14.9-74.1C118.7 73 51 155.1 51 253c0 114.8 93.2 208 208 208 97.9 0 180-67.7 202.1-158.9-22.8 9.6-47.9 14.9-74.1 14.9-106 0-192-86-192-192z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </nav>
+    <main class="layout">
+      <aside class="layout__sidebar">{sidebar}</aside>
+
+      <section class="layout__content">
+        <div class="whereAmI">{Where Am I}</div>
+        {content}
+        <div class="nextPrev">
+          <i>
+            <a href="{prevPage}">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"
+                  ></path>
+                </svg>
+              </span>
+              <span style="padding-bottom: 4px"> Previous </span>
+            </a>
+          </i>
+          <i>
+            <a href="{nextPage}">
+              <span style="padding-bottom: 4px"> Next </span>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+          </i>
+        </div>
+      </section>
+    </main>
+
+    <script src="{cssAndJsFileLocation}mdScript.js"></script>
+  </body>
+</html>

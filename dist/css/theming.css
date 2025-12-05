@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Text:wght@400;500;600;700&display=swap");
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121213;
+    --foreground: #e5e5e5;
+    --button: #3b82f6;
+    --button-hover: #1d4ed8;
+    --border: #2a2a2a;
+    --accent: #60a5fa;
+    --accent2: #10afa2;
+    --accent3: #34d399;
+    --muted: #9ca3af;
+    --icon: #c2c2c2;
+    --search: #222326;
+    --hr: #404040;
+    --transition-time: 0.3s;
+  }
+}
+.light {
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --button: #2563eb;
+  --button-hover: #1e4bcc;
+  --border: #e5e5e5;
+  --accent: #2563eb;
+  --accent2: #14b8a6;
+  --accent3: #10b981;
+  --muted: #6b7280;
+  --icon: #616161;
+  --search: #f3f4f6;
+  --hr: #d1d5db;
+}
+
