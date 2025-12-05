@@ -1,12 +1,18 @@
+@font-face {
+  font-family: "Google Sans Flex";
+  font-style: normal;
+  src: url("../assets/fonts/GoogleSansFlex.woff2") format("woff2");
+}
 html {
   height: 100dvh;
+  width:100dvw;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 body {
   margin: 0;
-  font-family: "Google Sans";
+  font-family: "Google Sans Flex";
   height: 100%;
   padding: 2rem 4rem 0 4rem;
   background-color: var(--background);
@@ -28,6 +34,7 @@ svg {
 .layout__content {
   width: 100%;
   overflow-y: scroll;
+  /* overflow-x: hidden; */
   padding: 0rem 1rem 4rem 0rem;
 }
 
@@ -134,7 +141,7 @@ nav {
   border-radius: 5px;
 }
 .openedArticle {
-  font-weight: 600;
+  font-weight: 900;
   color: var(--accent);
 }
 .sidebarHeader {
