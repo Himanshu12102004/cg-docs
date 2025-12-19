@@ -4,7 +4,15 @@ let openFolders = JSON.parse(localStorage.getItem("openFolders")) || [];
 function formatName(name) {
   return name
     .replace(/\.md$/, "")
-    .replace(/(^\w|-\w)/g, (m) => m.replace("-", "").toUpperCase());
+    .replace(/(^\w|-\w)/g, (m) => m.replace("-", " "));
+}
+function capitalizeFirstLetter(docName) {
+  let output = docName[0].toUpperCase();
+  for (let i = 1; i < docName.length; i++) {
+    if (docName[i - 1] == " ") output += docName[i].toUpperCase();
+    else output += docName[i];
+  }
+  return output;
 }
 function putUrlInOpenFolders() {
   const currentUrl = window.location.href;
@@ -18,9 +26,7 @@ function putUrlInOpenFolders() {
   const formattedParts = folderParts.map((part) => formatName(part));
   const mergedParts = formattedParts.join("/").split(".html")[0];
   console.log("Merged Parts:", mergedParts);
-  const openedFile = document.querySelector(
-    `[data-key-path="${mergedParts}"]`
-  );
+  const openedFile = document.querySelector(`[data-key-path="${mergedParts}"]`);
   console.log("Opened File Element:", openedFile);
   if (openedFile) {
     openedFile.classList.add("openedArticle");
@@ -36,13 +42,15 @@ function putUrlInOpenFolders() {
     for (let i = 0; i < formattedParts.length - 1; i++) {
       let partialPath = formattedParts.slice(0, i + 1).join("/") + "/";
       cumulativePaths.push(partialPath);
-      whereAmIHtml += `<span class="whereAmIBreadCrumb">${formattedParts[i]}</span><span class="whereAmIBreadCrumbSeparator"> > </span>`;
+      whereAmIHtml += `<span class="whereAmIBreadCrumb">${capitalizeFirstLetter(
+        formattedParts[i]
+      )}</span><span class="whereAmIBreadCrumbSeparator"> > </span>`;
     }
     whereAmIElement.innerHTML =
       whereAmIHtml +
-      `<span class="whereAmICurrentDoc">${formattedParts[
-        formattedParts.length - 1
-      ].replace(".html", "")}</span>`;
+      `<span class="whereAmICurrentDoc">${capitalizeFirstLetter(
+        formattedParts[formattedParts.length - 1].replace(".html", "")
+      )}</span>`;
 
     cumulativePaths.forEach((path) => {
       if (!openFolders.includes(path)) openFolders.push(path);

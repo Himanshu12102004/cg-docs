@@ -32,13 +32,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+    
     <link rel="stylesheet" href="../../css/theming.css" />
     <link
-      rel="stylesheet"
-      href="../../css/articleStyling.css"
+    rel="stylesheet"
+    href="../../css/articleStyling.css"
     />
     <link rel="stylesheet" href="../../css/mdStyling.css" />
-
+    
     
     <script type="application/ld+json">
       {
@@ -190,14 +192,36 @@
     <svg class="menuClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
     </div> 
       <ul class="level-0">
-          <li><a href="/cg-docs/docs/introduction.html" data-key-path=Introduction>Introduction</a></li>
+          <li><a href="/cg-docs/docs/introduction.html" data-key-path="introduction">Introduction</a></li>
         
-          <li><a href="/cg-docs/docs/basics.html" data-key-path=Basics>Basics</a></li>
+          <li><a href="/cg-docs/docs/basics.html" data-key-path="basics">Basics</a></li>
         
           <li class="folder">
-            <span class="folder-toggle" data-key-path=Maths/>Maths</span>
+            <span class="folder-toggle" data-key-path="WebGL/">WebGL</span>
             <ul class="level-1">
-          <li><a href="/cg-docs/docs/maths/basics.html" data-key-path=Maths/Basics>Basics</a></li>
+          <li><a href="/cg-docs/docs/webgl/overview.html" data-key-path="webgl/overview">Overview</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/webgl:-first-program.html" data-key-path="webgl/webgl: first program">WebGL: First Program</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/gpu-and-shaders.html" data-key-path="webgl/gpu and shaders">GPU And Shaders</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/lets-draw-a-point.html" data-key-path="webgl/lets draw a point">Lets Draw A Point</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/let's-draw-multiple-points.html" data-key-path="webgl/let's draw multiple points">Let's Draw Multiple Points</a></li>
+        </ul>
+          </li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="Maths/">Maths</span>
+            <ul class="level-1">
+          <li><a href="/cg-docs/docs/maths/basics.html" data-key-path="maths/basics">Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="maths/Vectors/">Vectors</span>
+            <ul class="level-2"></ul>
+          </li>
+        
+          <li><a href="/cg-docs/docs/maths/f.html" data-key-path="maths/f">F</a></li>
         </ul>
           </li>
         </ul>
@@ -211,9 +235,10 @@
 
 
 <h1>Basics</h1>
-<p>This section reviews the fundamental mathematical concepts used in these articles. If you&#39;re already comfortable with them you can skip ahead; otherwise use this section to refresh the basics.</p>
+<p>This section will deal with the basic mathematics that you will need along the way in your journey in CG,
+there will be times when you will need to implement somethings as you read the maths section </p>
 <h2>Cartesian Coordinate System</h2>
-<p>The Cartesian coordinate system is the backbone of computer graphics.<br>We can classify it into two seperate secions 2D and 3D.</p>
+<p>The Cartesian coordinate system is the backbone of computer graphics.<br>We can classify it into two separate sections 2D and 3D.</p>
 <h3>2D cartesian plane</h3>
 <p>The graph paper we all used in school is nothing but the 2D Cartesian plane we’re talking about.</p>
 <div class="img-external">
@@ -221,7 +246,7 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Cartesian-coordinate-system.svg/2560px-Cartesian-coordinate-system.svg.png" alt="Cartesian plane">
   <span class="img-credit">Image credit: Wikipedia Commons</span>
 </div>
-<i style="font-size:0.8rem">Image representing 2D cartesian Plane</i>
+<i style="font-size:1rem">Image representing 2D cartesian Plane</i>
 </div>
 
 <h3>3D Cartesian System</h3>
@@ -237,14 +262,14 @@
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764252605/iqblvtojulxfowxfz9xz.png" alt="Cartesian plane" alt="fleming-left hand rule">
   <span class="img-credit">Image credit: Wikipedia Commons</span>
 </div>
-<i style="font-size:0.8rem; text-align:center">Fleming's left hand rule with left-handed cartesian system</i>
+<i style="font-size:1rem; text-align:center">Fleming's left hand rule with left-handed cartesian system</i>
 </div>
 <div class="img-external">
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764252604/a2ymxlqkbtahduhjetkx.png" alt="fleming-left hand rule">
   <span class="img-credit">Image credit: Wikipedia Commons</span>
 </div>
-<i style="font-size:0.8rem; text-align:center">Fleming's right hand rule with right-handed cartesian system</i>
+<i style="font-size:1rem; text-align:center">Fleming's right hand rule with right-handed cartesian system</i>
 </div>
 </div>
 
@@ -337,7 +362,7 @@
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764428361/zp9xy3zcytthzorb6bpc.png" alt="fleming-left hand rule">
   <span class="img-credit">Image credit: Curtin University</span>
 </div>
-<i style="font-size:0.8rem; text-align:center">Reference image for sine and cosine rule</i>
+<i style="font-size:1rem; text-align:center">Reference image for sine and cosine rule</i>
 </div>
 </div>
 
@@ -356,7 +381,7 @@
 
         <div class="nextPrev">
           <i>
-            <a href="/cg-docs/docs/basics.html">
+            <a href="/cg-docs/docs/webgl/let's-draw-multiple-points.html">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -374,7 +399,7 @@
             </a>
           </i>
           <i>
-            <a href="#">
+            <a href="/cg-docs/docs/maths/f.html">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg

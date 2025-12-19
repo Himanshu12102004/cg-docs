@@ -68,7 +68,6 @@ p {
 .img-container img {
   width: 100%;
   height: auto;
-  max-width: 500px;
   display: block;
   border-radius: 5px;
 }
@@ -86,19 +85,22 @@ p {
 }
 
 /* List styling */
-ul {
+ul,
+ol {
   margin-left: 1rem;
 }
-li {
-  line-height: 1.8;
+li::marker {
+  font-weight: bold;
 }
 
+li {
+  line-height: 2.3;
+}
 /* table styling */
 
 table {
   width: 100%;
   margin: auto;
-  max-width: 500px;
   border-collapse: collapse;
 }
 
@@ -124,6 +126,19 @@ th {
   width: 100%;
 }
 
-ul li{
-  line-height: 2.3;
+.hljs {
+  margin-left: 1rem;
+  line-height: 2;
+  font-size: 0.9rem;
+}
+.link {
+  color: var(--accent);
+}
+.function-descriptor {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  background-color: var(--descriptor);
+  margin-left: 1rem;
+  padding: 1rem;
+  align-items: center;
 }

@@ -2,12 +2,16 @@ import { readdir, readFile, mkdir, writeFile, stat } from "fs/promises";
 import path from "path";
 import { marked } from "marked";
 import katex from "katex";
+import hljs from "highlight.js";
+import { markedHighlight } from "marked-highlight";
 import chokidar from "chokidar";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import getSortedFolderStructure from "./sortedFolderStr.js";
 import generateSidebarHTML from "./sideBarGenerator.js";
 import envVariables from "./env.js";
+
+import { getHtmlFilePath, removeNumericPrefixes } from "./utils.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const inputDir = path.resolve(__dirname, "docs");
@@ -69,6 +73,18 @@ marked.use({
   ],
 });
 
+marked.use(
+  markedHighlight({
+    langPrefix: "hljs language-",
+    highlight(code, lang) {
+      if (lang && hljs.getLanguage(lang)) {
+        return hljs.highlight(code, { language: lang }).value;
+      }
+      return hljs.highlightAuto(code).value;
+    },
+  })
+);
+
 function wrapHTML(
   content,
   cssAndJsFileLocation,
@@ -94,10 +110,7 @@ function wrapHTML(
 
 async function processFile(srcPath) {
   const relative = path.relative(srcRoot, srcPath);
-  const destPath = path.join(
-    outputDir,
-    relative.replace(".md", ".html").toLowerCase()
-  );
+  const destPath = getHtmlFilePath(outputDir, relative);
   await mkdir(path.dirname(destPath), { recursive: true });
 
   const depth = relative.split(path.sep).length - 1;
@@ -110,9 +123,9 @@ async function processFile(srcPath) {
   const pageKeywords = lines[2]?.replace(/^<!--\s*|\s*-->$/g, "").trim() || "";
   const pageUrl =
     `${envVariables.DOMAIN_NAME}/docs/` +
-    relative.replace(".md", ".html").toLowerCase();
+    removeNumericPrefixes(relative.replace(".md", ".html").toLowerCase());
   const html = marked.parse(md);
-  const { prev, next } = getPrevNextMD(relative, folderStr);
+  const { prev, next } = getPrevNextMD(relative);
   await writeFile(
     destPath,
     wrapHTML(
@@ -131,10 +144,7 @@ async function processFile(srcPath) {
 
 async function processDir(src, dest) {
   const relative = path.relative(srcRoot, src);
-  const destPath = path.join(
-    outputDir,
-    relative.replace(".md", ".html").toLowerCase()
-  );
+  const destPath = getHtmlFilePath(outputDir, relative);
   await mkdir(destPath, { recursive: true });
 
   const items = await readdir(src);
@@ -153,6 +163,7 @@ async function processDir(src, dest) {
 async function buildAll() {
   console.log("Building documentation...");
   folderStr = await getSortedFolderStructure(inputDir);
+  console.log(folderStr);
   sidebarHTML = generateSidebarHTML(folderStr);
   flattenedIndexList = flatten(folderStr);
   await processDir(inputDir, outputDir, folderStr);
@@ -189,7 +200,7 @@ function watch() {
     try {
       buildAll();
       const relative = path.relative(inputDir, file).toLowerCase();
-      const htmlPath = path.join(outputDir, relative.replace(/\.md$/, ".html"));
+      const htmlPath = getHtmlFilePath(outputDir, relative);
       await fs.promises.unlink(htmlPath);
       console.log(`❌ Removed: ${relative}`);
     } catch (err) {
@@ -210,10 +221,6 @@ if (process.argv.includes("--watch")) {
   buildAll();
 }
 
-function normalizePath(p) {
-  return p.replace(/\s+/g, "-").replace("md", "html").toLowerCase();
-}
-
 function flatten(struct) {
   const list = [];
 
@@ -228,17 +235,18 @@ function flatten(struct) {
     }
   }
   walk(struct);
-  console.log(list);
   return list;
 }
 
 function getPrevNextMD(mdPath) {
-  const targetPath = `/cg-docs/docs/` + normalizePath(mdPath);
+  const targetPath =
+    `/cg-docs/docs/` +
+    removeNumericPrefixes(mdPath).replace(".md", ".html").toLowerCase();
+  console.log(targetPath);
   const list = flattenedIndexList;
-
   const index = list.indexOf(targetPath);
+  console.log("============", index);
   if (index === -1) return { prev: null, next: null };
-
   return {
     prev: index > 0 ? list[index - 1] : null,
     next: index < list.length - 1 ? list[index + 1] : null,

@@ -4,10 +4,28 @@
  -->
 # Why these docs?
 
-When I started out to learn Computer Graphics I struggled a lot to find a clear step by step resource to learn, I fidgeted between youtube tutorials, medium articles, books, websites etc. to learn it.
+When I started out to learn Computer Graphics I struggled a lot to find a clear step by step resource, I fidgeted between youtube tutorials, medium articles, books, websites etc.
 
- After doing all this, I realized that the resources for learning Computer Graphics are so scattered that it becomes overwhelming for a beginner to even know where to start, so I decided to write these docs in a beginner friendly and chronological manner, so that anyone could learn it easily. 
+After doing all this, I realized that the resources for learning Computer Graphics are so scattered that it becomes overwhelming for a beginner to even know where to start, so I decided to write these docs in a beginner friendly and chronological manner, so that anyone could learn it easily. 
 
+We’ll be using WebGL as our graphics API. Since it needs very little setup when compared to other APIs, we can spend more time on graphics concepts and less time fighting configurations.
+
+## What is Computer Graphics
+
+Computer Graphics is basically a field of Computer Science that deals with  generating, rendering and displaying digital images. 
+
+So this was a technical definition, let's understand in common terms taking an example of **GTA: San Andreas**, what happens when the main character **Carl "CJ" Johnson** moves ahead?
+We know that **CJ** can move in any direction so computer does not know in advance where the player will go so once the computer detects the up arrow key is pressed it does the following things:
+
+1. Calculates the next position of **CJ** in the scene.
+2. Calculates the position of each surrounding object with respect to new camera position
+3. The scene is 3D but the screen is 2D now we need to convert the 3D scene to 2D .
+4. The final 2D scene is displayed on your screen.
+
+Doing all this stuff each frame is what Computer Graphics deals with.
+
+This is a very high level view of the steps but actually there are dozens of intermediate steps which we will look in the chapters ahead.
+ 
 ## Why Computer Graphics
 
 Before we dive into Computer Graphics, let’s answer the big question — why even learn it?<br>The following points will explain:
@@ -68,11 +86,15 @@ So, to keep that motivation going, here are some of the visual creations I’ve 
 
 ## How to use the docs
 
-When studying CG <sup>**2**</sup> do not forget to keep a notes copy and pen, the more you write the more you learn and make sure you don't skip over any of the chapters untill you are sure enough that you know it well because each chapter is built one over the other.   
+When studying CG<sup>1</sup>, make sure to keep a notebook and a pen handy — the more you write, the more you learn.
+Code it along, don't just read.
+Also, don’t skip chapters until you’re confident you understand them well, because each chapter builds
+on top of the previous ones.
+ 
 
 Stay consistent, explore deeply, and most importantly — ***Happy Learning!***
 
-<hr>
+---
 
 <sup>1</sup> Not to demotivate you or anything, but creating a full game engine by yourself is a loooong quest — like final-boss-level long
 

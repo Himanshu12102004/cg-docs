@@ -5,28 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>CG Docs – Introduction</title>
-    <meta name="description" content="Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations." />
-    <meta name="keywords" content="computer graphics, graphics fundamentals, CG basics, vectors in graphics, transformations, rendering pipeline, 3D graphics, 2D graphics" />
+    <title>CG Docs – # GPU & Shaders Explained</title>
+    <meta name="description" content="You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?" />
+    <meta name="keywords" content="Well, well today we will be getting ready for that with some basic terminology." />
     <meta name="author" content="Himanshu Gupta" />
 
-    <meta property="og:title" content="CG Docs – Introduction" />
-    <meta property="og:description" content="Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations." />
+    <meta property="og:title" content="CG Docs – # GPU & Shaders Explained" />
+    <meta property="og:description" content="You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/introduction.html" />
-    <meta property="og:image" content="../assets/logo.svg" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/gpu-and-shaders.html" />
+    <meta property="og:image" content="../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CG Docs – Introduction" />
-    <meta name="twitter:description" content="Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations." />
+    <meta name="twitter:title" content="CG Docs – # GPU & Shaders Explained" />
+    <meta name="twitter:description" content="You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?" />
     <meta
       name="twitter:image"
-      content="../assets/preview.png"
+      content="../../assets/preview.png"
     />
 
-    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/introduction.html" />
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/gpu-and-shaders.html" />
 
-    <link rel="icon" href="../assets/images/logo.svg" />
+    <link rel="icon" href="../../assets/images/logo.svg" />
 
     <link
       rel="stylesheet"
@@ -34,20 +34,20 @@
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
     
-    <link rel="stylesheet" href="../css/theming.css" />
+    <link rel="stylesheet" href="../../css/theming.css" />
     <link
     rel="stylesheet"
-    href="../css/articleStyling.css"
+    href="../../css/articleStyling.css"
     />
-    <link rel="stylesheet" href="../css/mdStyling.css" />
+    <link rel="stylesheet" href="../../css/mdStyling.css" />
     
     
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "Introduction",
-        "description": "Learn essential computer graphics concepts with clear explanations and visuals. CG Docs covers vectors, transformations, lighting, rendering, and everything you need to build strong graphics foundations.",
+        "headline": "# GPU & Shaders Explained",
+        "description": "You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?",
         "author": {
           "@type": "Person",
           "name": "Himanshu Gupta"
@@ -80,7 +80,7 @@
       <div>
         <img
           class="logo"
-          src="../assets/images/logo.svg"
+          src="../../assets/images/logo.svg"
           alt="logo"
         />
         <svg
@@ -184,7 +184,7 @@
     <div class="sidebarLogoContainer">
     <img
     class="logo-phone"
-    src="../assets/images/logo.svg"
+    src="../../assets/images/logo.svg"
     alt="logo"
     />
     <h1 class="sidebarTitle">CG Docs</h1>
@@ -230,93 +230,63 @@
 
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
-        
-
-
-<h1>Why these docs?</h1>
-<p>When I started out to learn Computer Graphics I struggled a lot to find a clear step by step resource, I fidgeted between youtube tutorials, medium articles, books, websites etc.</p>
-<p>After doing all this, I realized that the resources for learning Computer Graphics are so scattered that it becomes overwhelming for a beginner to even know where to start, so I decided to write these docs in a beginner friendly and chronological manner, so that anyone could learn it easily. </p>
-<p>We’ll be using WebGL as our graphics API. Since it needs very little setup when compared to other APIs, we can spend more time on graphics concepts and less time fighting configurations.</p>
-<h2>What is Computer Graphics</h2>
-<p>Computer Graphics is basically a field of Computer Science that deals with  generating, rendering and displaying digital images. </p>
-<p>So this was a technical definition, let&#39;s understand in common terms taking an example of <strong>GTA: San Andreas</strong>, what happens when the main character <strong>Carl &quot;CJ&quot; Johnson</strong> moves ahead?
-We know that <strong>CJ</strong> can move in any direction so computer does not know in advance where the player will go so once the computer detects the up arrow key is pressed it does the following things:</p>
+        <h1>GPU &amp; Shaders Explained</h1>
+<p>You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?
+Well, well today we will be getting ready for that with some basic terminology.</p>
+<h2>What is GPU?</h2>
+<p>If you are a gamer, you would already be familiar with GPUs, but to make these docs complete I need to explain a bit about them.</p>
+<p>So GPU (Graphical Processing Unit) is a brother of CPU that has thousands of basic arithmetic cores (very basic CPUs) that work in parallel and independent of each other to perform tasks.<sup>1</sup></p>
+<h2>How to run programs on the GPU?</h2>
+<p>To make the CPU perform a task, we write a program and execute it. The same idea applies to the GPU. To execute custom logic on the GPU, we write small programs called <strong>shaders</strong>. These shaders are executed on the GPU through graphics APIs (such as WebGL, OpenGL, or Vulkan), which act as an interface between our code and the GPU hardware.</p>
+<p>Although the underlying hardware differs between GPU manufacturers, graphics APIs provide a unified and portable way to run shader programs without dealing with hardware-specific details.</p>
+<h2>What is a shader?</h2>
+<p>A shader is a small program that runs on the GPU, operating on many data elements in parallel.</p>
+<h3>Types of shaders</h3>
+<p>There are mainly three types of shaders:</p>
 <ol>
-<li>Calculates the next position of <strong>CJ</strong> in the scene.</li>
-<li>Calculates the position of each surrounding object with respect to new camera position</li>
-<li>The scene is 3D but the screen is 2D now we need to convert the 3D scene to 2D .</li>
-<li>The final 2D scene is displayed on your screen.</li>
+<li>Vertex Shader</li>
+<li>Fragment Shader</li>
+<li>Compute Shaders (not supported by WebGL, so we will not discuss them here)</li>
 </ol>
-<p>Doing all this stuff each frame is what Computer Graphics deals with.</p>
-<p>This is a very high level view of the steps but actually there are dozens of intermediate steps which we will look in the chapters ahead.</p>
-<h2>Why Computer Graphics</h2>
-<p>Before we dive into Computer Graphics, let’s answer the big question — why even learn it?<br>The following points will explain:</p>
-<ul>
-<li>Got an Idea for a <strong>game</strong>? Now you can make it without using any game engine</li>
-<li>Like to see <strong>fluid or smoke simulations</strong>? Now you can code it</li>
-<li>Bad at drawing? I got your back, now you can make drawings impossible to draw by hand</li>
-<li>Curious about what secret sauce powers Unity and Unreal? Well… why not cook up your own <strong>game engine</strong> from scratch? <sup><strong>1</strong></sup></li>
-<li>And many more things but it will take whole day to write them all, so I am quitting it here ; )</li>
-</ul>
-<p><strong>I know you’re motivated — that’s why you’ve made it this far.</strong>
-And trust me, you’ll soon be able to build projects like these — <em>maybe even better!</em><br>So, to keep that motivation going, here are some of the visual creations I’ve built along the way.</p>
-<div style="
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 15px;
-">
-  <a href="https://alienworld-himanshu.vercel.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1752429226/fractals/dhxwr4svvhqmi6fcwgm2.png" alt="Alien World" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://factory-himanshu.vercel.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764065331/ve1hqosh3dbx6dxpdbfa.png" alt="Factory" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://alienworld-himanshu.vercel.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1752406386/fractals/j9uyx25t2v9m4f0inrsq.png" alt="Alien World" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://sketchy-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764065984/swgpt6lhanvxx9rln1yk.png" alt="Sketchy" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://dda-himanshu-gupta.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066170/vn4y68c9tn4boa2v2scl.png" alt="DDA Algorithm" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://fourier-grapher-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066416/s6hwj1qiskywbdlnnal5.png" alt="Fourier Grapher" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://pythaorean-tree-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070935/pjil5majln44jye9peeo.png" alt="Pythagorean Tree" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://conways-game-of-life-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066429/dc4v69scuwiiomivpcdr.png" alt="Conway's Game of Life" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://wave-animations-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764066798/aeklk7fcd8illhrz4wvy.png" alt="Wave Animations" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://mandelbrot-explorer.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070898/resmc0nnqlwu3zofh7hv.png" alt="Mandelbrot Explorer" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://tree-fractal-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070412/lkvdabtxzg0tkhwfpaoy.png" alt="Tree Fractal" style="width:100%; border-radius: 8px;" />
-  </a>
-  <a href="https://julia-set-himanshu.netlify.app/" target="_blank">
-    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764070715/x6mqolvcrlc9nkuu0epz.png" alt="Julia Set" style="width:100%; border-radius: 8px;" />
-  </a>
+<p>Before understanding what is a Vertex Shader and Fragment Shader, let&#39;s first understand what is a vertex and fragment.</p>
+<ol>
+<li><p><strong>Vertex</strong>:  A vertex represents a point in 2D or 3D space and is used to define a graphics primitive. For now, assume that the graphics primitive is a triangle, in which case three vertices define its shape.</p>
+</li>
+<li><p><strong>Fragment</strong> : All the pixels that fall inside the triangle, and need to be painted are the fragments.</p>
+</li>
+</ol>
+<p>Now lets see shaders:</p>
+<ol>
+<li><strong>Vertex Shader</strong>:<br>A vertex shader is a GPU program that runs once for each vertex, for example in a triangle we have three vertices and the vertex shader will run 3 times, once for each vertex, in parallel.</li>
+</ol>
+<div class="img-external">
+<div class= "img-container">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765783977/wkewu72kzpmvh94ryccm.png" alt="Vertex Shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Vertex shader illustration</i>
 </div>
 
-<h2>How to use the docs</h2>
-<p>When studying CG<sup>1</sup>, make sure to keep a notebook and a pen handy — the more you write, the more you learn.
-Code it along, don&#39;t just read.
-Also, don’t skip chapters until you’re confident you understand them well, because each chapter builds
-on top of the previous ones.</p>
-<p>Stay consistent, explore deeply, and most importantly — <em><strong>Happy Learning!</strong></em></p>
+<ol start="2">
+<li><strong>Fragment Shader</strong>:<br>A fragment shader is a GPU program that runs once for each fragment. It runs after the vertex shader. The vertex shader defines the shape of the triangle, and then the pixels inside the triangle are determined as fragments. Only after this step are the fragment shaders executed, and they run in parallel. For example, if a triangle covers 1000 pixels, the fragment shader will run 1000 times, in parallel and the entire operation will take the time equivalent to processing just on fragment <sup>2</sup>. This is where you can see the massive parallel processing power of the GPU.</li>
+</ol>
+<div class="img-external">
+<div class= "img-container">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765783915/eonx58z4eg4dencvxqwv.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Fragment shader illustration</i>
+</div> 
+
+<h3>Writing Shaders</h3>
+<p>Shaders are written in GLSL (OpenGL Shading Language), a language similar to C.<br>Even if you’re not familiar with C, the syntax is simple enough to grasp quickly.</p>
+<p>For WebGL (JavaScript), shaders are written as <strong>JavaScript strings</strong> that are passed to the WebGL API.</p>
+<p>We’ll cover shaders in much more detail in later chapters, so don’t worry if it seems confusing now. : )</p>
 <hr>
-<p><sup>1</sup> Not to demotivate you or anything, but creating a full game engine by yourself is a loooong quest — like final-boss-level long</p>
-<p><sup>2</sup> I will say Computer Graphics as CG from now onwards as it takes too long to type it, and programers are lazy you know</p>
+<p><sup>1</sup> This is an overly simplified definition of GPU.</p>
+<p><sup>2</sup> Subject number of cores in GPU</p>
 
         <div class="nextPrev">
           <i>
-            <a href="#">
+            <a href="/cg-docs/docs/webgl/webgl:-first-program.html">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -334,7 +304,7 @@ on top of the previous ones.</p>
             </a>
           </i>
           <i>
-            <a href="/cg-docs/docs/basics.html">
+            <a href="/cg-docs/docs/webgl/lets-draw-a-point.html">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg
@@ -355,6 +325,6 @@ on top of the previous ones.</p>
       </section>
     </main>
 
-    <script src="../mdScript.js"></script>
+    <script src="../../mdScript.js"></script>
   </body>
 </html>

@@ -5,16 +5,22 @@ function generateSidebarHTML(structure) {
       const value = obj[key];
       const isFolder = typeof value === "object";
       if (isFolder) {
-        dataKey = dataKey + key + "/";
         html += `
           <li class="folder">
-            <span class="folder-toggle" data-key-path=${dataKey}>${key}</span>
-            ${renderItems(value, level + 1, dataKey)}
+            <span class="folder-toggle" data-key-path="${
+              dataKey + key + "/"
+            }">${key}</span>
+            ${renderItems(value, level + 1, dataKey + key.toLowerCase() + "/")}
           </li>
         `;
       } else {
+        if (key == "WebGL: First Program") {
+          console.log(dataKey + key);
+        }
         html += `
-          <li><a href="${value}" data-key-path=${dataKey + key}>${key}</a></li>
+          <li><a href="${value}" data-key-path="${
+          dataKey + key.toLowerCase()
+        }">${key}</a></li>
         `;
       }
     }

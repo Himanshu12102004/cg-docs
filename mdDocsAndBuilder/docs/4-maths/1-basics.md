@@ -4,12 +4,13 @@
 
 # Basics
 
-This section reviews the fundamental mathematical concepts used in these articles. If you're already comfortable with them you can skip ahead; otherwise use this section to refresh the basics.
+This section will deal with the basic mathematics that you will need along the way in your journey in CG,
+there will be times when you will need to implement somethings as you read the maths section 
 
 ## Cartesian Coordinate System
 
 The Cartesian coordinate system is the backbone of computer graphics.  
-We can classify it into two seperate secions 2D and 3D.
+We can classify it into two separate sections 2D and 3D.
 
 ### 2D cartesian plane
 
@@ -20,7 +21,7 @@ The graph paper we all used in school is nothing but the 2D Cartesian plane weâ€
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Cartesian-coordinate-system.svg/2560px-Cartesian-coordinate-system.svg.png" alt="Cartesian plane">
   <span class="img-credit">Image credit: Wikipedia Commons</span>
 </div>
-<i style="font-size:0.8rem">Image representing 2D cartesian Plane</i>
+<i style="font-size:1rem">Image representing 2D cartesian Plane</i>
 </div>
 
 ### 3D Cartesian System
@@ -39,14 +40,14 @@ An analogy to undestand this is the Fleming's left and right hand rules which yo
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764252605/iqblvtojulxfowxfz9xz.png" alt="Cartesian plane" alt="fleming-left hand rule">
   <span class="img-credit">Image credit: Wikipedia Commons</span>
 </div>
-<i style="font-size:0.8rem; text-align:center">Fleming's left hand rule with left-handed cartesian system</i>
+<i style="font-size:1rem; text-align:center">Fleming's left hand rule with left-handed cartesian system</i>
 </div>
 <div class="img-external">
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764252604/a2ymxlqkbtahduhjetkx.png" alt="fleming-left hand rule">
   <span class="img-credit">Image credit: Wikipedia Commons</span>
 </div>
-<i style="font-size:0.8rem; text-align:center">Fleming's right hand rule with right-handed cartesian system</i>
+<i style="font-size:1rem; text-align:center">Fleming's right hand rule with right-handed cartesian system</i>
 </div>
 </div>
 
@@ -143,7 +144,7 @@ Angles can be represented in two ways:
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1764428361/zp9xy3zcytthzorb6bpc.png" alt="fleming-left hand rule">
   <span class="img-credit">Image credit: Curtin University</span>
 </div>
-<i style="font-size:0.8rem; text-align:center">Reference image for sine and cosine rule</i>
+<i style="font-size:1rem; text-align:center">Reference image for sine and cosine rule</i>
 </div>
 </div>
 
@@ -156,4 +157,3 @@ Angles can be represented in two ways:
 2. $\;b^2 = a^2 + c^2 - 2ac\cos B$
 
 3. $\;c^2 = a^2 + b^2 - 2ab\cos C$
-

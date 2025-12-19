@@ -16,6 +16,7 @@
     --muted: #9ca3af;
     --icon: #c2c2c2;
     --search: #222326;
+    --descriptor: #1b1c1f;
     --hr: #404040;
     --transition-time: 0.3s;
   }
@@ -32,5 +33,6 @@
   --muted: #6b7280;
   --icon: #616161;
   --search: #f3f4f6;
+  --descriptor: #f1f3f5;
   --hr: #d1d5db;
 }

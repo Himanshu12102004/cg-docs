@@ -5,28 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>CG Docs – {pageTitle}</title>
-    <meta name="description" content="{pageDescription}" />
-    <meta name="keywords" content="{pageKeywords}" />
+    <title>CG Docs – Overview</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="Overview of WebGL and the evolution of CG on the web." />
     <meta name="author" content="Himanshu Gupta" />
 
-    <meta property="og:title" content="CG Docs – {pageTitle}" />
-    <meta property="og:description" content="{pageDescription}" />
+    <meta property="og:title" content="CG Docs – Overview" />
+    <meta property="og:description" content="" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="{pageUrl}" />
-    <meta property="og:image" content="{cssAndJsFileLocation}assets/logo.svg" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/overview.html" />
+    <meta property="og:image" content="../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CG Docs – {pageTitle}" />
-    <meta name="twitter:description" content="{pageDescription}" />
+    <meta name="twitter:title" content="CG Docs – Overview" />
+    <meta name="twitter:description" content="" />
     <meta
       name="twitter:image"
-      content="{cssAndJsFileLocation}assets/preview.png"
+      content="../../assets/preview.png"
     />
 
-    <link rel="canonical" href="{pageUrl}" />
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/overview.html" />
 
-    <link rel="icon" href="{cssAndJsFileLocation}assets/images/logo.svg" />
+    <link rel="icon" href="../../assets/images/logo.svg" />
 
     <link
       rel="stylesheet"
@@ -34,20 +34,20 @@
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
     
-    <link rel="stylesheet" href="{cssAndJsFileLocation}css/theming.css" />
+    <link rel="stylesheet" href="../../css/theming.css" />
     <link
     rel="stylesheet"
-    href="{cssAndJsFileLocation}css/articleStyling.css"
+    href="../../css/articleStyling.css"
     />
-    <link rel="stylesheet" href="{cssAndJsFileLocation}css/mdStyling.css" />
+    <link rel="stylesheet" href="../../css/mdStyling.css" />
     
-    <!-- Structured Data (Schema) -->
+    
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "{pageTitle}",
-        "description": "{pageDescription}",
+        "headline": "Overview",
+        "description": "",
         "author": {
           "@type": "Person",
           "name": "Himanshu Gupta"
@@ -60,7 +60,7 @@
     </script>
   </head>
   <body>
-    <!-- Theme handling moved inside <body> to improve CLS -->
+    
     <script>
       const root = document.documentElement;
       let savedTheme = localStorage.getItem("theme");
@@ -80,7 +80,7 @@
       <div>
         <img
           class="logo"
-          src="{cssAndJsFileLocation}assets/images/logo.svg"
+          src="../../assets/images/logo.svg"
           alt="logo"
         />
         <svg
@@ -117,7 +117,7 @@
         />
       </div>
       <div class="githubAndLightToggler">
-        <!-- Git Hub Icon -->
+        
         <svg
           class="gitHub"
           version="1.0"
@@ -147,7 +147,7 @@
             />
           </g>
         </svg>
-        <!-- Sun Icon -->
+        
         <div class="theme-toggler">
           <svg
             class="sun theme-icon hide"
@@ -163,7 +163,7 @@
               d="M277.3 32h-42.7v64h42.7V32zm129.1 43.7L368 114.1l29.9 29.9 38.4-38.4-29.9-29.9zm-300.8 0l-29.9 29.9 38.4 38.4 29.9-29.9-38.4-38.4zM256 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128zm224 106.7h-64v42.7h64v-42.7zm-384 0H32v42.7h64v-42.7zM397.9 368L368 397.9l38.4 38.4 29.9-29.9-38.4-38.4zm-283.8 0l-38.4 38.4 29.9 29.9 38.4-38.4-29.9-29.9zm163.2 48h-42.7v64h42.7v-64z"
             ></path>
           </svg>
-          <!-- Moon Svg -->
+          
           <svg
             class="moon theme-icon"
             stroke-width="0"
@@ -178,14 +178,95 @@
       </div>
     </nav>
     <main class="layout">
-      <aside class="layout__sidebar">{sidebar}</aside>
+      <aside class="layout__sidebar">
+    <div class="sidebar">
+    <div class="sidebarHeader">
+    <div class="sidebarLogoContainer">
+    <img
+    class="logo-phone"
+    src="../../assets/images/logo.svg"
+    alt="logo"
+    />
+    <h1 class="sidebarTitle">CG Docs</h1>
+    </div>
+    <svg class="menuClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+    </div> 
+      <ul class="level-0">
+          <li><a href="/cg-docs/docs/introduction.html" data-key-path="introduction">Introduction</a></li>
+        
+          <li><a href="/cg-docs/docs/basics.html" data-key-path="basics">Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="WebGL/">WebGL</span>
+            <ul class="level-1">
+          <li><a href="/cg-docs/docs/webgl/overview.html" data-key-path="webgl/overview">Overview</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/webgl:-first-program.html" data-key-path="webgl/webgl: first program">WebGL: First Program</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/gpu-and-shaders.html" data-key-path="webgl/gpu and shaders">GPU And Shaders</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/lets-draw-a-point.html" data-key-path="webgl/lets draw a point">Lets Draw A Point</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/let's-draw-multiple-points.html" data-key-path="webgl/let's draw multiple points">Let's Draw Multiple Points</a></li>
+        </ul>
+          </li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="Maths/">Maths</span>
+            <ul class="level-1">
+          <li><a href="/cg-docs/docs/maths/basics.html" data-key-path="maths/basics">Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="maths/Vectors/">Vectors</span>
+            <ul class="level-2"></ul>
+          </li>
+        
+          <li><a href="/cg-docs/docs/maths/f.html" data-key-path="maths/f">F</a></li>
+        </ul>
+          </li>
+        </ul>
+    </div>
+  </aside>
 
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
-        {content}
+        
+
+
+<h1>Overview</h1>
+<p>With the release of JavaScript in 1995, we had a way to write some logical program that could be run on the browser. It ended the era of static webpages that were merely used to display information no real time interaction, no client side logic.</p>
+<p>This was a major leap in web development. However, as websites became more complex, developers started
+feeling the need of graphics such as dynamic charts, graphs, and custom drawings, but at that time,
+HTML had no native way to draw graphics programmatically.<br>Then in 2004 Apple released the <strong>canvas</strong> tag for Safari, which had the capability to draw 2D CPU rasterized graphics on the web. It was soon adapted by other browsers and the support for 2D CPU graphics was widely available on browsers.</p>
+<p>Still, GPU-rasterized CG was largely limited to native applications written in C/C++ using OpenGL. Then, in 2011, WebGL<sup>1</sup> was released, finally providing access to the GPU directly from
+within the browser.</p>
+<p>Now enough of trash talking : ) , we will discuss about the evolution of WebGL some other day let&#39;s dive straight into it.</p>
+<h2>What is WebGL?</h2>
+<p>From a beginners perspective, WebGL can be seen as a way to make dynamic 2D/3D scenes in the web browser, I don&#39;t want to scare you away by saying heavy words like WebGL is a low-level, JavaScript API that provides direct, programmable access to the GPU inside the browser for rendering real-time 2D and 3D graphics. Oops! I said it ; )</p>
+<h2>Why learn WebGL?</h2>
+<ol>
+<li><p>WebGL is a good starting point for leaning CG as it is lot more simpler than any other API like Vulkan or DirectX.</p>
+</li>
+<li><p>You need nothing more than a simple text editor and a web browser. When you compare it with OpenGL there is a lot more stuff to do like making window and all.</p>
+</li>
+<li><p>Easy to share and host. Host it like any other website and share the link.</p>
+</li>
+<li><p>You can use other HTML elements along with the graphics,
+with this you can make your stunning 3D portfolio.</p>
+</li>
+</ol>
+<h2>What do you need to proceed further</h2>
+<ol>
+<li>A decent PC.</li>
+<li>A Text editor and a browser.</li>
+<li>A little bit of maths (addition, subtraction, multiplication and division), anything other than these will be discussed on the spot.</li>
+<li>A little bit of HTML and Js.</li>
+<li>No prior CG experience needed</li>
+</ol>
+
         <div class="nextPrev">
           <i>
-            <a href="{prevPage}">
+            <a href="/cg-docs/docs/basics.html">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +284,7 @@
             </a>
           </i>
           <i>
-            <a href="{nextPage}">
+            <a href="/cg-docs/docs/webgl/webgl:-first-program.html">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg
@@ -224,6 +305,6 @@
       </section>
     </main>
 
-    <script src="{cssAndJsFileLocation}mdScript.js"></script>
+    <script src="../../mdScript.js"></script>
   </body>
 </html>
