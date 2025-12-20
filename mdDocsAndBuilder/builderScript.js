@@ -84,6 +84,49 @@ marked.use(
     },
   })
 );
+function wrapTables(html) {
+  let result = "";
+  let index = 0;
+
+  while (true) {
+    const tableStart = html.indexOf("<table", index);
+    if (tableStart === -1) {
+      result += html.slice(index);
+      break;
+    }
+
+    const beforeTable = html.slice(index, tableStart);
+
+    // Check if already wrapped
+    const lastContainer = beforeTable.lastIndexOf(
+      '<div class="table-container">'
+    );
+    const lastCloseDiv = beforeTable.lastIndexOf("</div>");
+
+    const isAlreadyWrapped =
+      lastContainer !== -1 && lastContainer > lastCloseDiv;
+
+    const tableEnd = html.indexOf("</table>", tableStart);
+    if (tableEnd === -1) {
+      result += html.slice(index);
+      break;
+    }
+
+    const fullTable = html.slice(tableStart, tableEnd + 8);
+
+    result += beforeTable;
+
+    if (isAlreadyWrapped) {
+      result += fullTable;
+    } else {
+      result += `<div class="table-container">${fullTable}</div>`;
+    }
+
+    index = tableEnd + 8;
+  }
+
+  return result;
+}
 
 function wrapHTML(
   content,
@@ -124,7 +167,7 @@ async function processFile(srcPath) {
   const pageUrl =
     `${envVariables.DOMAIN_NAME}/docs/` +
     removeNumericPrefixes(relative.replace(".md", ".html").toLowerCase());
-  const html = marked.parse(md);
+  const html = wrapTables(marked.parse(md));
   const { prev, next } = getPrevNextMD(relative);
   await writeFile(
     destPath,

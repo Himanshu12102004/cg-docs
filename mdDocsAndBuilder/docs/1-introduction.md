@@ -8,14 +8,20 @@ When I started out to learn Computer Graphics I struggled a lot to find a clear 
 
 After doing all this, I realized that the resources for learning Computer Graphics are so scattered that it becomes overwhelming for a beginner to even know where to start, so I decided to write these docs in a beginner friendly and chronological manner, so that anyone could learn it easily. 
 
-We’ll be using WebGL as our graphics API. Since it needs very little setup when compared to other APIs, we can spend more time on graphics concepts and less time fighting configurations.
+We’ll be using **WebGL** as our graphics API.  
+Since it requires very little setup compared to other graphics APIs, we can spend more time focusing on **graphics concepts** and less time fighting with configurations.
+This also makes WebGL **beginner-friendly**, allowing you to see results quickly while still learning ideas that apply to more advanced graphics APIs later on.
+
 
 ## What is Computer Graphics
 
 Computer Graphics is basically a field of Computer Science that deals with  generating, rendering and displaying digital images. 
 
-So this was a technical definition, let's understand in common terms taking an example of **GTA: San Andreas**, what happens when the main character **Carl "CJ" Johnson** moves ahead?
-We know that **CJ** can move in any direction so computer does not know in advance where the player will go so once the computer detects the up arrow key is pressed it does the following things:
+So, this was a technical definition. Now let’s understand it in plain terms using a game you probably already know — **GTA: San Andreas**.
+
+In the game, **CJ can move in any direction at any time** — left, right, forward, or backward — entirely based on your input. The computer has no idea in advance where you’ll go next.
+
+Now, when **you press the up arrow key**, the computer detects this input and does following things:
 
 1. Calculates the next position of **CJ** in the scene.
 2. Calculates the position of each surrounding object with respect to new camera position
