@@ -306,6 +306,39 @@ You have to draw 3 points, so issue the draw call with the last argument as 3
 gl.drawArrays(gl.POINTS, 0, 3);
 ```
 
+As promised in the last chapter, let’s continue the discussion on the arguments of the gl.drawArrays function.
+
+I think that the first arg is quite clear, that is to say what you want to draw, and here its points hence it's `gl.POINTS`.
+
+Let’s understand the second and third arguments with an example.
+
+Suppose we have 10 points:  
+`P0, P1, P2, ... P9`
+
+If we issue the draw call:
+
+```js
+gl.drawArrays(gl.POINTS, 0, 10);
+```
+WebGL will draw all 10 points, starting from `P0` up to `P9`.
+
+Now consider this draw call:
+```js
+gl.drawArrays(gl.POINTS, 2, 6);
+```
+This tells WebGL to start drawing from the 2nd index vertex that is `P2` and draw 6 points.    
+Hence it will draw the points:   
+`P2, P3, P4, P5, P6, P7`
+
+Now it should be obvious that the second argument tells, from which point to start and the third argument says that draw these many points from there.
+
+<div class="img-external">
+<div class= "img-container">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766124702/ypy61npsk09lrlcuvjhi.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Final result</i>
+</div> 
+
 ## Final Code
 `script.js`
 ```js
@@ -395,3 +428,5 @@ gl.useProgram(program);
 gl.drawArrays(gl.POINTS, 0, 3);
 
 ```
+
+<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/5-MultiplePoint" class="link" target="blank">Checkout the full code on github</a>

@@ -5,26 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>CG Docs – </title>
+    <title>CG Docs – # WebGL: Coordinate Space</title>
     <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="In the last chapter, we drew three points on the canvas with the coordinates" />
     <meta name="author" content="Himanshu Gupta" />
 
-    <meta property="og:title" content="CG Docs – " />
+    <meta property="og:title" content="CG Docs – # WebGL: Coordinate Space" />
     <meta property="og:description" content="" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/maths/f.html" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/coordinate-space.html" />
     <meta property="og:image" content="../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CG Docs – " />
+    <meta name="twitter:title" content="CG Docs – # WebGL: Coordinate Space" />
     <meta name="twitter:description" content="" />
     <meta
       name="twitter:image"
       content="../../assets/preview.png"
     />
 
-    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/maths/f.html" />
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/coordinate-space.html" />
 
     <link rel="icon" href="../../assets/images/logo.svg" />
 
@@ -46,7 +46,7 @@
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "",
+        "headline": "# WebGL: Coordinate Space",
         "description": "",
         "author": {
           "@type": "Person",
@@ -236,10 +236,56 @@
 
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
-        
+        <h1>WebGL: Coordinate Space</h1>
+<p>In the last chapter, we drew three points on the canvas with the coordinates<br><code>(0, 0.5)</code>, <code>(-0.5, -0.5)</code>, and <code>(0.5, -0.5)</code>.</p>
+<p>You might be wondering <strong>what these numbers actually mean</strong> and <strong>how they relate to the size of the canvas</strong>.<br>In other words, <em>what coordinate system does WebGL use, and what is its scale?</em></p>
+<p>To answer that, we first need to understand the coordinate space that WebGL works in.</p>
+<p>WebGL uses a coordinate system called <strong>Normalized Device Coordinates</strong>.</p>
+<h2>Normalized Device Coordinates (NDC)</h2>
+<p>NDC is a coordinate space where each axes goes from [-1, 1], Let&#39;s understand with a illustration:</p>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766124607/h2uozylpkheixqhri3mc.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Coordinate system</i>
+</div> 
+
+<p>Normalized Device Coordinates simply mean that <strong>no matter the actual size of the canvas or screen</strong>, WebGL uses a fixed coordinate range from <strong>-1 to +1</strong> along each axis.</p>
+<p>This range is often visualized as a <strong>2-unit wide cube</strong>, as shown in the figure above. Anything you want to draw <strong>must lie inside this cube</strong>—this cube is the entire drawing space available to you in WebGL.</p>
+<p>So we can conclude that <strong>even if the canvas is rectangular</strong>, the coordinate range in WebGL is still fixed from <strong>-1 to +1</strong> on both the X and Y axes.
+This also means that <strong>1 unit on the X-axis is not necessarily equal to 1 unit on the Y-axis in terms of actual pixels</strong>. The coordinates are normalized, not pixel-based, and are stretched to fit the canvas dimensions.</p>
+<p>Let&#39;s see a few illustrations to understand this: </p>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130685/brrqv4j19azedjgwv7xi.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Canvas height = Canvas width, hence 1 unit in y axis = 1 unit in x axis</i>
+</div> 
+
+<br>
+
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130686/uq1pryr2dpm1enen25zc.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Canvas height < Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
+</div> 
+
+
+<br>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130685/qanpv5awhecnsurfntu0.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Canvas height > Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
+</div> 
+
+<p>This unequal unit length must be handled carefully; otherwise, whatever you draw may appear <strong>stretched or squished</strong> on rectangular canvases. We will learn how to fix this properly in later chapters.</p>
+<p><strong>Note:</strong> This chapter only <strong>scratches the surface</strong> of the WebGL coordinate system. As we move to <strong>3D rendering</strong>, we will explore this topic in much more depth—covering the <strong>left-handed vs right-handed coordinate systems</strong>, <strong>how to use the z- axis</strong>, <strong>how to render 3D scene on 2D screen</strong> etc.</p>
+
         <div class="nextPrev">
           <i>
-            <a href="/cg-docs/docs/maths/basics.html">
+            <a href="/cg-docs/docs/webgl/draw-triangle.html">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -257,7 +303,7 @@
             </a>
           </i>
           <i>
-            <a href="#">
+            <a href="/cg-docs/docs/webgl/graphics-primitives.html">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg

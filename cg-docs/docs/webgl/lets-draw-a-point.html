@@ -207,7 +207,13 @@
         
           <li><a href="/cg-docs/docs/webgl/lets-draw-a-point.html" data-key-path="webgl/lets draw a point">Lets Draw A Point</a></li>
         
-          <li><a href="/cg-docs/docs/webgl/let's-draw-multiple-points.html" data-key-path="webgl/let's draw multiple points">Let's Draw Multiple Points</a></li>
+          <li><a href="/cg-docs/docs/webgl/draw-multiple-points.html" data-key-path="webgl/draw multiple points">Draw Multiple Points</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/draw-triangle.html" data-key-path="webgl/draw triangle">Draw Triangle</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/coordinate-space.html" data-key-path="webgl/coordinate space">Coordinate Space</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/graphics-primitives.html" data-key-path="webgl/graphics primitives">Graphics Primitives</a></li>
         </ul>
           </li>
         
@@ -350,7 +356,7 @@ gl.<span class="hljs-title function_">attachShader</span>(program, fragmentShade
 <p>Now you are all set to draw a point and to do that we have to issue a draw call, let&#39;s see the code:</p>
 <pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
 </code></pre><p>The first arg is the graphics primitive you want to draw, it can be gl.TRIANGLES, gl.LINE etc. We will have a in-depth discussion on graphics primitive.</p>
-<p>The next index specifies the starting index in the currently bound vertex buffer. This tells WebGL where to start reading vertices from the buffer. Don&#39;t worry if you don&#39;t understand this we will have a good discussion on this.</p>
+<p>The next argument specifies from which vertex you want to start drawing, we will have a good discussion on this in the next chapter.</p>
 <p>The last arg is the number of vertices you want to draw and here as its a single point so only one vertex is needed.</p>
 <p>So with this you will see something like this on the screen: </p>
 <div class="img-external">
@@ -428,8 +434,7 @@ gl.<span class="hljs-title function_">useProgram</span>(program);
 
 <span class="hljs-comment">// Step 8: Issue the draw call</span>
 gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
-</code></pre><p><a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/DrawingAPoint" class="link" target="blank">Checkout the full code on github</a></p>
-<hr>
+</code></pre><h2><a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/4-DrawingAPoint" class="link" target="blank">Checkout the full code on github</a></h2>
 <p><sup>1</sup> WebGL is based on OpenGL ES (OpenGL for Embedded Systems), and therefore it uses GLSL ES, which is the embedded-systems version of the OpenGL Shading Language.
 By embedded systems, we mean resource-constrained devices like mobile phones, tablets, smart TVs, and other low-power hardware.</p>
 
@@ -453,7 +458,7 @@ By embedded systems, we mean resource-constrained devices like mobile phones, ta
             </a>
           </i>
           <i>
-            <a href="/cg-docs/docs/webgl/let's-draw-multiple-points.html">
+            <a href="/cg-docs/docs/webgl/draw-multiple-points.html">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg

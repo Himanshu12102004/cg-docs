@@ -190,7 +190,7 @@ gl.drawArrays(gl.POINTS, 0, 1);
 ```
 The first arg is the graphics primitive you want to draw, it can be gl.TRIANGLES, gl.LINE etc. We will have a in-depth discussion on graphics primitive.
 
-The next index specifies the starting index in the currently bound vertex buffer. This tells WebGL where to start reading vertices from the buffer. Don't worry if you don't understand this we will have a good discussion on this.
+The next argument specifies from which vertex you want to start drawing, we will have a good discussion on this in the next chapter.
 
 The last arg is the number of vertices you want to draw and here as its a single point so only one vertex is needed.
 
@@ -274,8 +274,7 @@ gl.useProgram(program);
 gl.drawArrays(gl.POINTS, 0, 1);
 ```
 
-<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/DrawingAPoint" class="link" target="blank">Checkout the full code on github</a>
-
+<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/4-DrawingAPoint" class="link" target="blank">Checkout the full code on github</a>
 ---
 
 <sup>1</sup> WebGL is based on OpenGL ES (OpenGL for Embedded Systems), and therefore it uses GLSL ES, which is the embedded-systems version of the OpenGL Shading Language.

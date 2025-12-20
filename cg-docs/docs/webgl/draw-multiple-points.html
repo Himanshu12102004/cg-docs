@@ -13,7 +13,7 @@
     <meta property="og:title" content="CG Docs – # Let's draw multiple points" />
     <meta property="og:description" content="In the last program you must have noticed that we hardcoded the position to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here then there etc. These vertex shader inputs are called attributes." />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/let's-draw-multiple-points.html" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/draw-multiple-points.html" />
     <meta property="og:image" content="../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -24,7 +24,7 @@
       content="../../assets/preview.png"
     />
 
-    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/let's-draw-multiple-points.html" />
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/draw-multiple-points.html" />
 
     <link rel="icon" href="../../assets/images/logo.svg" />
 
@@ -207,7 +207,13 @@
         
           <li><a href="/cg-docs/docs/webgl/lets-draw-a-point.html" data-key-path="webgl/lets draw a point">Lets Draw A Point</a></li>
         
-          <li><a href="/cg-docs/docs/webgl/let's-draw-multiple-points.html" data-key-path="webgl/let's draw multiple points">Let's Draw Multiple Points</a></li>
+          <li><a href="/cg-docs/docs/webgl/draw-multiple-points.html" data-key-path="webgl/draw multiple points">Draw Multiple Points</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/draw-triangle.html" data-key-path="webgl/draw triangle">Draw Triangle</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/coordinate-space.html" data-key-path="webgl/coordinate space">Coordinate Space</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/graphics-primitives.html" data-key-path="webgl/graphics primitives">Graphics Primitives</a></li>
         </ul>
           </li>
         
@@ -532,7 +538,25 @@ position — the center of the screen — and appear as a single point.</p>
 <h3>8. Issue the draw call with the number of vertices you want to draw.</h3>
 <p>You have to draw 3 points, so issue the draw call with the last argument as 3</p>
 <pre><code><span class="hljs-attribute">gl</span>.drawArrays(gl.POINTS, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
-</code></pre><h2>Final Code</h2>
+</code></pre><p>As promised in the last chapter, let’s continue the discussion on the arguments of the gl.drawArrays function.</p>
+<p>I think that the first arg is quite clear, that is to say what you want to draw, and here its points hence it&#39;s <code>gl.POINTS</code>.</p>
+<p>Let’s understand the second and third arguments with an example.</p>
+<p>Suppose we have 10 points:<br><code>P0, P1, P2, ... P9</code></p>
+<p>If we issue the draw call:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+</code></pre><p>WebGL will draw all 10 points, starting from <code>P0</code> up to <code>P9</code>.</p>
+<p>Now consider this draw call:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>);
+</code></pre><p>This tells WebGL to start drawing from the 2nd index vertex that is <code>P2</code> and draw 6 points.<br>Hence it will draw the points:<br><code>P2, P3, P4, P5, P6, P7</code></p>
+<p>Now it should be obvious that the second argument tells, from which point to start and the third argument says that draw these many points from there.</p>
+<div class="img-external">
+<div class= "img-container">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766124702/ypy61npsk09lrlcuvjhi.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Final result</i>
+</div> 
+
+<h2>Final Code</h2>
 <p><code>script.js</code></p>
 <pre><code class="hljs language-js"><span class="hljs-comment">//Step 1: Set the viewport</span>
 <span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
@@ -618,7 +642,8 @@ gl.<span class="hljs-title function_">useProgram</span>(program);
 
 <span class="hljs-comment">// Step 8: Issue the draw call</span>
 gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
-</code></pre>
+</code></pre><p><a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/5-MultiplePoint" class="link" target="blank">Checkout the full code on github</a></p>
+
         <div class="nextPrev">
           <i>
             <a href="/cg-docs/docs/webgl/lets-draw-a-point.html">
@@ -639,7 +664,7 @@ gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-pro
             </a>
           </i>
           <i>
-            <a href="/cg-docs/docs/maths/basics.html">
+            <a href="/cg-docs/docs/webgl/draw-triangle.html">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg

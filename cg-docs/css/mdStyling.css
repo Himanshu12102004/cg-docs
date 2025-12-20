@@ -66,8 +66,8 @@ p {
 }
 
 .img-container img {
-  width: 100%;
-  height: auto;
+  margin: auto;
+  max-width: 80%;
   display: block;
   border-radius: 5px;
 }
@@ -83,7 +83,9 @@ p {
   padding: 2px 4px;
   border-radius: 3px;
 }
-
+.img-square {
+  width: 60%;
+}
 /* List styling */
 ul,
 ol {
@@ -141,4 +143,11 @@ th {
   margin-left: 1rem;
   padding: 1rem;
   align-items: center;
+}
+
+/* Media Query */
+@media screen and (max-width: 500px) {
+  .img-square {
+    width: 100%;
+  }
 }

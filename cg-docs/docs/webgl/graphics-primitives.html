@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CG Docs – # Graphics Primitives</title>
+    <meta name="description" content="In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Himanshu Gupta" />
+
+    <meta property="og:title" content="CG Docs – # Graphics Primitives" />
+    <meta property="og:description" content="In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/graphics-primitives.html" />
+    <meta property="og:image" content="../../assets/logo.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CG Docs – # Graphics Primitives" />
+    <meta name="twitter:description" content="In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:" />
+    <meta
+      name="twitter:image"
+      content="../../assets/preview.png"
+    />
+
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/graphics-primitives.html" />
+
+    <link rel="icon" href="../../assets/images/logo.svg" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+    
+    <link rel="stylesheet" href="../../css/theming.css" />
+    <link
+    rel="stylesheet"
+    href="../../css/articleStyling.css"
+    />
+    <link rel="stylesheet" href="../../css/mdStyling.css" />
+    
+    
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "# Graphics Primitives",
+        "description": "In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:",
+        "author": {
+          "@type": "Person",
+          "name": "Himanshu Gupta"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CG Docs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    
+    <script>
+      const root = document.documentElement;
+      let savedTheme = localStorage.getItem("theme");
+      if (!savedTheme) {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        savedTheme = prefersDark ? "dark" : "light";
+        localStorage.setItem("theme", savedTheme);
+      }
+      if (savedTheme === "light") {
+        root.classList.add("light");
+      }
+    </script>
+    <div class="overlay"></div>
+    <nav>
+      <div>
+        <img
+          class="logo"
+          src="../../assets/images/logo.svg"
+          alt="logo"
+        />
+        <svg
+          class="hamburgerMenu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="searchBar">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 256 256"
+          class="searchIcon"
+        >
+          <path
+            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+          ></path>
+        </svg>
+
+        <input
+          type="text"
+          class="searchInput"
+          placeholder="Search docs..."
+          aria-label="Search docs"
+        />
+      </div>
+      <div class="githubAndLightToggler">
+        
+        <svg
+          class="gitHub"
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width="240.000000pt"
+          height="240.000000pt"
+          viewBox="0 0 240.000000 240.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g
+            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+            stroke="none"
+          >
+            <path
+              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+-1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
+118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
+-144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
+49 -10 94 -6 162 14 9 3 21 24 27 48 6 23 22 58 35 77 l24 35 -81 16 c-170 35
+-275 96 -344 200 -64 96 -85 179 -86 334 0 146 16 206 79 288 28 36 31 47 23
+68 -15 36 -11 188 5 234 13 34 20 40 47 43 45 5 129 -24 214 -72 l73 -42 64
+15 c91 21 364 20 446 0 l62 -16 58 35 c77 46 175 82 224 82 39 0 39 -1 55 -52
+17 -59 20 -166 5 -217 -8 -30 -6 -39 16 -68 109 -144 121 -383 29 -579 -62
+-129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
+-15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
+-419 518 -733 602 -137 36 -395 44 -525 15z"
+            />
+          </g>
+        </svg>
+        
+        <div class="theme-toggler">
+          <svg
+            class="sun theme-icon hide"
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M277.3 32h-42.7v64h42.7V32zm129.1 43.7L368 114.1l29.9 29.9 38.4-38.4-29.9-29.9zm-300.8 0l-29.9 29.9 38.4 38.4 29.9-29.9-38.4-38.4zM256 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128zm224 106.7h-64v42.7h64v-42.7zm-384 0H32v42.7h64v-42.7zM397.9 368L368 397.9l38.4 38.4 29.9-29.9-38.4-38.4zm-283.8 0l-38.4 38.4 29.9 29.9 38.4-38.4-29.9-29.9zm163.2 48h-42.7v64h42.7v-64z"
+            ></path>
+          </svg>
+          
+          <svg
+            class="moon theme-icon"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M195 125c0-26.3 5.3-51.3 14.9-74.1C118.7 73 51 155.1 51 253c0 114.8 93.2 208 208 208 97.9 0 180-67.7 202.1-158.9-22.8 9.6-47.9 14.9-74.1 14.9-106 0-192-86-192-192z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </nav>
+    <main class="layout">
+      <aside class="layout__sidebar">
+    <div class="sidebar">
+    <div class="sidebarHeader">
+    <div class="sidebarLogoContainer">
+    <img
+    class="logo-phone"
+    src="../../assets/images/logo.svg"
+    alt="logo"
+    />
+    <h1 class="sidebarTitle">CG Docs</h1>
+    </div>
+    <svg class="menuClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+    </div> 
+      <ul class="level-0">
+          <li><a href="/cg-docs/docs/introduction.html" data-key-path="introduction">Introduction</a></li>
+        
+          <li><a href="/cg-docs/docs/basics.html" data-key-path="basics">Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="WebGL/">WebGL</span>
+            <ul class="level-1">
+          <li><a href="/cg-docs/docs/webgl/overview.html" data-key-path="webgl/overview">Overview</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/webgl:-first-program.html" data-key-path="webgl/webgl: first program">WebGL: First Program</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/gpu-and-shaders.html" data-key-path="webgl/gpu and shaders">GPU And Shaders</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/lets-draw-a-point.html" data-key-path="webgl/lets draw a point">Lets Draw A Point</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/draw-multiple-points.html" data-key-path="webgl/draw multiple points">Draw Multiple Points</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/draw-triangle.html" data-key-path="webgl/draw triangle">Draw Triangle</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/coordinate-space.html" data-key-path="webgl/coordinate space">Coordinate Space</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/graphics-primitives.html" data-key-path="webgl/graphics primitives">Graphics Primitives</a></li>
+        </ul>
+          </li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="Maths/">Maths</span>
+            <ul class="level-1">
+          <li><a href="/cg-docs/docs/maths/basics.html" data-key-path="maths/basics">Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="maths/Vectors/">Vectors</span>
+            <ul class="level-2"></ul>
+          </li>
+        
+          <li><a href="/cg-docs/docs/maths/f.html" data-key-path="maths/f">F</a></li>
+        </ul>
+          </li>
+        </ul>
+    </div>
+  </aside>
+
+      <section class="layout__content">
+        <div class="whereAmI">{Where Am I}</div>
+        <h1>Graphics Primitives</h1>
+<p>In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
+</code></pre><p>You must have wondered what is <code>gl.POINTS</code> here.</p>
+<p>Well today we will discuss in detail on this.</p>
+<h2>Fundamental elements of Plane geometry</h2>
+<p>Let’s start with a simple question:</p>
+<p><strong>What is the smallest thing you can draw?</strong></p>
+<p>A <strong>point.</strong><br>A point has a position, but no size.</p>
+<p>Now ask another question:</p>
+<p><strong>What can you make using two points?</strong></p>
+<p>A <strong>line</strong>.</p>
+<p>And with <strong>three points</strong> (as long as they’re not on the same straight line), you get a <strong>triangle</strong>.</p>
+<p>That’s it <strong>point, line, and triangle</strong> — are the fundamental elements of plane geometry used in computer graphics.</p>
+<h2>Why only these, why not quadrilaterals, circles etc. ?</h2>
+<p>Because you can make pretty much anything just from these three geometric elements,</p>
+<ul>
+<li>A quadrilateral is nothing but two triangles attached to each other.</li>
+<li>A circle is also a bunch of triangles arranged around the center of point.</li>
+<li>3D Models made in blender are also millions of triangles stitched together.</li>
+</ul>
+<p>Modern GPUs are extremely optimized to work with <strong>triangles</strong>, which is why triangles are the backbone of real-time graphics.</p>
+<h2>Graphics Primitives</h2>
+<p>There are a total of <strong>7 graphics primitives in WebGL</strong>.</p>
+<p>You might wonder:<br><em>“How can there be 7 when we earlier said there are only three basic elements — point, line, and triangle?”</em><br>Actually the others are derived from the basic elements, and they help to reduce the buffer data you need to render things.</p>
+<p>Let&#39;s see each one by one</p>
+<h3>1. <code>gl.POINTS</code></h3>
+<p>We have already used this primitive in chapter 4 and 5.<br>Let&#39;s see a illustration to be more clear:</p>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143986/m0prvfgdbsnalyqohjvb.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Three points V<sub>0</sub> , V<sub>1</sub> and V<sub>2</sub></i>
+</div> 
+
+<p>Vertices used to draw this: <code>[V₀, V₁, V₂]</code></p>
+<p>Draw Call: <code>gl.drawArrays(gl.POINTS, 0, 3);</code></p>
+<h3>2. <code>gl.LINES</code></h3>
+<p>Two points make up a line, hence to define a line we need 2 vertices, for 2 lines 4 vertices and so on.</p>
+<p>Let&#39;s see a illustration to be more clear:</p>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143991/itaaqgdpmjzbfyceddtd.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">Two lines made using four vertices</i>
+</div> 
+
+<p>Vertices used to draw this: <code>[V₀, V₁, V₂, V₃]</code></p>
+<p>Draw Call: <code>gl.drawArrays(gl.LINES, 0, 4);</code><br>You might be thinking why the third argument is 4 when we are drawing only two lines? Recall that the third argument is the number of vertices to draw, not the number of primitives.</p>
+<h3>3. <code>gl.LINE_STRIP</code></h3>
+<p><code>gl.LINE_STRIP</code> is <strong>derived from the line primitive</strong> and is used to draw multiple <strong>connected line segments</strong>.</p>
+<p>For example, if you want to draw two connected lines from point <strong>A → B</strong> and <strong>B → C</strong>, <code>gl.LINE_STRIP</code> is the right choice.</p>
+<p>Let&#39;s see an illustration to make it more clear.</p>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143991/ovwjwrbjunexasruaomw.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">
+LINE_STRIP made by 5 vertices 
+</i>
+</div>
+
+<p>Vertices used to draw this: <code>[V₀, V₁, V₂, V₃, V₄]</code></p>
+<p>Draw Call: <code>gl.drawArrays(gl.LINE_STRIP, 0, 5);</code></p>
+<p>If you tried to make the same shape using <code>gl.LINES</code> you would need 8 vertices
+<code>[V₀, V₁, V₁, V₂, V₂, V₃, V₃, V₄, V₄, V₅]</code></p>
+<p>Hence when you want to draw connected lines LINE_STRIP is a good choice.</p>
+<h3>4. <code>gl.LINE_LOOP</code></h3>
+<p><code>gl.LINE_LOOP</code> is exactly the same as <code>gl.LINE_STRIP</code>, with one small difference.</p>
+<p>In addition to connecting each vertex to the next one, it also <strong>connects the last vertex back to the first vertex</strong>, forming a <strong>closed loop</strong>.</p>
+<p>This makes it useful for drawing closed shapes like <strong>polygons, outlines, and boundaries</strong>.</p>
+<p>Let&#39;s see an illustration to make it more clear.</p>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766212959/cxuejbgwwknkjmguxaek.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">
+LINE_LOOP made by 5 vertices 
+</i>
+</div> 
+
+<p>Vertices used to draw this: <code>[V₀, V₁, V₂, V₃, V₄]</code></p>
+<p>Draw Call: <code>gl.drawArrays(gl.LINE_LOOP, 0, 5);</code></p>
+<h3>5. <code>gl.TRIANGLES</code></h3>
+<p>I don&#39;t think I need to explain this.</p>
+<p>Still let&#39;s see an illustration:</p>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143994/yhw4qnyjumdmnipefxft.png" alt="fragment shader illustration">
+</div>
+<i style="font-size:1rem; text-align:center">
+TRIANGLE made by 3 vertices 
+</i>
+</div> 
+
+<p>Vertices used to draw this shape:  <code>[V₀, V₁, V₂]</code></p>
+<p>Draw Call: <code>gl.drawArrays(gl.TRIANGLES, 0, 3);</code></p>
+<h3>6. <code>gl.TRIANGLE_STRIP</code></h3>
+<p>This primitive is similar to <code>gl.LINE_STRIP</code> and is used to draw <strong>multiple connected triangles</strong>.</p>
+<p>Let&#39;s see the illustration then it will be easy to understand: </p>
+<div class="img-external">
+<div class="img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766144000/bl9u4otac81xfq7u9wp4.png" alt="triangle strip illustration">
+</div>
+<i style="font-size:1rem; text-align:center">
+TRIANGLE_STRIP made using 6 vertices
+</i>
+</div> 
+
+<p>Vertices used to draw this shape: <code>[V₀, V₁, V₂, V₃, V₄, V₅]</code></p>
+<p>Draw call:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLE_STRIP</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>);
+</code></pre><p>The <strong>first three vertices</strong> are used to draw the first triangle.
+After that, <strong>each new vertex</strong>, together with the l<strong>ast two vertices</strong> of the previous triangle, forms a new triangle.</p>
+<p>This makes <code>gl.TRIANGLE_STRIP</code> very <strong>memory-efficient</strong>, as adjacent triangles share vertices.</p>
+<p>It is commonly used to create <strong>quadrilaterals, terrain meshes, and connected surfaces</strong>.
+We will explore this primitive in more detail in later chapters.</p>
+<h3>7. <code>gl.TRIANGLE_FAN</code></h3>
+<p>This primitive is used to draw <strong>multiple triangles that share a common center vertex</strong>, forming a fan-like pattern.</p>
+<p>Let’s look at the illustration first — it will make the idea clear:</p>
+<div class="img-external">
+<div class="img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766144002/ufoief1u7iqkr7lqnjog.png" alt="triangle fan illustration">
+</div>
+<i style="font-size:1rem; text-align:center">
+TRIANGLE_FAN made using 6 vertices
+</i>
+</div> 
+
+<p>Vertices used to draw this shape: <code>[V₀, V₁, V₂, V₃, V₄, V₅]</code></p>
+<p>Draw call:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLE_FAN</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>);
+</code></pre><p>The <strong>first vertex (<code>V₀</code>)</strong> acts as the <strong>center</strong> of the fan.
+The <strong>first three vertices</strong> form the first triangle.<br>After that, <strong>each new vertex</strong>, together with the <strong>center vertex (<code>V₀</code>)</strong> and the <strong>previous vertex</strong>, forms a new triangle.<br>This also makes <code>gl.TRIANGLE_FAN</code> <strong>memory-efficient</strong>, since many triangles reuse the same center vertex.</p>
+<p>It is commonly used to draw <strong>circles, disks, cones, and radial shapes</strong>.</p>
+
+        <div class="nextPrev">
+          <i>
+            <a href="/cg-docs/docs/webgl/coordinate-space.html">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"
+                  ></path>
+                </svg>
+              </span>
+              <span style="padding-bottom: 4px"> Previous </span>
+            </a>
+          </i>
+          <i>
+            <a href="/cg-docs/docs/maths/basics.html">
+              <span style="padding-bottom: 4px"> Next </span>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+          </i>
+        </div>
+      </section>
+    </main>
+
+    <script src="../../mdScript.js"></script>
+  </body>
+</html>
