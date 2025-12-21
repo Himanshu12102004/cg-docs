@@ -16,9 +16,9 @@ With the release of JavaScript in 1995, we had a way to write some logical progr
 This was a major leap in web development. However, as websites became more complex, developers started
 feeling the need of graphics such as dynamic charts, graphs, and custom drawings, but at that time,
 HTML had no native way to draw graphics programmatically.  
-Then in 2004 Apple released the **canvas** tag for Safari, which had the capability to draw 2D CPU rasterized graphics on the web. It was soon adapted by other browsers and the support for 2D CPU graphics was widely available on browsers.
+Then in 2004 Apple released the **canvas** tag for Safari, which had the capability to draw 2D CPU rasterized graphics on the webpages. It was soon adapted by other browsers and the support for 2D CPU graphics was widely available on browsers.
 
-Still, GPU-rasterized CG was largely limited to native applications written in C/C++ using OpenGL. Then, in 2011, WebGL<sup>1</sup> was released, finally providing access to the GPU directly from
+Still, GPU-rasterized CG was largely limited to native applications written in C/C++ using OpenGL. Then, in 2011, WebGL was released, finally providing access to the GPU from
 within the browser.
 
 Now enough of trash talking : ) , we will discuss about the evolution of WebGL some other day let's dive straight into it.
@@ -30,18 +30,16 @@ From a beginners perspective, WebGL can be seen as a way to make dynamic 2D/3D s
 ## Why learn WebGL?
 
 1. WebGL is a good starting point for leaning CG as it is lot more simpler than any other API like Vulkan or DirectX.
-
-2. You need nothing more than a simple text editor and a web browser. When you compare it with OpenGL there is a lot more stuff to do like making window and all.
-
-3. Easy to share and host. Host it like any other website and share the link.
-
+2. You need nothing more than a simple text editor, a web browser.
+3. Easy to share and host.You can host it like any other website and share the link.
 4. You can use other HTML elements along with the graphics,
 with this you can make your stunning 3D portfolio.
 
-## What do you need to proceed further
+## What do you need to proceed further?
 
 1. A decent PC.
 2. A Text editor and a browser.
 3. A little bit of maths (addition, subtraction, multiplication and division), anything other than these will be discussed on the spot.
-4. A little bit of HTML and Js.
+4. A little bit of HTML and JS.
 5. No prior CG experience needed
+

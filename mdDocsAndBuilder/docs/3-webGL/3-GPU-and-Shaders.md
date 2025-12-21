@@ -40,7 +40,7 @@ Now lets see shaders:
 </div>
 
 2. **Fragment Shader**:  
-A fragment shader is a GPU program that runs once for each fragment. It runs after the vertex shader. The vertex shader defines the shape of the triangle, and then the pixels inside the triangle are determined as fragments. Only after this step are the fragment shaders executed, and they run in parallel. For example, if a triangle covers 1000 pixels, the fragment shader will run 1000 times, in parallel and the entire operation will take the time equivalent to processing just on fragment <sup>2</sup>. This is where you can see the massive parallel processing power of the GPU.
+A fragment shader is a GPU program that runs once for each fragment. It runs after the vertex shader. The vertex shader defines the shape of the triangle, and then the pixels inside the triangle are determined as fragments. Only after this step are the fragment shaders executed, and they run in parallel. For example, if a triangle covers 1000 pixels, the fragment shader will run 1000 times, in parallel and the entire operation will take the time equivalent to processing just one fragment <sup>2</sup>. This is where you can see the massive parallel processing power of the GPU.
 
 <div class="img-external">
 <div class= "img-container">
@@ -51,13 +51,9 @@ A fragment shader is a GPU program that runs once for each fragment. It runs aft
 
 ### Writing Shaders
 
-Shaders are written in GLSL (OpenGL Shading Language), a language similar to C.  
-Even if you’re not familiar with C, the syntax is simple enough to grasp quickly.
+Shaders can be written in different languages, depending which graphics API you are using, but in **WebGL** we write shaders in a language called **GLSL**.
 
-For WebGL (JavaScript), shaders are written as **JavaScript strings** that are passed to the WebGL API.
-
-We’ll cover shaders in much more detail in later chapters, so don’t worry if it seems confusing now. : )
-
+GLSL stands for **OpenGL shading language**, and is a language similar to C. Don't worry we will have a full length chapter on shaders and GLSL.  
 
 ---
 <sup>1</sup> This is an overly simplified definition of GPU.

@@ -38,21 +38,21 @@ You can calculate the framerate in two ways:
 
 1) Count how many frames are rendered in one second.
 2) Measure the time between two consecutive frames and take its reciprocal.
-$$
-Framerate = \frac{1}{time\:elapsed\:between\:two\:frames}
-$$
+
+
 Most screens have the framerate between 60 to 120.
 
 ## What is an animation?
 An animation is a sequence of images (called frames) that are drawn, erased, and redrawn very quickly.
 When these frames change fast enough, your eyes perceive it as smooth motion instead of individual pictures.
 
+
 Lets see an example
 
 
 
 <div class="img-external">
-<div class= "img-container">
+<div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765024464/mlepjvc3kln5vf8cbrmn.jpg" alt="sprite sequence">
 </div>
 <i style="font-size:1rem; text-align:center">
@@ -60,7 +60,7 @@ Image showing a sequence of successive frames</i>
 </div>
 
 <div class="img-external">
-<div class= "img-container">
+<div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765024350/yniaimqbejpwrhbs2caf.gif" alt="animation example">
 </div>
 <i style="font-size:1rem; text-align:center">Animated GIF using the above sequence of images</i>

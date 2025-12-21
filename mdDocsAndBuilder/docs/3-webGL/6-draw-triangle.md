@@ -7,6 +7,8 @@ Whole code will be exactly the same with the difference in the draw call , what 
 gl.drawArrays(gl.TRIANGLES, 0, 3);
 ```
 
+You might wonder why the third arg is 3 when we are drawing only one triangle. Well this argument does not signify how many `gl.TRIANGLES` you are drawing but it signifies how many vertices you want to render and as a triangle requires 3 vertices hence the third arg is 3. 
+
 <div class="img-external">
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766225147/dzqemcdhmczwdobzezwg.png" alt="fragment shader illustration">

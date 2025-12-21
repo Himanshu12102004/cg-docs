@@ -1,5 +1,5 @@
 # Let's draw multiple points
-In the last program you must have noticed that we hardcoded the position to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here then there etc. These vertex shader inputs are called attributes.
+In the last chapter you must have noticed that we had hardcoded the `gl_Position` to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here, the next there and so on. These vertex shader inputs are called attributes.
 
 ## What are attributes
 Any input given to the vertex shader can be termed as attribute, and here we will use attribute to pass the position of points.
@@ -15,15 +15,31 @@ void main(){
   gl_PointSize = 30.0;
 }`;
 ```
-You notice that we have added a new line `in vec2 a_position;` in the shader, and this line helps us to take the input into the shader.  The name of the attribute `a_position` has a `a_` in the prefix is just to maintain the convention, and here `a_` stands for attribute.
+You may notice that we have added a new line, `in vec2 a_position;`, in the shader.  
+The `in` keyword tells the shader that this variable will receive data from outside the shader. In simple terms, it works in the opposite way of the `out` keyword.
 
-You might get confused with this line `gl_Position = vec4(a_position,0,1);` that how come a `vec4` constructor take a `vec2` as its first arg and the then the other args are 0 and 1, let me clarify this it's actually a shorthand form of writing `vec4(a_position[0], a_position[1], 0, 1)` and GLSL has tons of these shorthands that we will discuss in further chapters.  
+- `in` → used to get data **into** the shader from outside  
+- `out` → used to send data **out of** the shader  
+
+Recall that in the previous chapter, we used the `out` keyword in the fragment shader to output the final color.
+
+The variable name `a_position` follows a common naming convention. The prefix `a_` simply stands for **attribute**, which helps us easily identify that this value comes from vertex attribute data.
+
+Moving on to the next line, you might be confused by the statement  
+`gl_Position = vec4(a_position, 0, 1);`.
+
+At first glance, it may seem strange that the `vec4` constructor accepts a `vec2` as its first argument, followed by `0` and `1`. What’s actually happening is that this is just a shorthand form. The line above is equivalent to writing:
+
+`vec4(a_position[0], a_position[1], 0, 1)`
+
+GLSL provides many such shorthand (and convenience) constructors to make the code shorter and more readable. We’ll explore these shorthands in more detail in later chapters.
+ 
 
 Now the question arises how to give different positions to this attribute for different points
 
 ## Steps to give input to the vertex shader
 
-1. Make a js array of the coordinates of points  
+1. Make a JS array of the coordinates of points  
 2. Get the location of the attribute
 3. Create Buffer
 4. Bind Buffer to the target
@@ -32,13 +48,15 @@ Now the question arises how to give different positions to this attribute for di
 7. Enable the attribute
 8. Issue the draw call with the number of vertices you want to draw.
 
+The code we are discussing in this section will come after the linking of the program.   
+
 Now let's see each step in detail:
 
-### 1. Make a js array of the coordinates of points
+### 1. Make a JS array of the coordinates of points
 First of all you need to define an array containing the coordinates of all the points you want to be drawn on the screen.
 
 Code:
-``` js
+``` JS
 const pointsCoordinates = [
   0.0, 0.5, // First point
   -0.5,-0.5, // Second point
@@ -62,11 +80,11 @@ Inside the GPU, attributes are not identified by their names, but by numeric
 values called attribute locations.
 
 During program linking, WebGL assigns a number (such as `0`, `1`, `2`, …) to each
-attribute.
+attribute, and these numbers are the attribute locations.
 
 There is one more question, why we need the location in the first place?
 
-From the example above you can see that there can be more than one attributes or inputs in the vertex shader and hence to identify a particular attribute and pass data to that attribute. 
+Let's answer this, from the example above you can see that there can be more than one attributes or inputs in the vertex shader and hence to identify a particular attribute and pass data to that attribute, we need its location. 
 
 To get the location of the attribute we invoke the function `gl.getAttribLocation` with the first arg being `program` and the next arg is the name of the attribute.
 
@@ -81,6 +99,10 @@ The first question that arises is: **what is a buffer?**
 A **buffer** in WebGL is a block of memory on the GPU used to store data that will
 be processed by the graphics pipeline.
 
+The next question is why do we need it?
+
+The vertex or coordinate data which we defined as a JS array in the first step exists in the system RAM, but for rendering we need it to be in the GPU memory and for that we need to make a buffer.
+
 To create a buffer we invoke the function `gl.createBuffer` and it creates a empty buffer in the GPU and makes a buffer object in the WebGL Driver and returns it's handle(reference).
 
 Code:
@@ -92,14 +114,14 @@ const pointsBuffer = gl.createBuffer();
 It would be more clear with the diagrams below:
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965103/uwkhhyn8oqo7nxbcz541.png" alt="">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965103/uwkhhyn8oqo7nxbcz541.png" alt="Webgl system initially">
 </div>
 <i style="font-size:1rem; text-align:center">System state before calling gl.createBuffer function</i>
 </div> 
 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/xo07x2yrji3sk2rrjc92.png" alt="">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/xo07x2yrji3sk2rrjc92.png" alt="System state after calling gl.createBuffer function">
 </div>
 <i style="font-size:1rem; text-align:center">System state after calling gl.createBuffer function</i>
 </div> 
@@ -141,7 +163,7 @@ gl.bindBuffer(gl.ARRAY_BUFFER, pointsBuffer);
 Let's have a look at the system state after calling this function:
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/eo2kxae7hle5yahzyofh.png" alt="">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/eo2kxae7hle5yahzyofh.png" alt="System state after calling gl.bindBuffer">
 </div>
 <i style="font-size:1rem; text-align:center">System state after calling gl.bindBuffer function. The double headed arrow shows the target binding</i>
 </div> 
@@ -159,7 +181,7 @@ This function:
 2. a typed array containing the data
 3. a usage hint describing how the data will be used
 
-You can say that this function instructs that put the data in this array into the memory location of buffer that is currently bound to the `gl.ARRAY_BUFFER`.
+You can think of this function as telling WebGL to copy the data from this array into the GPU buffer that is currently bound to `gl.ARRAY_BUFFER`.
 
 Code:
 ```js 
@@ -182,9 +204,7 @@ element has the same data type and a known size in memory.
 `Float32Array` is a typed array that guarantees:
 
 - every element is a number
-
 - each number is a 32-bit floating-point value
-
 - the memory layout is predictable for the GPU
 
 By converting the data into a `Float32Array`, we give the GPU a clear guarantee
@@ -223,22 +243,13 @@ Use this when the buffer data is set **once** and used many times for rendering.
 
 2. `gl.DYNAMIC_DRAW`: 
 Use this when the buffer data will be **updated frequently**, for example changing the data every frame . It works on the Allocating First, Filling Later When using `gl.DYNAMIC_DRAW`, you can first allocate memory on the GPU and then update it later using `gl.bufferSubData`.
-
-    ```js
-    const data = new Float32Array(pointsCoordinates)
-    gl.bufferData(gl.ARRAY_BUFFER, 24, gl.DYNAMIC_DRAW);
-    gl.bufferSubData(
-      gl.ARRAY_BUFFER,
-      0,  // byte offset in the GPU buffer where the data will be written
-      data);
-    ```
-    This mode is mainly used in situations where the data is updated on the CPU and then rendered by the GPU,for example in particle simulations.
+    This mode is mainly used in situations where the data is updated on the CPU and then rendered by the GPU, for example in particle simulations.
 
 System state after invocation of the `gl.bufferData` function:
 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965544/hhasixs6asr3trxtsmn0.png" alt="">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965544/hhasixs6asr3trxtsmn0.png" alt="Showing transfer of data from RAM to GPU memory">
 </div>
 <i style="font-size:1rem; text-align:center">Transfer of data from RAM to the GPU buffer bounded to the target ARRAY_BUFFER</i>
 </div>
@@ -275,8 +286,8 @@ If the data type is `gl.FLOAT`, this parameter is ignored.
 
     This value is always specified in **bytes**, not in number of elements.
 
-We will discuss this argument in detail in the colored point chapter.
-Don’t worry if you don’t fully understand this function yet — we will revisit it in the following chapters.  
+We will discuss this function again in the coloured triangle chapter, so don't worry if you don’t fully understand this function yet.
+
 For now, just understand that this function tells the GPU that for the attribute at location
 `a_position_location`, it should read data from the buffer currently bound to `gl.ARRAY_BUFFER`,
 and interpret that data as **pairs of two numbers** to form the attribute values.
@@ -302,11 +313,11 @@ position — the center of the screen — and appear as a single point.
 
 You have to draw 3 points, so issue the draw call with the last argument as 3
 
-```
+``` js
 gl.drawArrays(gl.POINTS, 0, 3);
 ```
 
-As promised in the last chapter, let’s continue the discussion on the arguments of the gl.drawArrays function.
+As promised in the last chapter, let’s continue the discussion on the arguments of the `gl.drawArrays` function.
 
 I think that the first arg is quite clear, that is to say what you want to draw, and here its points hence it's `gl.POINTS`.
 
@@ -332,9 +343,15 @@ Hence it will draw the points:
 
 Now it should be obvious that the second argument tells, from which point to start and the third argument says that draw these many points from there.
 
+
+---
+
+
+Now when you save your `script.js` and reload the browser window you will see something like this. And yeee! we have drawn multiple points.
+
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766124702/ypy61npsk09lrlcuvjhi.png" alt="fragment shader illustration">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766310312/omuvtvn9d65af0qddxk1.png" alt="fragment shader illustration">
 </div>
 <i style="font-size:1rem; text-align:center">Final result</i>
 </div> 

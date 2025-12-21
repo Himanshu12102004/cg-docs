@@ -1,6 +1,5 @@
 # Let’s Draw a Point
-
-So finally, we are going to write some GPU code and draw a point on the screen. 
+In the last chapter we learned a bit about GPU and shaders, now its time to write some GPU code and draw a point on the screen. 
 
 In CG whether you are rendering a single point or a full 3D scene the underlying steps which I say **Eightfold Path of rendering** remain the same so let's start with that.  
 
@@ -20,31 +19,33 @@ I know these steps may feel overwhelming in the first glance but believe me they
 Now lets see each step in detail:
 ### 1. Set the viewport
 Setting the viewport means telling the WebGL system that this is my canvas height and width and I want you to draw in this space.
-To do this, we first set the width and height of the canvas and then call the function `gl.viewport`.
+To do this, we first set the width and height of the canvas and then call the function `gl.viewport`.     
+Let's see the code first:
 
-This function defines the rectangular area of the canvas where WebGL will draw. It takes four arguments:
-
-1. **x**: The x-coordinate (in pixels) of the lower-left corner of the viewport.
-2. **y**: The y-coordinate (in pixels) of the lower-left corner of the viewport.
-3. **width**: The width of the viewport in pixels.
-4. **height**: The height of the viewport in pixels.
-
-Code to set the viewport: 
-
-``` js
+``` JS
 const canvas = document.querySelector("canvas");
 const gl = canvas.getContext("webgl2");
 canvas.height = window.innerHeight; // For making the canvas full screen
 canvas.width = window.innerWidth; // For making the canvas full screen
 gl.viewport(0, 0, canvas.width, canvas.height);
 ```
+You would be familiar about the first two lines of the code so they don't need any explanation.
+
+The next two lines are there for setting up the **canvas** height and width.
+Then comes the `gl.viewport` function that 
+takes four arguments:
+
+1. **x**: The x-coordinate (in pixels) of the lower-left corner of the viewport.
+2. **y**: The y-coordinate (in pixels) of the lower-left corner of the viewport.
+3. **width**: The width of the viewport in pixels.
+4. **height**: The height of the viewport in pixels.
 
 ### 2. Write the vertex and fragment shaders
-We know that we are using js as a wrapper for using WebGL so actually the shader code will be written as js strings, then we will be sending it to the GPU for execution.
+We know that we are using JS as a wrapper for using WebGL so actually the shader code will be written as JS strings, then we will be sending it to the GPU for execution.
 
-Lets see the vertex shader to render a point at the center of the screen:
+Lets see the **vertex shader** to render a point at the center of the screen:
 
-```js
+```JS
 // vertex shader
 const vertexShaderSource = `#version 300 es
 void main(){
@@ -57,20 +58,27 @@ The first line of the shader defines the version of the GLSL we are using that i
 
 The next line defines the `main` function which serves as the entry point for the program
 
-Then we initialize the `gl_Position` variable, which is a predefined system variable. It is the responsibility of the vertex shader to assign a value to it, and this value represents the position of the vertex.  
+Then we initialize the `gl_Position`. It is a built-in variable available in the WebGL vertex shader. It is the responsibility of the vertex shader to assign a value to `gl_Position` , and this value represents the position of the vertex.  
+
+Now you would have a question that, ok fine we have predefined variables in other languages as well but what is that `vec4`?  We have never seen it.
+
+To answer that let's see the core purpose of GLSL. GLSL is designed to render high performance graphics, and in CG vectors are so indispensable that we have specialized data types for them, and  `vec4` is one of them representing a 4 dimensional vector.    
 These data types also have constructors and hence can be invoked to create vector values by directly providing their components.
-For example, `vec4(0, 0, 0, 1)` creates a 4D vector with the given values for `x`, `y`, `z`, and `w` respectively.
+For example, `vec4(0, 0, 0, 1)` creates a 4D vector.
+There are other such data types as well for example `mat2x2`, `sampler_2d` etc. we will see them in later chapters.
 
-One thing that might bother you, is why we need **four components** to describe a position in a 3D world? These 4D coordinates are called **homogeneous coordinates**. In this representation, the first three components represent the usual `x, y, z` coordinates, and the fourth component is called `w`.
+One thing that might bother you, is why we need **4D vector** to describe a position in a 3D world? These 4D coordinates are called **homogeneous coordinates**. In this representation, the first three components represent the usual `x, y, z` coordinates, and the fourth component is called `w`.
 
-For the time being, you can simply understand that a homogeneous coordinate `(x, y, z, w)` represents the 3D point `(x / w, y / w, z / w)`. The presence of this *w* component allows us to express transformations in a more general and unified way, which we will discuss in detail later.
+For the time being, you can simply understand that the 4D vector `(x, y, z, w)` represents the 3D point  
+`(x / w, y / w, z / w)`.
 
+This way of representing points is called **homogeneous coordinates**, and we’ll have a full discussion about it in later chapters.  
+For now, just remember that the presence of the `w` component allows us to express transformations in a more general and unified way.
 
 After this we have another predefined variable `gl_PointSize` whose default value is 1 and it means that the size of the point will be having a size of 1px and in this line we are setting it to 30px.
 
-
-Fragment Shader:
-```js
+**Fragment Shader**:
+```JS
 // fragment shader
 const fragmentShaderSource = `# version 300 es
 precision mediump float;
@@ -79,25 +87,26 @@ void main(){
   color = vec4(1,0,0,1); 
 }`;
 ```
-The fragment shader is very similar to the vertex shader, with a few important differences.
 
-First, in the fragment shader we must specify the precision for floating-point values. We will have a detailed discussion about precision qualifiers later, when we study shaders in depth.
+The fragment shader is also written in GLSL, just like the vertex shader, so it looks similar to the vertex shader with a few differences.
 
-Second, just as the vertex shader is responsible for setting `gl_Position`, the fragment shader is responsible for producing the final color of each fragment. In GLSL, we declare an output variable using the `out` keyword before the `main` function. Then, inside the `main` function, we assign a value to this output variable. In our case, this output variable represents the fragment color.
+First, in the fragment shader we must specify the precision for floating-point values. Here, we declare that we want **medium precision** for `float` data types. We will discuss precision qualifiers in detail later, when we study shaders more deeply.
+
+Second, just as the vertex shader is responsible for setting `gl_Position`, the fragment shader is responsible for producing the final color of each fragment. In GLSL, we declare an output variable using the `out` keyword before the `main` function. Then, inside the `main` function, we assign a value to this output variable. In our case, the output variable `vec4 color` is responsible for doing so. Color is also a **4D vector** representing **RGBA** values which are normalized to the range of 0 to 1.
 
 ### 3. Compile the shaders
-Now that we have the shaders as js strings we need to let the WebGL system know that this is our fragment shader and this is our vertex shader to do this we have two functions `gl.createShader` and `gl.shaderSource`.
+Now that we have the shaders as JS strings we need to let the WebGL system know that this is our fragment shader and this is our vertex shader to do this we have two functions `gl.createShader` and `gl.shaderSource`.
 
 First let's look at the code then we will understand what these functions do.
 
 For vertex shader:
-```js
+```JS
 const vertexShader = gl.createShader(gl.VERTEX_SHADER);
 gl.shaderSource(vertexShader, vertexShaderSource);
 ```
 
 For fragment shader:
-```js
+```JS
 
 const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
 gl.shaderSource(fragmentShader, fragmentShaderSource);
@@ -108,10 +117,10 @@ The `gl.createShader` function takes in a flag, which is simply a numeric value 
 
 Now once the shader object is created we need to put the shader source code into the object which is done using the function `gl.shaderSource`. This function takes in two arguments, the first one is the shader object reference in which you want to put your shader code and the other argument is a string which is the shader source code we had written before.
 
-Now, the plain english cannot be interpreted by the GPU so we need to compile the shaders which can be done using the `gl.compileShader` function.
+At this point, the shader source is still just plain text, which the GPU cannot execute directly. To make it usable, we must compile the shader using the `gl.compileShader` function.
 
 **Code for compiling vertex shader:**
-```js
+```JS
 gl.compileShader(vertexShader);
 if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
   console.log(
@@ -122,7 +131,7 @@ if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
 ```
 
 **Code for compiling fragment shader:**
-``` js
+``` JS
 gl.compileShader(fragmentShader);
 if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
   console.log(
@@ -142,26 +151,29 @@ Querying shader parameters have a small performance cost, so it is usually avoid
 ### 4. Create WebGL program 
 Once the shader objects are created you need some vessel that can combine the fragment shader and the vertex shader together, as alone they are good for nothing and this vessel is provided by WebGL `program` object.
 
-To create a program object we need to invoke `gl.createProgram` function, no arguments needed and it returns a handle (reference) to a WebGL program object managed by WebGL system.
+To create a program object we need to invoke `gl.createProgram` function. It returns a handle (reference) to a WebGL program object managed by WebGL system.
 
 Code:
-```js
+```JS
 const program = gl.createProgram();
 ```
 
 ### 5. Attach the shaders to the program 
 Now the program needs to know that what are the vertex and fragment shaders to be used together. We do it using the `gl.attachShader` function which takes two args, the first one is the program reference and the next one is the shader reference, let's see the code:
 
-```js
+```JS
 gl.attachShader(program, vertexShader);
 gl.attachShader(program, fragmentShader);
 ```
 
 ### 6. Link the program
-Now that the program knows the shaders that are to be used together. You can say that linking is kind of bringing the vertex shader and the fragment shader together, but there are some nuances here and there that we will discuss later.
+
+Now that the program knows which shaders are to be used together, the next step is to link them. You can think of linking as the process of bringing the vertex shader and the fragment shader together into a single entity.
+  
+  To link the program we invoke the `gl.linkProgram` function with the WebGL program object reference as the argument.
 
 Let's look at the code now:
-```js
+```JS
 gl.linkProgram(program);
 if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
   console.log(
@@ -171,24 +183,26 @@ if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
 }
 ``` 
 
-To link the program we invoke the `gl.linkProgram` function with the WebGL program object reference as the argument.
+In the first line we call the `gl.linkProgram` function passing in the program we want to link.
 
-The lines following it are just there to console any issue we have while linking, similar to the one we did for the shaders.
+The lines that follow are just there to console any error while linking, similar to the one we did for the shaders.
 
 ### 7. Use the program
-One thing to note here is that you can have multiple programs but only one can be used at a time so we need to specify which program to use, and to do it we invoke the function `gl.useProgram`.
+Now the program is ready to use. In WebGL you can have multiple programs but you can only use one at a time, so we need to specify which program to use by invoking the function `gl.useProgram`.
 
 Code:
-```js
+```JS
 gl.useProgram(program);
 ```
 
+The `gl.useProgram` function tells WebGL that use this particular program for the draw call.
+
 ### 8. Issue the draw call
 Now you are all set to draw a point and to do that we have to issue a draw call, let's see the code:
-```js
+```JS
 gl.drawArrays(gl.POINTS, 0, 1);
 ```
-The first arg is the graphics primitive you want to draw, it can be gl.TRIANGLES, gl.LINE etc. We will have a in-depth discussion on graphics primitive.
+The first arg is the graphics primitive you want to draw, it can be `gl.TRIANGLES` , `gl.LINE` etc. We will have a in-depth discussion on graphics primitives.
 
 The next argument specifies from which vertex you want to start drawing, we will have a good discussion on this in the next chapter.
 
@@ -197,7 +211,7 @@ The last arg is the number of vertices you want to draw and here as its a single
 So with this you will see something like this on the screen: 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765813386/oszo86bqor8m0zpmvlfn.png" alt="fragment shader illustration">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766302819/mcd5mc5bft34cq84dlbp.png" alt="Final result:lets draw a point">
 </div>
 <i style="font-size:1rem; text-align:center">Final result</i>
 </div> 
@@ -275,6 +289,7 @@ gl.drawArrays(gl.POINTS, 0, 1);
 ```
 
 <a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/4-DrawingAPoint" class="link" target="blank">Checkout the full code on github</a>
+
 ---
 
 <sup>1</sup> WebGL is based on OpenGL ES (OpenGL for Embedded Systems), and therefore it uses GLSL ES, which is the embedded-systems version of the OpenGL Shading Language.
