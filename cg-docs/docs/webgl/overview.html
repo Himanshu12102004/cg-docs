@@ -32,15 +32,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
-    
+    <link id="hljs-theme" rel="stylesheet" />
+
     <link rel="stylesheet" href="../../css/theming.css" />
     <link
-    rel="stylesheet"
-    href="../../css/articleStyling.css"
+      rel="stylesheet"
+      href="../../css/articleStyling.css"
     />
     <link rel="stylesheet" href="../../css/mdStyling.css" />
-    
+
     
     <script type="application/ld+json">
       {
@@ -63,18 +63,28 @@
     
     <script>
       const root = document.documentElement;
+      const hljsLink = document.getElementById("hljs-theme");
+
       let savedTheme = localStorage.getItem("theme");
+
       if (!savedTheme) {
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
+
         savedTheme = prefersDark ? "dark" : "light";
         localStorage.setItem("theme", savedTheme);
       }
+
       if (savedTheme === "light") {
         root.classList.add("light");
+        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+      } else {
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
       }
     </script>
+
     <div class="overlay"></div>
     <nav>
       <div>
@@ -243,30 +253,26 @@
 <p>With the release of JavaScript in 1995, we had a way to write some logical program that could be run on the browser. It ended the era of static webpages that were merely used to display information no real time interaction, no client side logic.</p>
 <p>This was a major leap in web development. However, as websites became more complex, developers started
 feeling the need of graphics such as dynamic charts, graphs, and custom drawings, but at that time,
-HTML had no native way to draw graphics programmatically.<br>Then in 2004 Apple released the <strong>canvas</strong> tag for Safari, which had the capability to draw 2D CPU rasterized graphics on the web. It was soon adapted by other browsers and the support for 2D CPU graphics was widely available on browsers.</p>
-<p>Still, GPU-rasterized CG was largely limited to native applications written in C/C++ using OpenGL. Then, in 2011, WebGL<sup>1</sup> was released, finally providing access to the GPU directly from
+HTML had no native way to draw graphics programmatically.<br>Then in 2004 Apple released the <strong>canvas</strong> tag for Safari, which had the capability to draw 2D CPU rasterized graphics on the webpages. It was soon adapted by other browsers and the support for 2D CPU graphics was widely available on browsers.</p>
+<p>Still, GPU-rasterized CG was largely limited to native applications written in C/C++ using OpenGL. Then, in 2011, WebGL was released, finally providing access to the GPU from
 within the browser.</p>
 <p>Now enough of trash talking : ) , we will discuss about the evolution of WebGL some other day let&#39;s dive straight into it.</p>
 <h2>What is WebGL?</h2>
 <p>From a beginners perspective, WebGL can be seen as a way to make dynamic 2D/3D scenes in the web browser, I don&#39;t want to scare you away by saying heavy words like WebGL is a low-level, JavaScript API that provides direct, programmable access to the GPU inside the browser for rendering real-time 2D and 3D graphics. Oops! I said it ; )</p>
 <h2>Why learn WebGL?</h2>
 <ol>
-<li><p>WebGL is a good starting point for leaning CG as it is lot more simpler than any other API like Vulkan or DirectX.</p>
-</li>
-<li><p>You need nothing more than a simple text editor and a web browser. When you compare it with OpenGL there is a lot more stuff to do like making window and all.</p>
-</li>
-<li><p>Easy to share and host. Host it like any other website and share the link.</p>
-</li>
-<li><p>You can use other HTML elements along with the graphics,
-with this you can make your stunning 3D portfolio.</p>
-</li>
+<li>WebGL is a good starting point for leaning CG as it is lot more simpler than any other API like Vulkan or DirectX.</li>
+<li>You need nothing more than a simple text editor, a web browser.</li>
+<li>Easy to share and host.You can host it like any other website and share the link.</li>
+<li>You can use other HTML elements along with the graphics,
+with this you can make your stunning 3D portfolio.</li>
 </ol>
-<h2>What do you need to proceed further</h2>
+<h2>What do you need to proceed further?</h2>
 <ol>
 <li>A decent PC.</li>
 <li>A Text editor and a browser.</li>
 <li>A little bit of maths (addition, subtraction, multiplication and division), anything other than these will be discussed on the spot.</li>
-<li>A little bit of HTML and Js.</li>
+<li>A little bit of HTML and JS.</li>
 <li>No prior CG experience needed</li>
 </ol>
 

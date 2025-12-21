@@ -24,7 +24,6 @@ svg {
   transition: fill var(--transition-time) ease;
 }
 .layout__content {
-
   overflow-y: scroll;
   /* overflow-x: hidden; */
   padding: 0rem 1rem 2rem 0rem;
@@ -199,6 +198,7 @@ hr {
   border-top: 1px solid var(--border);
   margin: 3rem 0 1rem 0;
 }
+
 /* Media Query */
 @media screen and (max-width: 500px) {
   :root {
@@ -240,7 +240,7 @@ hr {
     padding: 0;
     background-color: var(--background);
     z-index: 1000;
-    height: calc(100dvh);
+    height: 100dvh;
     transform: translateX(-100%);
     transition: transform 0.1s ease-in-out;
   }

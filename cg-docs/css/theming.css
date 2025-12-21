@@ -3,6 +3,7 @@
   font-style: normal;
   src: url("../assets/Fonts/GoogleSansFlex.woff2") format("woff2");
 }
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #121213;
@@ -20,8 +21,17 @@
     --hr: #404040;
     --transition-time: 0.3s;
     --navHeight: 101px;
+
+    --code-bg: #3e3b2e; /* subtle yellowish bg for code */
+    --code-fg: #fefcbf; /* light yellow text */
+    --highlight: #60a5fa; /* accent highlight */
+    --highlight2: #10afa2;
+    --highlight3: #34d399;
+    --block-code: #0c1117;
   }
 }
+
+/* Light mode */
 .light {
   --background: #fafafa;
   --foreground: #1a1a1a;
@@ -36,4 +46,12 @@
   --search: #f3f4f6;
   --descriptor: #f1f3f5;
   --hr: #d1d5db;
+
+  /* New palette colors */
+  --code-bg: #fef9c3; /* subtle yellow bg for code */
+  --code-fg: #78350f; /* dark brown text */
+  --highlight: #2563eb;
+  --highlight2: #14b8a6;
+  --highlight3: #10b981;
+  --block-code: #edeef3;
 }

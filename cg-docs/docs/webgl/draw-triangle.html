@@ -32,15 +32,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
-    
+    <link id="hljs-theme" rel="stylesheet" />
+
     <link rel="stylesheet" href="../../css/theming.css" />
     <link
-    rel="stylesheet"
-    href="../../css/articleStyling.css"
+      rel="stylesheet"
+      href="../../css/articleStyling.css"
     />
     <link rel="stylesheet" href="../../css/mdStyling.css" />
-    
+
     
     <script type="application/ld+json">
       {
@@ -63,18 +63,28 @@
     
     <script>
       const root = document.documentElement;
+      const hljsLink = document.getElementById("hljs-theme");
+
       let savedTheme = localStorage.getItem("theme");
+
       if (!savedTheme) {
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
+
         savedTheme = prefersDark ? "dark" : "light";
         localStorage.setItem("theme", savedTheme);
       }
+
       if (savedTheme === "light") {
         root.classList.add("light");
+        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+      } else {
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
       }
     </script>
+
     <div class="overlay"></div>
     <nav>
       <div>
@@ -240,7 +250,8 @@
 <p>Drawing a triangle is incredibly easy if you followed the last chapter carefully.</p>
 <p>Whole code will be exactly the same with the difference in the draw call , what you need to do in the draw call is just replace gl.POINTS with gl.TRIANGLES waking the draw call like this:</p>
 <pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
-</code></pre><div class="img-external">
+</code></pre><p>You might wonder why the third arg is 3 when we are drawing only one triangle. Well this argument does not signify how many <code>gl.TRIANGLES</code> you are drawing but it signifies how many vertices you want to render and as a triangle requires 3 vertices hence the third arg is 3. </p>
+<div class="img-external">
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766225147/dzqemcdhmczwdobzezwg.png" alt="fragment shader illustration">
 </div>

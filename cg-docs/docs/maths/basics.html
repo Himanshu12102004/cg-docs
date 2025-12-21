@@ -32,15 +32,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
-    
+    <link id="hljs-theme" rel="stylesheet" />
+
     <link rel="stylesheet" href="../../css/theming.css" />
     <link
-    rel="stylesheet"
-    href="../../css/articleStyling.css"
+      rel="stylesheet"
+      href="../../css/articleStyling.css"
     />
     <link rel="stylesheet" href="../../css/mdStyling.css" />
-    
+
     
     <script type="application/ld+json">
       {
@@ -63,18 +63,28 @@
     
     <script>
       const root = document.documentElement;
+      const hljsLink = document.getElementById("hljs-theme");
+
       let savedTheme = localStorage.getItem("theme");
+
       if (!savedTheme) {
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
+
         savedTheme = prefersDark ? "dark" : "light";
         localStorage.setItem("theme", savedTheme);
       }
+
       if (savedTheme === "light") {
         root.classList.add("light");
+        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+      } else {
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
       }
     </script>
+
     <div class="overlay"></div>
     <nav>
       <div>

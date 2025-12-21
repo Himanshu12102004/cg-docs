@@ -103,7 +103,7 @@ document.querySelectorAll(".folder-toggle").forEach((toggle) => {
 
 const sunIcon = document.querySelector(".sun");
 const moonIcon = document.querySelector(".moon");
-// Do not think that saved theme is undefined its in the templete
+// Do not think that saved theme is undefined its in the template
 if (savedTheme === "dark") {
   sunIcon.classList.add("hide");
   moonIcon.classList.remove("hide");
@@ -112,19 +112,23 @@ if (savedTheme === "dark") {
   sunIcon.classList.remove("hide");
 }
 function toggleTheme() {
-  console.log("Toggling theme");
   const lightNow = root.classList.toggle("light");
 
   if (lightNow) {
     moonIcon.classList.add("hide");
     sunIcon.classList.remove("hide");
     localStorage.setItem("theme", "light");
+    hljsLink.href =
+      "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
   } else {
     sunIcon.classList.add("hide");
     moonIcon.classList.remove("hide");
     localStorage.setItem("theme", "dark");
+    hljsLink.href =
+      "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
   }
 }
+
 document.querySelector(".theme-toggler").addEventListener("click", toggleTheme);
 
 // Phone Menu Toggle Script

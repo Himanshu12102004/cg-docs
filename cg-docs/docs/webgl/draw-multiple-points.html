@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>CG Docs – # Let's draw multiple points</title>
-    <meta name="description" content="In the last program you must have noticed that we hardcoded the position to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here then there etc. These vertex shader inputs are called attributes." />
+    <meta name="description" content="In the last chapter you must have noticed that we had hardcoded the `gl_Position` to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here, the next there and so on. These vertex shader inputs are called attributes." />
     <meta name="keywords" content="" />
     <meta name="author" content="Himanshu Gupta" />
 
     <meta property="og:title" content="CG Docs – # Let's draw multiple points" />
-    <meta property="og:description" content="In the last program you must have noticed that we hardcoded the position to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here then there etc. These vertex shader inputs are called attributes." />
+    <meta property="og:description" content="In the last chapter you must have noticed that we had hardcoded the `gl_Position` to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here, the next there and so on. These vertex shader inputs are called attributes." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/draw-multiple-points.html" />
     <meta property="og:image" content="../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="CG Docs – # Let's draw multiple points" />
-    <meta name="twitter:description" content="In the last program you must have noticed that we hardcoded the position to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here then there etc. These vertex shader inputs are called attributes." />
+    <meta name="twitter:description" content="In the last chapter you must have noticed that we had hardcoded the `gl_Position` to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here, the next there and so on. These vertex shader inputs are called attributes." />
     <meta
       name="twitter:image"
       content="../../assets/preview.png"
@@ -32,22 +32,22 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
-    
+    <link id="hljs-theme" rel="stylesheet" />
+
     <link rel="stylesheet" href="../../css/theming.css" />
     <link
-    rel="stylesheet"
-    href="../../css/articleStyling.css"
+      rel="stylesheet"
+      href="../../css/articleStyling.css"
     />
     <link rel="stylesheet" href="../../css/mdStyling.css" />
-    
+
     
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "# Let's draw multiple points",
-        "description": "In the last program you must have noticed that we hardcoded the position to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here then there etc. These vertex shader inputs are called attributes.",
+        "description": "In the last chapter you must have noticed that we had hardcoded the `gl_Position` to `vec4(0,0,0,1)` in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here, the next there and so on. These vertex shader inputs are called attributes.",
         "author": {
           "@type": "Person",
           "name": "Himanshu Gupta"
@@ -63,18 +63,28 @@
     
     <script>
       const root = document.documentElement;
+      const hljsLink = document.getElementById("hljs-theme");
+
       let savedTheme = localStorage.getItem("theme");
+
       if (!savedTheme) {
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
+
         savedTheme = prefersDark ? "dark" : "light";
         localStorage.setItem("theme", savedTheme);
       }
+
       if (savedTheme === "light") {
         root.classList.add("light");
+        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+      } else {
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
       }
     </script>
+
     <div class="overlay"></div>
     <nav>
       <div>
@@ -237,7 +247,7 @@
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
         <h1>Let&#39;s draw multiple points</h1>
-<p>In the last program you must have noticed that we hardcoded the position to <code>vec4(0,0,0,1)</code> in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here then there etc. These vertex shader inputs are called attributes.</p>
+<p>In the last chapter you must have noticed that we had hardcoded the <code>gl_Position</code> to <code>vec4(0,0,0,1)</code> in the vertex shader, but now you want multiple points at different places, so we need to give the vertex shader an input telling that draw the first point here, the next there and so on. These vertex shader inputs are called attributes.</p>
 <h2>What are attributes</h2>
 <p>Any input given to the vertex shader can be termed as attribute, and here we will use attribute to pass the position of points.</p>
 <p>Let&#39;s see how to use them</p>
@@ -248,12 +258,21 @@ void main(){
   gl_Position = vec4(a_position,0,1);
   gl_PointSize = 30.0;
 }`</span>;
-</code></pre><p>You notice that we have added a new line <code>in vec2 a_position;</code> in the shader, and this line helps us to take the input into the shader.  The name of the attribute <code>a_position</code> has a <code>a_</code> in the prefix is just to maintain the convention, and here <code>a_</code> stands for attribute.</p>
-<p>You might get confused with this line <code>gl_Position = vec4(a_position,0,1);</code> that how come a <code>vec4</code> constructor take a <code>vec2</code> as its first arg and the then the other args are 0 and 1, let me clarify this it&#39;s actually a shorthand form of writing <code>vec4(a_position[0], a_position[1], 0, 1)</code> and GLSL has tons of these shorthands that we will discuss in further chapters.  </p>
+</code></pre><p>You may notice that we have added a new line, <code>in vec2 a_position;</code>, in the shader.<br>The <code>in</code> keyword tells the shader that this variable will receive data from outside the shader. In simple terms, it works in the opposite way of the <code>out</code> keyword.</p>
+<ul>
+<li><code>in</code> → used to get data <strong>into</strong> the shader from outside  </li>
+<li><code>out</code> → used to send data <strong>out of</strong> the shader</li>
+</ul>
+<p>Recall that in the previous chapter, we used the <code>out</code> keyword in the fragment shader to output the final color.</p>
+<p>The variable name <code>a_position</code> follows a common naming convention. The prefix <code>a_</code> simply stands for <strong>attribute</strong>, which helps us easily identify that this value comes from vertex attribute data.</p>
+<p>Moving on to the next line, you might be confused by the statement<br><code>gl_Position = vec4(a_position, 0, 1);</code>.</p>
+<p>At first glance, it may seem strange that the <code>vec4</code> constructor accepts a <code>vec2</code> as its first argument, followed by <code>0</code> and <code>1</code>. What’s actually happening is that this is just a shorthand form. The line above is equivalent to writing:</p>
+<p><code>vec4(a_position[0], a_position[1], 0, 1)</code></p>
+<p>GLSL provides many such shorthand (and convenience) constructors to make the code shorter and more readable. We’ll explore these shorthands in more detail in later chapters.</p>
 <p>Now the question arises how to give different positions to this attribute for different points</p>
 <h2>Steps to give input to the vertex shader</h2>
 <ol>
-<li>Make a js array of the coordinates of points  </li>
+<li>Make a JS array of the coordinates of points  </li>
 <li>Get the location of the attribute</li>
 <li>Create Buffer</li>
 <li>Bind Buffer to the target</li>
@@ -262,11 +281,12 @@ void main(){
 <li>Enable the attribute</li>
 <li>Issue the draw call with the number of vertices you want to draw.</li>
 </ol>
+<p>The code we are discussing in this section will come after the linking of the program.   </p>
 <p>Now let&#39;s see each step in detail:</p>
-<h3>1. Make a js array of the coordinates of points</h3>
+<h3>1. Make a JS array of the coordinates of points</h3>
 <p>First of all you need to define an array containing the coordinates of all the points you want to be drawn on the screen.</p>
 <p>Code:</p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> pointsCoordinates = [
+<pre><code class="hljs language-JS"><span class="hljs-keyword">const</span> pointsCoordinates = [
   <span class="hljs-number">0.0</span>, <span class="hljs-number">0.5</span>, <span class="hljs-comment">// First point</span>
   -<span class="hljs-number">0.5</span>,-<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Second point</span>
   <span class="hljs-number">0.5</span>,-<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Third point</span>
@@ -281,9 +301,9 @@ void main(){
 Inside the GPU, attributes are not identified by their names, but by numeric
 values called attribute locations.</p>
 <p>During program linking, WebGL assigns a number (such as <code>0</code>, <code>1</code>, <code>2</code>, …) to each
-attribute.</p>
+attribute, and these numbers are the attribute locations.</p>
 <p>There is one more question, why we need the location in the first place?</p>
-<p>From the example above you can see that there can be more than one attributes or inputs in the vertex shader and hence to identify a particular attribute and pass data to that attribute. </p>
+<p>Let&#39;s answer this, from the example above you can see that there can be more than one attributes or inputs in the vertex shader and hence to identify a particular attribute and pass data to that attribute, we need its location. </p>
 <p>To get the location of the attribute we invoke the function <code>gl.getAttribLocation</code> with the first arg being <code>program</code> and the next arg is the name of the attribute.</p>
 <p>Code:</p>
 <pre><code class="hljs language-js"><span class="hljs-keyword">const</span> a_position_location = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_position&quot;</span>);
@@ -291,20 +311,22 @@ attribute.</p>
 <p>The first question that arises is: <strong>what is a buffer?</strong></p>
 <p>A <strong>buffer</strong> in WebGL is a block of memory on the GPU used to store data that will
 be processed by the graphics pipeline.</p>
+<p>The next question is why do we need it?</p>
+<p>The vertex or coordinate data which we defined as a JS array in the first step exists in the system RAM, but for rendering we need it to be in the GPU memory and for that we need to make a buffer.</p>
 <p>To create a buffer we invoke the function <code>gl.createBuffer</code> and it creates a empty buffer in the GPU and makes a buffer object in the WebGL Driver and returns it&#39;s handle(reference).</p>
 <p>Code:</p>
 <pre><code class="hljs language-js"><span class="hljs-keyword">const</span> pointsBuffer = gl.<span class="hljs-title function_">createBuffer</span>();
 </code></pre><p>It would be more clear with the diagrams below:</p>
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965103/uwkhhyn8oqo7nxbcz541.png" alt="">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965103/uwkhhyn8oqo7nxbcz541.png" alt="Webgl system initially">
 </div>
 <i style="font-size:1rem; text-align:center">System state before calling gl.createBuffer function</i>
 </div> 
 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/xo07x2yrji3sk2rrjc92.png" alt="">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/xo07x2yrji3sk2rrjc92.png" alt="System state after calling gl.createBuffer function">
 </div>
 <i style="font-size:1rem; text-align:center">System state after calling gl.createBuffer function</i>
 </div> 
@@ -337,7 +359,7 @@ We will discuss more on this in chapter we make a 3D Cube.</p>
 </code></pre><p>Let&#39;s have a look at the system state after calling this function:</p>
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/eo2kxae7hle5yahzyofh.png" alt="">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/eo2kxae7hle5yahzyofh.png" alt="System state after calling gl.bindBuffer">
 </div>
 <i style="font-size:1rem; text-align:center">System state after calling gl.bindBuffer function. The double headed arrow shows the target binding</i>
 </div> 
@@ -356,7 +378,7 @@ We will discuss more on this in chapter we make a 3D Cube.</p>
 <li>a typed array containing the data</li>
 <li>a usage hint describing how the data will be used</li>
 </ol>
-<p>You can say that this function instructs that put the data in this array into the memory location of buffer that is currently bound to the <code>gl.ARRAY_BUFFER</code>.</p>
+<p>You can think of this function as telling WebGL to copy the data from this array into the GPU buffer that is currently bound to <code>gl.ARRAY_BUFFER</code>.</p>
 <p>Code:</p>
 <pre><code class="hljs language-js">gl.<span class="hljs-title function_">bufferData</span>( gl.<span class="hljs-property">ARRAY_BUFFER</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Float32Array</span>(pointsCoordinates), gl.<span class="hljs-property">STATIC_DRAW</span> );
 </code></pre><p>You might be wondering: what is <code>Float32Array</code>?</p>
@@ -370,12 +392,9 @@ have a string data type.</p>
 element has the same data type and a known size in memory.</p>
 <p><code>Float32Array</code> is a typed array that guarantees:</p>
 <ul>
-<li><p>every element is a number</p>
-</li>
-<li><p>each number is a 32-bit floating-point value</p>
-</li>
-<li><p>the memory layout is predictable for the GPU</p>
-</li>
+<li>every element is a number</li>
+<li>each number is a 32-bit floating-point value</li>
+<li>the memory layout is predictable for the GPU</li>
 </ul>
 <p>By converting the data into a <code>Float32Array</code>, we give the GPU a clear guarantee
 about the type of data it will receive and how that data is laid out in memory.</p>
@@ -475,20 +494,14 @@ about the type of data it will receive and how that data is laid out in memory.<
 Use this when the buffer data is set <strong>once</strong> and used many times for rendering.</p>
 </li>
 <li><p><code>gl.DYNAMIC_DRAW</code>: 
-Use this when the buffer data will be <strong>updated frequently</strong>, for example changing the data every frame . It works on the Allocating First, Filling Later When using <code>gl.DYNAMIC_DRAW</code>, you can first allocate memory on the GPU and then update it later using <code>gl.bufferSubData</code>.</p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Float32Array</span>(pointsCoordinates)
-gl.<span class="hljs-title function_">bufferData</span>(gl.<span class="hljs-property">ARRAY_BUFFER</span>, <span class="hljs-number">24</span>, gl.<span class="hljs-property">DYNAMIC_DRAW</span>);
-gl.<span class="hljs-title function_">bufferSubData</span>(
-  gl.<span class="hljs-property">ARRAY_BUFFER</span>,
-  <span class="hljs-number">0</span>,  <span class="hljs-comment">// byte offset in the GPU buffer where the data will be written</span>
-  data);
-</code></pre><p> This mode is mainly used in situations where the data is updated on the CPU and then rendered by the GPU,for example in particle simulations.</p>
+Use this when the buffer data will be <strong>updated frequently</strong>, for example changing the data every frame . It works on the Allocating First, Filling Later When using <code>gl.DYNAMIC_DRAW</code>, you can first allocate memory on the GPU and then update it later using <code>gl.bufferSubData</code>.
+ This mode is mainly used in situations where the data is updated on the CPU and then rendered by the GPU, for example in particle simulations.</p>
 </li>
 </ol>
 <p>System state after invocation of the <code>gl.bufferData</code> function:</p>
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965544/hhasixs6asr3trxtsmn0.png" alt="">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965544/hhasixs6asr3trxtsmn0.png" alt="Showing transfer of data from RAM to GPU memory">
 </div>
 <i style="font-size:1rem; text-align:center">Transfer of data from RAM to the GPU buffer bounded to the target ARRAY_BUFFER</i>
 </div>
@@ -521,8 +534,8 @@ gl.<span class="hljs-title function_">bufferSubData</span>(
 <p> This value is always specified in <strong>bytes</strong>, not in number of elements.</p>
 </li>
 </ol>
-<p>We will discuss this argument in detail in the colored point chapter.
-Don’t worry if you don’t fully understand this function yet — we will revisit it in the following chapters.<br>For now, just understand that this function tells the GPU that for the attribute at location
+<p>We will discuss this function again in the coloured triangle chapter, so don&#39;t worry if you don’t fully understand this function yet.</p>
+<p>For now, just understand that this function tells the GPU that for the attribute at location
 <code>a_position_location</code>, it should read data from the buffer currently bound to <code>gl.ARRAY_BUFFER</code>,
 and interpret that data as <strong>pairs of two numbers</strong> to form the attribute values.</p>
 <h3>7. Enable the attribute</h3>
@@ -537,8 +550,8 @@ with it and instead uses a <strong>default constant value</strong> for that attr
 position — the center of the screen — and appear as a single point.</p>
 <h3>8. Issue the draw call with the number of vertices you want to draw.</h3>
 <p>You have to draw 3 points, so issue the draw call with the last argument as 3</p>
-<pre><code><span class="hljs-attribute">gl</span>.drawArrays(gl.POINTS, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
-</code></pre><p>As promised in the last chapter, let’s continue the discussion on the arguments of the gl.drawArrays function.</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
+</code></pre><p>As promised in the last chapter, let’s continue the discussion on the arguments of the <code>gl.drawArrays</code> function.</p>
 <p>I think that the first arg is quite clear, that is to say what you want to draw, and here its points hence it&#39;s <code>gl.POINTS</code>.</p>
 <p>Let’s understand the second and third arguments with an example.</p>
 <p>Suppose we have 10 points:<br><code>P0, P1, P2, ... P9</code></p>
@@ -549,9 +562,11 @@ position — the center of the screen — and appear as a single point.</p>
 <pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>);
 </code></pre><p>This tells WebGL to start drawing from the 2nd index vertex that is <code>P2</code> and draw 6 points.<br>Hence it will draw the points:<br><code>P2, P3, P4, P5, P6, P7</code></p>
 <p>Now it should be obvious that the second argument tells, from which point to start and the third argument says that draw these many points from there.</p>
+<hr>
+<p>Now when you save your <code>script.js</code> and reload the browser window you will see something like this. And yeee! we have drawn multiple points.</p>
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766124702/ypy61npsk09lrlcuvjhi.png" alt="fragment shader illustration">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766310312/omuvtvn9d65af0qddxk1.png" alt="fragment shader illustration">
 </div>
 <i style="font-size:1rem; text-align:center">Final result</i>
 </div> 
