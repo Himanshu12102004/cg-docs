@@ -224,6 +224,8 @@
           <li><a href="/cg-docs/docs/webgl/coordinate-space.html" data-key-path="webgl/coordinate space">Coordinate Space</a></li>
         
           <li><a href="/cg-docs/docs/webgl/graphics-primitives.html" data-key-path="webgl/graphics primitives">Graphics Primitives</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/graphics-pipeline.html" data-key-path="webgl/graphics pipeline">Graphics Pipeline</a></li>
         </ul>
           </li>
         </ul>
@@ -243,7 +245,7 @@
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766124607/h2uozylpkheixqhri3mc.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Coordinate system</i>
+<i  class="image-description">Coordinate system</i>
 </div> 
 
 <p>Normalized Device Coordinates simply mean that <strong>no matter the actual size of the canvas or screen</strong>, WebGL uses a fixed coordinate range from <strong>-1 to +1</strong> along each axis.</p>
@@ -255,7 +257,7 @@ This also means that <strong>1 unit on the X-axis is not necessarily equal to 1 
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130685/brrqv4j19azedjgwv7xi.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Canvas height = Canvas width, hence 1 unit in y axis = 1 unit in x axis</i>
+<i  class="image-description">Canvas height = Canvas width, hence 1 unit in y axis = 1 unit in x axis</i>
 </div> 
 
 <br>
@@ -264,7 +266,7 @@ This also means that <strong>1 unit on the X-axis is not necessarily equal to 1 
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130686/uq1pryr2dpm1enen25zc.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Canvas height < Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
+<i  class="image-description">Canvas height < Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
 </div> 
 
 
@@ -273,7 +275,7 @@ This also means that <strong>1 unit on the X-axis is not necessarily equal to 1 
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130685/qanpv5awhecnsurfntu0.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Canvas height > Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
+<i  class="image-description">Canvas height > Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
 </div> 
 
 <p>This unequal unit length must be handled carefully; otherwise, whatever you draw may appear <strong>stretched or squished</strong> on rectangular canvases. We will learn how to fix this properly in later chapters.</p>

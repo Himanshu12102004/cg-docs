@@ -34,9 +34,9 @@ Now lets see shaders:
 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765783977/wkewu72kzpmvh94ryccm.png" alt="Vertex Shader illustration">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766475971/vbtqkcmxd2jrf3e6oqwv.png" alt="Vertex Shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Vertex shader illustration</i>
+<i  class="image-description">Vertex shader illustration</i>
 </div>
 
 2. **Fragment Shader**:  
@@ -44,9 +44,9 @@ A fragment shader is a GPU program that runs once for each fragment. It runs aft
 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765783915/eonx58z4eg4dencvxqwv.png" alt="fragment shader illustration">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766476063/qg3u0epdoph74zhtan7m.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Fragment shader illustration</i>
+<i  class="image-description">Fragment shader illustration</i>
 </div> 
 
 ### Writing Shaders

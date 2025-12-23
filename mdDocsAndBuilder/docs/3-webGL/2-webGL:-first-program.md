@@ -42,7 +42,7 @@ Here is the HTML to use the canvas element:
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765612943/dhsb2kafvylsoppmlysb.png" alt="canvas">
 </div>
-<i style="font-size:1rem; text-align:center">HTML page showing the canvas element</i>
+<i  class="image-description">HTML page showing the canvas element</i>
 </div>
 
 ## Getting Started with WebGL
@@ -78,7 +78,7 @@ When you use a code editor like VS Code and type `canvas.getContext("")`, you wi
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765615182/xzrj0myvt2cdqf5pgby5.png" alt="getContext">
 </div>
-<i style="font-size:1rem; text-align:center">Image showing the different context types available</i>
+<i  class="image-description">Image showing the different context types available</i>
 </div>
 
 As this is a **WebGL** doc so we will not dwell much on the other contexts but for your information the **2d** context is used for only drawing the 2D CG and it uses CPU for rendering, **bitmaprenderer** must also be used for something I don't know : ), **webgl** context is the older version of webgl and the **webgl2** is the new version of webgl with enhanced speed and new functionalities.
@@ -131,7 +131,7 @@ Once you follow all the above steps you will see the following result:
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765625281/qgl9sbaiqvsacc9q7j6h.png" alt="Final result-webgl-first-program">
 </div>
-<i style="font-size:1rem; text-align:center">Final result</i>
+<i  class="image-description">Final result</i>
 </div>
 
 ## Final Code

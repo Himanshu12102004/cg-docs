@@ -54,7 +54,7 @@ Let's see a illustration to be more clear:
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143986/m0prvfgdbsnalyqohjvb.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Three points V<sub>0</sub> , V<sub>1</sub> and V<sub>2</sub></i>
+<i  class="image-description">Three points V<sub>0</sub> , V<sub>1</sub> and V<sub>2</sub></i>
 </div> 
 
 Vertices used to draw this: `[V₀, V₁, V₂]`
@@ -72,7 +72,7 @@ Let's see a illustration to be more clear:
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143991/itaaqgdpmjzbfyceddtd.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Two lines made using four vertices</i>
+<i  class="image-description">Two lines made using four vertices</i>
 </div> 
 
 Vertices used to draw this: `[V₀, V₁, V₂, V₃]`
@@ -93,7 +93,7 @@ Let's see an illustration to make it more clear.
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143991/ovwjwrbjunexasruaomw.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">
+<i  class="image-description">
 LINE_STRIP made by 5 vertices 
 </i>
 </div>
@@ -123,7 +123,7 @@ Let's see an illustration to make it more clear.
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766212959/cxuejbgwwknkjmguxaek.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">
+<i  class="image-description">
 LINE_LOOP made by 5 vertices 
 </i>
 </div> 
@@ -141,7 +141,7 @@ Still let's see an illustration:
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143994/yhw4qnyjumdmnipefxft.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">
+<i  class="image-description">
 TRIANGLE made by 3 vertices 
 </i>
 </div> 
@@ -159,7 +159,7 @@ Let's see the illustration then it will be easy to understand:
 <div class="img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766144000/bl9u4otac81xfq7u9wp4.png" alt="triangle strip illustration">
 </div>
-<i style="font-size:1rem; text-align:center">
+<i  class="image-description">
 TRIANGLE_STRIP made using 6 vertices
 </i>
 </div> 
@@ -189,7 +189,7 @@ Let’s look at the illustration first — it will make the idea clear:
 <div class="img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766144002/ufoief1u7iqkr7lqnjog.png" alt="triangle fan illustration">
 </div>
-<i style="font-size:1rem; text-align:center">
+<i  class="image-description">
 TRIANGLE_FAN made using 6 vertices
 </i>
 </div> 

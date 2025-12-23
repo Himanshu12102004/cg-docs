@@ -213,7 +213,7 @@ So with this you will see something like this on the screen:
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766302819/mcd5mc5bft34cq84dlbp.png" alt="Final result:lets draw a point">
 </div>
-<i style="font-size:1rem; text-align:center">Final result</i>
+<i  class="image-description">Final result</i>
 </div> 
 
 **Note: The point is a square and not a circle because making a square is a lot less expensive than circle.**

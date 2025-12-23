@@ -55,7 +55,7 @@ Lets see an example
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765024464/mlepjvc3kln5vf8cbrmn.jpg" alt="sprite sequence">
 </div>
-<i style="font-size:1rem; text-align:center">
+<i  class="image-description">
 Image showing a sequence of successive frames</i>
 </div>
 
@@ -63,7 +63,7 @@ Image showing a sequence of successive frames</i>
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765024350/yniaimqbejpwrhbs2caf.gif" alt="animation example">
 </div>
-<i style="font-size:1rem; text-align:center">Animated GIF using the above sequence of images</i>
+<i  class="image-description">Animated GIF using the above sequence of images</i>
 </div>
 
 ## What is rendering?

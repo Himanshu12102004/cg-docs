@@ -18,7 +18,7 @@ NDC is a coordinate space where each axes goes from [-1, 1], Let's understand wi
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766124607/h2uozylpkheixqhri3mc.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Coordinate system</i>
+<i  class="image-description">Coordinate system</i>
 </div> 
 
 Normalized Device Coordinates simply mean that **no matter the actual size of the canvas or screen**, WebGL uses a fixed coordinate range from **-1 to +1** along each axis.
@@ -35,7 +35,7 @@ Let's see a few illustrations to understand this:
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130685/brrqv4j19azedjgwv7xi.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Canvas height = Canvas width, hence 1 unit in y axis = 1 unit in x axis</i>
+<i  class="image-description">Canvas height = Canvas width, hence 1 unit in y axis = 1 unit in x axis</i>
 </div> 
 
 <br>
@@ -44,7 +44,7 @@ Let's see a few illustrations to understand this:
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130686/uq1pryr2dpm1enen25zc.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Canvas height < Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
+<i  class="image-description">Canvas height < Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
 </div> 
 
 
@@ -53,7 +53,7 @@ Let's see a few illustrations to understand this:
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130685/qanpv5awhecnsurfntu0.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Canvas height > Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
+<i  class="image-description">Canvas height > Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
 </div> 
 
 This unequal unit length must be handled carefully; otherwise, whatever you draw may appear **stretched or squished** on rectangular canvases. We will learn how to fix this properly in later chapters.

@@ -13,7 +13,7 @@ You might wonder why the third arg is 3 when we are drawing only one triangle. W
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766225147/dzqemcdhmczwdobzezwg.png" alt="fragment shader illustration">
 </div>
-<i style="font-size:1rem; text-align:center">Final result</i>
+<i  class="image-description">Final result</i>
 </div> 
 
 ## Final Code

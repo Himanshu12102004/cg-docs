@@ -114,16 +114,16 @@ const pointsBuffer = gl.createBuffer();
 It would be more clear with the diagrams below:
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965103/uwkhhyn8oqo7nxbcz541.png" alt="Webgl system initially">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766477273/macyrl0q8qbs2v2ln0jm.png" alt="Webgl system initially">
 </div>
-<i style="font-size:1rem; text-align:center">System state before calling gl.createBuffer function</i>
+<i  class="image-description">System state before calling gl.createBuffer function</i>
 </div> 
 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/xo07x2yrji3sk2rrjc92.png" alt="System state after calling gl.createBuffer function">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766477278/kipccqenvrnwvgyiqq43.png" alt="System state after calling gl.createBuffer function">
 </div>
-<i style="font-size:1rem; text-align:center">System state after calling gl.createBuffer function</i>
+<i  class="image-description">System state after calling gl.createBuffer function</i>
 </div> 
 
 **Note: These arrows mark which variable points to which location and don't worry about the `ARRAY_BUFFER` and `ELEMENT_ARRAY_BUFFER` we will discuss it in the next point**
@@ -163,9 +163,9 @@ gl.bindBuffer(gl.ARRAY_BUFFER, pointsBuffer);
 Let's have a look at the system state after calling this function:
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965086/eo2kxae7hle5yahzyofh.png" alt="System state after calling gl.bindBuffer">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766477304/j57ib1vstg01eoxw1w4q.png" alt="System state after calling gl.bindBuffer">
 </div>
-<i style="font-size:1rem; text-align:center">System state after calling gl.bindBuffer function. The double headed arrow shows the target binding</i>
+<i  class="image-description">System state after calling gl.bindBuffer function. The double headed arrow shows the target binding</i>
 </div> 
 
 ### 5. Insert data into the buffer
@@ -249,9 +249,9 @@ System state after invocation of the `gl.bufferData` function:
 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1765965544/hhasixs6asr3trxtsmn0.png" alt="Showing transfer of data from RAM to GPU memory">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766477398/dtew673wkso7frpo1gfm.png" alt="Showing transfer of data from RAM to GPU memory">
 </div>
-<i style="font-size:1rem; text-align:center">Transfer of data from RAM to the GPU buffer bounded to the target ARRAY_BUFFER</i>
+<i  class="image-description">Transfer of data from RAM to the GPU buffer bounded to the target ARRAY_BUFFER</i>
 </div>
 
 ### 6. Tell the GPU how to read the buffer
@@ -351,9 +351,9 @@ Now when you save your `script.js` and reload the browser window you will see so
 
 <div class="img-external">
 <div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766310312/omuvtvn9d65af0qddxk1.png" alt="fragment shader illustration">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766310312/omuvtvn9d65af0qddxk1.png" alt="Final result: draw multiple points">
 </div>
-<i style="font-size:1rem; text-align:center">Final result</i>
+<i  class="image-description">Final result</i>
 </div> 
 
 ## Final Code
