@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CG Docs – # Let's make some utility functions</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="In the last three chapters - **Coordinate Spaces**, **Graphics Primitives** and **Graphics Pipeline** we had a lot of theory and now its time to shift back to some code." />
+    <meta name="author" content="Himanshu Gupta" />
+
+    <meta property="og:title" content="CG Docs – # Let's make some utility functions" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/utility-functions.html" />
+    <meta property="og:image" content="../../assets/logo.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CG Docs – # Let's make some utility functions" />
+    <meta name="twitter:description" content="" />
+    <meta
+      name="twitter:image"
+      content="../../assets/preview.png"
+    />
+
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/utility-functions.html" />
+
+    <link rel="icon" href="../../assets/images/logo.svg" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+    />
+    <link id="hljs-theme" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../css/theming.css" />
+    <link
+      rel="stylesheet"
+      href="../../css/articleStyling.css"
+    />
+    <link rel="stylesheet" href="../../css/mdStyling.css" />
+
+    
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "# Let's make some utility functions",
+        "description": "",
+        "author": {
+          "@type": "Person",
+          "name": "Himanshu Gupta"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CG Docs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    
+    <script>
+      const root = document.documentElement;
+      const hljsLink = document.getElementById("hljs-theme");
+
+      let savedTheme = localStorage.getItem("theme");
+
+      if (!savedTheme) {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+
+        savedTheme = prefersDark ? "dark" : "light";
+        localStorage.setItem("theme", savedTheme);
+      }
+
+      if (savedTheme === "light") {
+        root.classList.add("light");
+        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+      } else {
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
+      }
+    </script>
+
+    <div class="overlay"></div>
+    <nav>
+      <div>
+        <img
+          class="logo"
+          src="../../assets/images/logo.svg"
+          alt="logo"
+        />
+        <svg
+          class="hamburgerMenu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="searchBar">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 256 256"
+          class="searchIcon"
+        >
+          <path
+            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+          ></path>
+        </svg>
+
+        <input
+          type="text"
+          class="searchInput"
+          placeholder="Search docs..."
+          aria-label="Search docs"
+        />
+      </div>
+      <div class="githubAndLightToggler">
+        
+        <svg
+          class="gitHub"
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width="240.000000pt"
+          height="240.000000pt"
+          viewBox="0 0 240.000000 240.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g
+            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+            stroke="none"
+          >
+            <path
+              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+-1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
+118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
+-144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
+49 -10 94 -6 162 14 9 3 21 24 27 48 6 23 22 58 35 77 l24 35 -81 16 c-170 35
+-275 96 -344 200 -64 96 -85 179 -86 334 0 146 16 206 79 288 28 36 31 47 23
+68 -15 36 -11 188 5 234 13 34 20 40 47 43 45 5 129 -24 214 -72 l73 -42 64
+15 c91 21 364 20 446 0 l62 -16 58 35 c77 46 175 82 224 82 39 0 39 -1 55 -52
+17 -59 20 -166 5 -217 -8 -30 -6 -39 16 -68 109 -144 121 -383 29 -579 -62
+-129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
+-15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
+-419 518 -733 602 -137 36 -395 44 -525 15z"
+            />
+          </g>
+        </svg>
+        
+        <div class="theme-toggler">
+          <svg
+            class="sun theme-icon hide"
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M277.3 32h-42.7v64h42.7V32zm129.1 43.7L368 114.1l29.9 29.9 38.4-38.4-29.9-29.9zm-300.8 0l-29.9 29.9 38.4 38.4 29.9-29.9-38.4-38.4zM256 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128zm224 106.7h-64v42.7h64v-42.7zm-384 0H32v42.7h64v-42.7zM397.9 368L368 397.9l38.4 38.4 29.9-29.9-38.4-38.4zm-283.8 0l-38.4 38.4 29.9 29.9 38.4-38.4-29.9-29.9zm163.2 48h-42.7v64h42.7v-64z"
+            ></path>
+          </svg>
+          
+          <svg
+            class="moon theme-icon"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M195 125c0-26.3 5.3-51.3 14.9-74.1C118.7 73 51 155.1 51 253c0 114.8 93.2 208 208 208 97.9 0 180-67.7 202.1-158.9-22.8 9.6-47.9 14.9-74.1 14.9-106 0-192-86-192-192z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </nav>
+    <main class="layout">
+      <aside class="layout__sidebar">
+    <div class="sidebar">
+    <div class="sidebarHeader">
+    <div class="sidebarLogoContainer">
+    <img
+    class="logo-phone"
+    src="../../assets/images/logo.svg"
+    alt="logo"
+    />
+    <h1 class="sidebarTitle">CG Docs</h1>
+    </div>
+    <svg class="menuClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+    </div> 
+      <ul class="level-0">
+          <li><a href="/cg-docs/docs/introduction.html" data-key-path="introduction">Introduction</a></li>
+        
+          <li><a href="/cg-docs/docs/basics.html" data-key-path="basics">Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="WebGL/">WebGL</span>
+            <ul class="level-1">
+          <li><a href="/cg-docs/docs/webgl/overview.html" data-key-path="webgl/overview">Overview</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/webgl:-first-program.html" data-key-path="webgl/webgl: first program">WebGL: First Program</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/gpu-and-shaders.html" data-key-path="webgl/gpu and shaders">GPU And Shaders</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/lets-draw-a-point.html" data-key-path="webgl/lets draw a point">Lets Draw A Point</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/draw-multiple-points.html" data-key-path="webgl/draw multiple points">Draw Multiple Points</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/draw-triangle.html" data-key-path="webgl/draw triangle">Draw Triangle</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/coordinate-space.html" data-key-path="webgl/coordinate space">Coordinate Space</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/graphics-primitives.html" data-key-path="webgl/graphics primitives">Graphics Primitives</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/graphics-pipeline.html" data-key-path="webgl/graphics pipeline">Graphics Pipeline</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/utility-functions.html" data-key-path="webgl/utility functions">Utility Functions</a></li>
+        </ul>
+          </li>
+        </ul>
+    </div>
+  </aside>
+
+      <section class="layout__content">
+        <div class="whereAmI">{Where Am I}</div>
+        <h1>Let&#39;s make some utility functions</h1>
+<p>In the last three chapters - <strong>Coordinate Spaces</strong>, <strong>Graphics Primitives</strong> and <strong>Graphics Pipeline</strong> we had a lot of theory and now its time to shift back to some code.</p>
+<p>You must have noticed a few things in the chapters <strong>Let&#39;s draw a point</strong> and <strong>Draw Multiple Points</strong>:</p>
+<ul>
+<li><p>The code used to create and compile a <strong>vertex shader</strong> and a <strong>fragment shader</strong> is identical, except for the shader type constants <code>gl.VERTEX_SHADER</code> and <code>gl.FRAGMENT_SHADER</code>. Can we make single, reusable function for this?</p>
+</li>
+<li><p>A program can have multiple <strong>attributes</strong>, yet the buffer creation logic remains the same each time. Instead of rewriting this code repeatedly, can we create a utility function for setting up attribute buffers?</p>
+</li>
+<li><p>As mentioned earlier, a WebGL application can use multiple <strong>programs</strong>, which means we must explicitly create, link, and select the program we want to use. Rather than repeating this setup code, can we encapsulate it into a function as well?</p>
+</li>
+</ul>
+<p>Well, we are going to reduce these pain points by creating a new file named <code>webgl-utilities.js</code> and importing it into our HTML files before <code>script.js</code> from now on.</p>
+<p><strong>New HTML template</strong>:</p>
+<pre><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin: 0&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../webgl-utilities.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./script.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre><p>I have imported the <code>webgl-utilities.js</code> with a <code>../</code> because I have kept it outside my working folder.</p>
+<h3>Utility function to create and compile a shader</h3>
+<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">utilCreateShader</span>(<span class="hljs-params">gl, shaderType, shaderSource</span>) {
+  <span class="hljs-keyword">const</span> shader = gl.<span class="hljs-title function_">createShader</span>(shaderType);
+  gl.<span class="hljs-title function_">shaderSource</span>(shader,shaderSource);
+  gl.<span class="hljs-title function_">compileShader</span>(shader);
+  <span class="hljs-keyword">if</span> (!gl.<span class="hljs-title function_">getShaderParameter</span>(shader, gl.<span class="hljs-property">COMPILE_STATUS</span>)) {
+    <span class="hljs-keyword">if</span> (shaderType == gl.<span class="hljs-property">VERTEX_SHADER</span>) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;Error in vertex shader:&quot;</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;Error in fragment shader:&quot;</span>);
+    }
+    <span class="hljs-keyword">const</span> error = gl.<span class="hljs-title function_">getShaderInfoLog</span>(shader);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
+    <span class="hljs-keyword">throw</span> error;
+  }
+  <span class="hljs-keyword">return</span> shader;
+}
+</code></pre><p>Args of this function:</p>
+<ul>
+<li><strong>gl</strong>: The WebGL context</li>
+<li><strong>shaderType</strong>: The type of shader you want <code>gl.VERTEX_SHADER</code> or <code>gl.FRAGMENT_SHADER</code>.</li>
+<li><strong>shaderSource</strong>: The shader program string.</li>
+</ul>
+<p><strong>Function calling</strong></p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> vertexShader = <span class="hljs-title function_">utilCreateShader</span>(gl, gl.<span class="hljs-property">VERTEX_SHADER</span>, vertexShaderSource);
+<span class="hljs-keyword">const</span> fragmentShader = <span class="hljs-title function_">utilCreateShader</span>(gl, gl.<span class="hljs-property">FRAGMENT_SHADER</span>, fragmentShaderSource);
+</code></pre><h3>Utility function to create and link a program</h3>
+<pre><code class="hljs language-js">
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">utilCreateProgram</span>(<span class="hljs-params">gl, vertexShader, fragmentShader</span>) {
+  <span class="hljs-keyword">const</span> program = gl.<span class="hljs-title function_">createProgram</span>();
+  gl.<span class="hljs-title function_">attachShader</span>(program, vertexShader);
+  gl.<span class="hljs-title function_">attachShader</span>(program, fragmentShader);
+  gl.<span class="hljs-title function_">linkProgram</span>(program);
+  <span class="hljs-keyword">if</span> (!gl.<span class="hljs-title function_">getProgramParameter</span>(program, gl.<span class="hljs-property">LINK_STATUS</span>)) {
+    <span class="hljs-keyword">const</span> error = gl.<span class="hljs-title function_">getProgramInfoLog</span>(program);
+    <span class="hljs-keyword">throw</span> error;
+  }
+  <span class="hljs-keyword">return</span> program;
+}
+</code></pre><p>Args of this function:</p>
+<ul>
+<li><strong>gl</strong>: The WebGL context</li>
+<li><strong>vertexShader</strong>: The vertex shader you got in return when you called <code>utilCreateShader</code> with <code>gl.VERTEX_SHADER</code> as the shaderType.</li>
+<li><strong>fragmentShader</strong>: The fragment shader you got in return when you called <code>utilCreateShader</code> with <code>gl.FRAGMENT_SHADER</code> as the shaderType.</li>
+</ul>
+<p><strong>Function calling</strong></p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> program = <span class="hljs-title function_">utilCreateProgram</span>(gl, vertexShader, fragmentShader);
+</code></pre><h3>Utility function to create and set data in the buffer</h3>
+<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">utilCreateBuffer</span>(<span class="hljs-params">gl, attribLocation, data, size, stride, offset</span>) {
+  <span class="hljs-keyword">const</span> buffer = gl.<span class="hljs-title function_">createBuffer</span>();
+  gl.<span class="hljs-title function_">bindBuffer</span>(gl.<span class="hljs-property">ARRAY_BUFFER</span>, buffer);
+  gl.<span class="hljs-title function_">bufferData</span>(gl.<span class="hljs-property">ARRAY_BUFFER</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Float32Array</span>(data), gl.<span class="hljs-property">STATIC_DRAW</span>);
+  gl.<span class="hljs-title function_">vertexAttribPointer</span>(attribLocation, size, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, stride, offset);
+  gl.<span class="hljs-title function_">enableVertexAttribArray</span>(attribLocation);
+  <span class="hljs-keyword">return</span> buffer;
+}
+</code></pre><p>Args of this function:</p>
+<ul>
+<li><strong>gl</strong>: The WebGL rendering context.</li>
+<li><strong>attribLocation</strong>: The location of the vertex attribute in the shader program (obtained using <code>gl.getAttribLocation</code>).</li>
+<li><strong>data</strong>: A JavaScript array containing the vertex data that will be uploaded to the GPU.</li>
+<li><strong>size</strong>: The number of components per vertex attribute (e.g., <code>2</code> for <code>(x, y)</code>, <code>3</code> for <code>(r, g, b)</code>).</li>
+<li><strong>stride</strong>: The total size (in bytes) of one vertex. Use <code>0</code> if the data is tightly packed.</li>
+<li><strong>offset</strong>: The byte offset in the buffer where this attribute starts.</li>
+</ul>
+<p><strong>Note: From now we will put any webgl utility function we make in the file <code>webgl-utilities.js</code></strong></p>
+<p><strong>Function calling</strong></p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> pointsBuffer = <span class="hljs-title function_">utilCreateBuffer</span>(gl, a_position_location ,pointsCoordinates, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+</code></pre><h3>Sample program using these functions ( Draw Triangle ):</h3>
+<pre><code class="hljs language-js"><span class="hljs-comment">//Step 1: Set the viewport</span>
+<span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
+<span class="hljs-keyword">const</span> gl = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;webgl2&quot;</span>);
+canvas.<span class="hljs-property">height</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>; <span class="hljs-comment">// For making the canvas full screen</span>
+canvas.<span class="hljs-property">width</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>; <span class="hljs-comment">// For making the canvas full screen</span>
+gl.<span class="hljs-title function_">viewport</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, canvas.<span class="hljs-property">width</span>, canvas.<span class="hljs-property">height</span>);
+
+<span class="hljs-comment">//Step 2: Write the shaders</span>
+<span class="hljs-comment">// vertex shader</span>
+<span class="hljs-keyword">const</span> vertexShaderSource = <span class="hljs-string">`#version 300 es
+in vec2 a_position;
+in vec3 a_color;
+out vec3 frag_color;
+void main(){
+  gl_Position = vec4(a_position,0,1);
+  gl_PointSize = 30.0;
+  frag_color = a_color;
+}`</span>;
+
+<span class="hljs-comment">// fragment shader</span>
+<span class="hljs-keyword">const</span> fragmentShaderSource = <span class="hljs-string">`# version 300 es
+precision mediump float;
+
+out vec4 color;
+void main(){
+  color = vec4(1,0,0,1); 
+}`</span>;
+
+<span class="hljs-comment">// Step 3: Compile the shaders</span>
+<span class="hljs-keyword">const</span> vertexShader = <span class="hljs-title function_">utilCreateShader</span>(gl, gl.<span class="hljs-property">VERTEX_SHADER</span>, vertexShaderSource);
+
+<span class="hljs-keyword">const</span> fragmentShader = <span class="hljs-title function_">utilCreateShader</span>(
+  gl,
+  gl.<span class="hljs-property">FRAGMENT_SHADER</span>,
+  fragmentShaderSource
+);
+
+<span class="hljs-comment">// Step 4: Create a WebGL program</span>
+<span class="hljs-keyword">const</span> program = <span class="hljs-title function_">utilCreateProgram</span>(gl, vertexShader, fragmentShader);
+
+<span class="hljs-keyword">const</span> pointsCoordinates = [
+  <span class="hljs-number">0</span>, <span class="hljs-number">0.5</span>, <span class="hljs-comment">// First point</span>
+  -<span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Second point</span>
+  <span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Third point</span>
+];
+
+<span class="hljs-keyword">const</span> a_position_location = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_position&quot;</span>);
+<span class="hljs-comment">// Create Buffer</span>
+<span class="hljs-keyword">const</span> pointsBuffer = <span class="hljs-title function_">utilCreateBuffer</span>( gl, a_position_location, pointsCoordinates, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+<span class="hljs-comment">// Step 7: Use the WebGL program</span>
+gl.<span class="hljs-title function_">useProgram</span>(program);
+
+<span class="hljs-comment">// Step 8: Issue the draw call</span>
+gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
+</code></pre><p><a href="https://github.com/Himanshu12102004/cg-docs-examples/blob/main/webgl-utilities.js" class="link" target="blank">Checkout the full webgl-utilities.js</a></p>
+
+        <div class="nextPrev">
+          <i>
+            <a href="/cg-docs/docs/webgl/graphics-pipeline.html">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"
+                  ></path>
+                </svg>
+              </span>
+              <span style="padding-bottom: 4px"> Previous </span>
+            </a>
+          </i>
+          <i>
+            <a href="#">
+              <span style="padding-bottom: 4px"> Next </span>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+          </i>
+        </div>
+      </section>
+    </main>
+
+    <script src="../../mdScript.js"></script>
+  </body>
+</html>
