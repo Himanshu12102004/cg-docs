@@ -30,6 +30,10 @@ $$
 
 Viewport is the part of the screen where your scene is drawn.
 
+## What is a Frame?
+
+To understand this, let’s first understand what a video is. A video is essentially a stream of images played so fast that it appears as continuous motion. Each individual image in this stream is called a frame.
+
 ## Framerate/Refresh rate of screen
 
 **Framerate (FPS)** is the number of frames your **GPU/CPU** renders per second, more the framerate more smooth are the graphics. Framerate is also an indicator of how optimal your code is, if the frame rate drops below the screen refresh rate then you need to review your code. 
@@ -46,10 +50,7 @@ Most screens have the framerate between 60 to 120.
 An animation is a sequence of images (called frames) that are drawn, erased, and redrawn very quickly.
 When these frames change fast enough, your eyes perceive it as smooth motion instead of individual pictures.
 
-
 Lets see an example
-
-
 
 <div class="img-external">
 <div class= "img-container img-square">
@@ -69,3 +70,27 @@ Image showing a sequence of successive frames</i>
 ## What is rendering?
 
 Rendering is basically making a scene ready to be displayed onto the screen. It is converting a **3D/2D scene to 2D**
+
+## What is a Framebuffer?
+
+Before displaying a frame, the hardware of any display device needs to store the color values of that frame somewhere, and that somewhere is called the **framebuffer**.
+
+A framebuffer is a block of memory that stores information about each pixel for the current frame. Modern framebuffers often contain multiple kinds of buffers, such as:
+
+- **Color buffer**: Stores the color of each pixel.
+- **Depth buffer (z-buffer)**: Stores the distance of each pixel from the viewer, used for 3D rendering to determine which objects are in front.
+- **Stencil buffer**: Stores mask information to control where drawing is allowed or blocked on the screen.
+
+These buffers work together to produce the final image displayed on the screen.
+
+
+## How a Modern Display Works
+
+The steps below provide a **very high-level view** of how modern displays work:
+
+1. GPU or video decoder generates a frame.
+2. Frame is stored in the framebuffer (memory).
+3. Display controller reads the framebuffer.
+4. Pixels on the screen are illuminated accordingly.
+5. Next frame is prepared while current frame is shown (double/triple buffering).
+6. This repeats many times per second to create smooth motion.

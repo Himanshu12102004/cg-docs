@@ -7,7 +7,7 @@
 
     <title>CG Docs – # WebGL: Coordinate Space</title>
     <meta name="description" content="" />
-    <meta name="keywords" content="In the last chapter, we drew three points on the canvas with the coordinates" />
+    <meta name="keywords" content="In the chapter **Draw Multiple Points**, we drew three points on the canvas with the coordinates" />
     <meta name="author" content="Himanshu Gupta" />
 
     <meta property="og:title" content="CG Docs – # WebGL: Coordinate Space" />
@@ -228,6 +228,12 @@
           <li><a href="/cg-docs/docs/webgl/graphics-pipeline.html" data-key-path="webgl/graphics pipeline">Graphics Pipeline</a></li>
         
           <li><a href="/cg-docs/docs/webgl/utility-functions.html" data-key-path="webgl/utility functions">Utility Functions</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-triangle-i.html" data-key-path="webgl/rgb triangle i">RGB Triangle I</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-traiangle-ii.html" data-key-path="webgl/rgb traiangle ii">RGB Traiangle II</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/fixing-aspect-ratio.html" data-key-path="webgl/fixing aspect ratio">Fixing Aspect Ratio</a></li>
         </ul>
           </li>
         </ul>
@@ -237,7 +243,7 @@
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
         <h1>WebGL: Coordinate Space</h1>
-<p>In the last chapter, we drew three points on the canvas with the coordinates<br><code>(0, 0.5)</code>, <code>(-0.5, -0.5)</code>, and <code>(0.5, -0.5)</code>.</p>
+<p>In the chapter <strong>Draw Multiple Points</strong>, we drew three points on the canvas with the coordinates<br><code>(0, 0.5)</code>, <code>(-0.5, -0.5)</code>, and <code>(0.5, -0.5)</code>.</p>
 <p>You might be wondering <strong>what these numbers actually mean</strong> and <strong>how they relate to the size of the canvas</strong>.<br>In other words, <em>what coordinate system does WebGL use, and what is its scale?</em></p>
 <p>To answer that, we first need to understand the coordinate space that WebGL works in.</p>
 <p>WebGL uses a coordinate system called <strong>Normalized Device Coordinates</strong>.</p>
@@ -247,10 +253,10 @@
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766124607/h2uozylpkheixqhri3mc.png" alt="fragment shader illustration">
 </div>
-<i  class="image-description">Coordinate system</i>
+<i  class="image-description">WebGL Coordinate system goes from -1 to +1 in all axis. It could be visualized as a 2 unit cube.</i>
 </div> 
 
-<p>Normalized Device Coordinates simply mean that <strong>no matter the actual size of the canvas or screen</strong>, WebGL uses a fixed coordinate range from <strong>-1 to +1</strong> along each axis.</p>
+<p>Normalized Device Coordinates simply means that <strong>no matter the actual size of the canvas or screen</strong>, WebGL uses a fixed coordinate range from <strong>-1 to +1</strong> along each axis.</p>
 <p>This range is often visualized as a <strong>2-unit wide cube</strong>, as shown in the figure above. Anything you want to draw <strong>must lie inside this cube</strong>—this cube is the entire drawing space available to you in WebGL.</p>
 <p>So we can conclude that <strong>even if the canvas is rectangular</strong>, the coordinate range in WebGL is still fixed from <strong>-1 to +1</strong> on both the X and Y axes.
 This also means that <strong>1 unit on the X-axis is not necessarily equal to 1 unit on the Y-axis in terms of actual pixels</strong>. The coordinates are normalized, not pixel-based, and are stretched to fit the canvas dimensions.</p>
@@ -268,7 +274,7 @@ This also means that <strong>1 unit on the X-axis is not necessarily equal to 1 
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130686/uq1pryr2dpm1enen25zc.png" alt="fragment shader illustration">
 </div>
-<i  class="image-description">Canvas height < Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
+<i  class="image-description">Canvas height < Canvas width, hence 1 unit in y axis < 1 unit in x axis</i>
 </div> 
 
 
@@ -280,7 +286,7 @@ This also means that <strong>1 unit on the X-axis is not necessarily equal to 1 
 <i  class="image-description">Canvas height > Canvas width, hence 1 unit in y axis > 1 unit in x axis</i>
 </div> 
 
-<p>This unequal unit length must be handled carefully; otherwise, whatever you draw may appear <strong>stretched or squished</strong> on rectangular canvases. We will learn how to fix this properly in later chapters.</p>
+<p>This unequal unit length must be handled carefully; otherwise, whatever you draw may appear <strong>stretched or squished</strong> on rectangular canvases. We will learn how to fix this in chapter <strong>Fixing Aspect Ratio</strong>.</p>
 <p><strong>Note:</strong> This chapter only <strong>scratches the surface</strong> of the WebGL coordinate system. As we move to <strong>3D rendering</strong>, we will explore this topic in much more depth—covering the <strong>left-handed vs right-handed coordinate systems</strong>, <strong>how to use the z- axis</strong>, <strong>how to render 3D scene on 2D screen</strong> etc.</p>
 
         <div class="nextPrev">

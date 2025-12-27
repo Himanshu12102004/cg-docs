@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CG Docs – # Let's Fix the squishing and stretching of the canvas</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="Hey curious! I am really happy to see you here as I know most of the people would have quit by the time they reached the 4th or may be 5th chapter but you survived a total of 14 chapters up till now, and I really appreciate that." />
+    <meta name="author" content="Himanshu Gupta" />
+
+    <meta property="og:title" content="CG Docs – # Let's Fix the squishing and stretching of the canvas" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/fixing-aspect-ratio.html" />
+    <meta property="og:image" content="../../assets/logo.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CG Docs – # Let's Fix the squishing and stretching of the canvas" />
+    <meta name="twitter:description" content="" />
+    <meta
+      name="twitter:image"
+      content="../../assets/preview.png"
+    />
+
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/fixing-aspect-ratio.html" />
+
+    <link rel="icon" href="../../assets/images/logo.svg" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+    />
+    <link id="hljs-theme" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../css/theming.css" />
+    <link
+      rel="stylesheet"
+      href="../../css/articleStyling.css"
+    />
+    <link rel="stylesheet" href="../../css/mdStyling.css" />
+
+    
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "# Let's Fix the squishing and stretching of the canvas",
+        "description": "",
+        "author": {
+          "@type": "Person",
+          "name": "Himanshu Gupta"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CG Docs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    
+    <script>
+      const root = document.documentElement;
+      const hljsLink = document.getElementById("hljs-theme");
+
+      let savedTheme = localStorage.getItem("theme");
+
+      if (!savedTheme) {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+
+        savedTheme = prefersDark ? "dark" : "light";
+        localStorage.setItem("theme", savedTheme);
+      }
+
+      if (savedTheme === "light") {
+        root.classList.add("light");
+        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+      } else {
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
+      }
+    </script>
+
+    <div class="overlay"></div>
+    <nav>
+      <div>
+        <img
+          class="logo"
+          src="../../assets/images/logo.svg"
+          alt="logo"
+        />
+        <svg
+          class="hamburgerMenu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="searchBar">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 256 256"
+          class="searchIcon"
+        >
+          <path
+            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+          ></path>
+        </svg>
+
+        <input
+          type="text"
+          class="searchInput"
+          placeholder="Search docs..."
+          aria-label="Search docs"
+        />
+      </div>
+      <div class="githubAndLightToggler">
+        
+        <svg
+          class="gitHub"
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width="240.000000pt"
+          height="240.000000pt"
+          viewBox="0 0 240.000000 240.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g
+            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+            stroke="none"
+          >
+            <path
+              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+-1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
+118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
+-144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
+49 -10 94 -6 162 14 9 3 21 24 27 48 6 23 22 58 35 77 l24 35 -81 16 c-170 35
+-275 96 -344 200 -64 96 -85 179 -86 334 0 146 16 206 79 288 28 36 31 47 23
+68 -15 36 -11 188 5 234 13 34 20 40 47 43 45 5 129 -24 214 -72 l73 -42 64
+15 c91 21 364 20 446 0 l62 -16 58 35 c77 46 175 82 224 82 39 0 39 -1 55 -52
+17 -59 20 -166 5 -217 -8 -30 -6 -39 16 -68 109 -144 121 -383 29 -579 -62
+-129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
+-15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
+-419 518 -733 602 -137 36 -395 44 -525 15z"
+            />
+          </g>
+        </svg>
+        
+        <div class="theme-toggler">
+          <svg
+            class="sun theme-icon hide"
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M277.3 32h-42.7v64h42.7V32zm129.1 43.7L368 114.1l29.9 29.9 38.4-38.4-29.9-29.9zm-300.8 0l-29.9 29.9 38.4 38.4 29.9-29.9-38.4-38.4zM256 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128zm224 106.7h-64v42.7h64v-42.7zm-384 0H32v42.7h64v-42.7zM397.9 368L368 397.9l38.4 38.4 29.9-29.9-38.4-38.4zm-283.8 0l-38.4 38.4 29.9 29.9 38.4-38.4-29.9-29.9zm163.2 48h-42.7v64h42.7v-64z"
+            ></path>
+          </svg>
+          
+          <svg
+            class="moon theme-icon"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M195 125c0-26.3 5.3-51.3 14.9-74.1C118.7 73 51 155.1 51 253c0 114.8 93.2 208 208 208 97.9 0 180-67.7 202.1-158.9-22.8 9.6-47.9 14.9-74.1 14.9-106 0-192-86-192-192z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </nav>
+    <main class="layout">
+      <aside class="layout__sidebar">
+    <div class="sidebar">
+    <div class="sidebarHeader">
+    <div class="sidebarLogoContainer">
+    <img
+    class="logo-phone"
+    src="../../assets/images/logo.svg"
+    alt="logo"
+    />
+    <h1 class="sidebarTitle">CG Docs</h1>
+    </div>
+    <svg class="menuClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+    </div> 
+      <ul class="level-0">
+          <li><a href="/cg-docs/docs/introduction.html" data-key-path="introduction">Introduction</a></li>
+        
+          <li><a href="/cg-docs/docs/basics.html" data-key-path="basics">Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="WebGL/">WebGL</span>
+            <ul class="level-1">
+          <li><a href="/cg-docs/docs/webgl/overview.html" data-key-path="webgl/overview">Overview</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/webgl:-first-program.html" data-key-path="webgl/webgl: first program">WebGL: First Program</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/gpu-and-shaders.html" data-key-path="webgl/gpu and shaders">GPU And Shaders</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/lets-draw-a-point.html" data-key-path="webgl/lets draw a point">Lets Draw A Point</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/draw-multiple-points.html" data-key-path="webgl/draw multiple points">Draw Multiple Points</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/draw-triangle.html" data-key-path="webgl/draw triangle">Draw Triangle</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/coordinate-space.html" data-key-path="webgl/coordinate space">Coordinate Space</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/graphics-primitives.html" data-key-path="webgl/graphics primitives">Graphics Primitives</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/graphics-pipeline.html" data-key-path="webgl/graphics pipeline">Graphics Pipeline</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/utility-functions.html" data-key-path="webgl/utility functions">Utility Functions</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-triangle-i.html" data-key-path="webgl/rgb triangle i">RGB Triangle I</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-traiangle-ii.html" data-key-path="webgl/rgb traiangle ii">RGB Traiangle II</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/fixing-aspect-ratio.html" data-key-path="webgl/fixing aspect ratio">Fixing Aspect Ratio</a></li>
+        </ul>
+          </li>
+        </ul>
+    </div>
+  </aside>
+
+      <section class="layout__content">
+        <div class="whereAmI">{Where Am I}</div>
+        <h1>Let&#39;s Fix the squishing and stretching of the canvas</h1>
+<p>Hey curious! I am really happy to see you here as I know most of the people would have quit by the time they reached the 4th or may be 5th chapter but you survived a total of 14 chapters up till now, and I really appreciate that.</p>
+<p>I am sure that now you are equipped with enough knowledge that you can make a square of 1 unit side, But I want you to do it on a rectangular canvas.</p>
+<p>The two ways you can do it is:</p>
+<ul>
+<li>Using 2 triangles (requires 6 vertices)</li>
+<li>or using triangle strip (requires 4 vertices)</li>
+</ul>
+<p>You could simply make it using the four coordinates <code>(-0.5, 0.5)</code>, <code>(0.5, 0.5)</code>, <code>(-0.5, -0.5)</code>, <code>(0.5, -0.5)</code> right? Try it you will get a rectangle not square:</p>
+<div class="img-external">
+<div class= "img-container">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766648311/uqylnnmdbr4rkn17sfjw.png" alt="rasterization stage">
+</div>
+<i  class="image-description">Square turned into rectangle or you can say it's stretched in x axis</i>
+</div>
+
+<p>But we want something like this:</p>
+<div class="img-external">
+<div class= "img-container">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766835567/s95etk9e9fndgf7lqj2f.png" alt="rasterization stage">
+</div>
+<i  class="image-description">Square with fixed aspect-ratio</i>
+</div>
+
+<p>I am sure that you have identified what is the issue, if not, its due to the fact that the webgl coordinate system goes from -1 to +1 regardless of the size of the canvas, recall this diagram from the chapter <strong>Coordinate Spaces</strong>:</p>
+<div class="img-external">
+<div class= "img-container img-square">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766130686/uq1pryr2dpm1enen25zc.png" alt="fragment shader illustration">
+</div>
+<i  class="image-description">Canvas height < Canvas width, hence 1 unit in y axis < 1 unit in x axis</i>
+</div> 
+
+<h2>How to solve the issue</h2>
+<p>Believe me, there are many—literally many—ways to solve this problem. However, the two approaches that immediately come to mind whenever I encounter this situation are:</p>
+<ol>
+<li><p>Modify the vertex coordinates directly in the buffer data <br>
+Since the square looks <strong>stretched along the x-axis</strong>, one way to fix this is to <strong>reduce the extent of the x-axis in the vertex data itself</strong>.<br>In other words, instead of letting both axes span the same <code>[-1, +1]</code> range, we <strong>shrink the x-axis bounds</strong> so that one unit in <code>x</code> corresponds to the same number of pixels as one unit in <code>y</code>.<br>This adjustment makes the square appear <strong>correctly proportioned</strong> on the screen.</p>
+</li>
+<li><p>Keep the buffer data unchanged and apply a correction in the vertex shader <br>
+In this approach, we leave the original vertex coordinates untouched and instead adjust the positions inside the vertex shader so that the aspect ratio is corrected during rendering.</p>
+</li>
+</ol>
+<p>It is important to note that you generally want to avoid modifying buffers. Once you are introduced to animation, you will realize that updating buffer data—especially every frame—is computationally expensive and inefficient.</p>
+<p>Therefore, we will use the second approach.</p>
+<h3>Let’s understand it intuitively</h3>
+<p>We observe that the square appears <strong>stretched along the x-axis</strong>, even though we define identical bounds (<code>-0.5</code> to <code>+0.5</code>) on both axes.</p>
+<p>This happens because clip space is always square, but the canvas is usually rectangular. When this square space is mapped onto a wide canvas, the x-direction gets stretched more than the y-direction.</p>
+<p>If we could somehow <strong>pull the x-component of each vertex</strong> so that one unit along the x-axis visually matches one unit along the y-axis, the shape would appear as a square again.</p>
+<hr>
+<h3>Using the aspect ratio</h3>
+<p>The amount of stretching depends on the <strong>aspect ratio of the canvas</strong>:</p>
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mord mathnormal">p</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="mord mathnormal">an</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="mord mathnormal">an</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span><span class="mord mathnormal">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><p>A wider canvas means a larger aspect ratio, which causes more stretching along the x-axis. To counteract this, we scale the x-component of each vertex by the <strong>inverse of the aspect ratio</strong> inside the vertex shader.</p>
+<p>In other words, before placing the vertex in clip space, we slightly pull its x-component closer to the center.</p>
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">correc</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">d</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.988em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mord mathnormal">p</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><p>Now the question is: <strong>how do we send the aspect ratio to the GPU?</strong>  </p>
+<p>There are a few characteristics of this data:  </p>
+<ul>
+<li>It remains <strong>constant</strong> until the canvas is resized.  </li>
+<li>It is <strong>the same for all vertices</strong>.</li>
+</ul>
+<p>Can we use a vertex attribute to send this?<br>Yes, technically we can—but it would be a <strong>waste of memory</strong>, as we would be passing the same value for every vertex multiple times in the buffer.  </p>
+<p>There must be a better way.  </p>
+<p>The alternative is to use a <strong>uniform</strong>.</p>
+<h2>What are Uniforms?</h2>
+<p><strong>Uniforms</strong> are another way to pass data from the CPU to the GPU.  </p>
+<p>There are two key differences between <strong>uniforms</strong> and <strong>attributes</strong>:</p>
+<ul>
+<li>Unlike attributes, their value <strong>remains the same across all vertices</strong>.  </li>
+<li>Uniforms can be used to pass data to <strong>both the vertex shader and the fragment shader</strong>.</li>
+</ul>
+<h3>How to use uniforms?</h3>
+<p>To use uniforms you need to define a variable with the uniform keyword in the shader, like this:</p>
+<pre><code class="hljs language-glsl"><span class="hljs-keyword">uniform</span> <span class="hljs-type">float</span> u_aspectRatio;
+</code></pre><p>This full shader code: </p>
+<pre><code class="hljs language-js"><span class="hljs-comment">// Vertex shader</span>
+<span class="hljs-keyword">const</span> vertexShaderSource = <span class="hljs-string">`#version 300 es
+in vec2 a_position;
+in vec3 a_color;
+uniform float u_aspectRatio;
+out vec3 frag_color;
+void main() {
+    gl_Position = vec4(a_position.x/u_aspectRatio, a_position.y, 0, 1);
+    frag_color = a_color;
+}`</span>;
+</code></pre><p>You can see that I have divided the <code>a_position.x</code> with the <code>u_aspectRatio</code> before setting the <code>gl_Position</code></p>
+<p>Once you include the uniform in the shader you need to get its location as we did for attributes using the <code>gl.getUniformLocation</code> function.</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> u_resolution_location = gl.<span class="hljs-title function_">getUniformLocation</span>(program, <span class="hljs-string">&quot;u_aspectRatio&quot;</span>);
+</code></pre><p>Now we have ready to use functions for setting a value into uniforms, unlike the uniforms where we needed to make buffers and all.</p>
+<p>Here we need to pass a float and for float we have <code>gl.uniform1f</code> function to set data into the uniform.</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">uniform1f</span>(u_resolution_location, canvas.<span class="hljs-property">width</span> / canvas.<span class="hljs-property">height</span>);
+</code></pre><p><strong>NOTE: Set the uniform data after you have called the <code>gl.useProgram</code> function because it works with sets the uniform of the currently used program if no program is being used the a warning is thrown and nothing gets drawn.</strong></p>
+<h2>Final Code</h2>
+<p><strong>script.js</strong></p>
+<pre><code class="hljs language-js"><span class="hljs-comment">// Step 1: Set the viewport and clear the canvas</span>
+<span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
+<span class="hljs-keyword">const</span> gl = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;webgl2&quot;</span>);
+canvas.<span class="hljs-property">width</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>;
+canvas.<span class="hljs-property">height</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>;
+gl.<span class="hljs-title function_">viewport</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, canvas.<span class="hljs-property">width</span>, canvas.<span class="hljs-property">height</span>);
+gl.<span class="hljs-title function_">clearColor</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>);
+
+<span class="hljs-comment">// Step 2: Write the shaders</span>
+<span class="hljs-comment">// Vertex shader</span>
+<span class="hljs-keyword">const</span> vertexShaderSource = <span class="hljs-string">`#version 300 es
+in vec2 a_position;
+in vec3 a_color;
+uniform float u_aspectRatio;
+out vec3 frag_color;
+void main() {
+    gl_Position = vec4(a_position.x, a_position.y*u_aspectRatio, 0, 1);
+    frag_color = a_color;
+}`</span>;
+
+<span class="hljs-comment">// Fragment shader</span>
+<span class="hljs-keyword">const</span> fragmentShaderSource = <span class="hljs-string">`#version 300 es
+precision mediump float;
+in vec3 frag_color;
+out vec4 color;
+void main() {
+    color = vec4(frag_color, 1);
+}`</span>;
+
+<span class="hljs-comment">// Step 3: Compile the shaders</span>
+<span class="hljs-keyword">const</span> vertexShader = <span class="hljs-title function_">utilCreateShader</span>(gl, gl.<span class="hljs-property">VERTEX_SHADER</span>, vertexShaderSource);
+<span class="hljs-keyword">const</span> fragmentShader = <span class="hljs-title function_">utilCreateShader</span>(
+  gl,
+  gl.<span class="hljs-property">FRAGMENT_SHADER</span>,
+  fragmentShaderSource
+);
+<span class="hljs-comment">// Step 4: Create a WebGL program</span>
+<span class="hljs-keyword">const</span> program = <span class="hljs-title function_">utilCreateProgram</span>(gl, vertexShader, fragmentShader);
+
+<span class="hljs-comment">// Step 5: Define square vertices and colors using TRIANGLE_STRIP</span>
+<span class="hljs-keyword">const</span> vertexCoordinatesAndColors = [
+  -<span class="hljs-number">0.5</span>,  <span class="hljs-number">0.5</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-comment">// Top-left → Red</span>
+  -<span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-comment">// Bottom-left → Green</span>
+   <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.5</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-comment">// Top-right → Blue</span>
+   <span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-comment">// Bottom-right → Yellow</span>
+];
+
+<span class="hljs-comment">// Step 6: Get attribute locations</span>
+<span class="hljs-keyword">const</span> a_position_location = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_position&quot;</span>);
+<span class="hljs-keyword">const</span> a_color_location = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_color&quot;</span>);
+
+<span class="hljs-comment">// Step 7: Use the WebGL program and create buffer</span>
+gl.<span class="hljs-title function_">useProgram</span>(program);
+
+<span class="hljs-keyword">const</span> u_resolution_location = gl.<span class="hljs-title function_">getUniformLocation</span>(program, <span class="hljs-string">&quot;u_aspectRatio&quot;</span>);
+gl.<span class="hljs-title function_">uniform1f</span>(u_resolution_location, canvas.<span class="hljs-property">width</span> / canvas.<span class="hljs-property">height</span>);
+
+<span class="hljs-keyword">const</span> buffer = <span class="hljs-title function_">utilCreateBuffer</span>(gl, vertexCoordinatesAndColors);
+gl.<span class="hljs-title function_">vertexAttribPointer</span>(a_position_location, <span class="hljs-number">2</span>, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">5</span> * <span class="hljs-number">4</span>, <span class="hljs-number">0</span>);
+gl.<span class="hljs-title function_">enableVertexAttribArray</span>(a_position_location);
+gl.<span class="hljs-title function_">vertexAttribPointer</span>(a_color_location, <span class="hljs-number">3</span>, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">5</span> * <span class="hljs-number">4</span>, <span class="hljs-number">2</span> * <span class="hljs-number">4</span>);
+gl.<span class="hljs-title function_">enableVertexAttribArray</span>(a_color_location);
+
+<span class="hljs-comment">// Step 8: Draw the square using TRIANGLE_STRIP</span>
+gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLE_STRIP</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>);
+</code></pre><p><a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/13-fixing-aspect-ratio" class="link" target="blank">Checkout the full code on github</a></p>
+
+        <div class="nextPrev">
+          <i>
+            <a href="/cg-docs/docs/webgl/rgb-traiangle-ii.html">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"
+                  ></path>
+                </svg>
+              </span>
+              <span style="padding-bottom: 4px"> Previous </span>
+            </a>
+          </i>
+          <i>
+            <a href="#">
+              <span style="padding-bottom: 4px"> Next </span>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+          </i>
+        </div>
+      </section>
+    </main>
+
+    <script src="../../mdScript.js"></script>
+  </body>
+</html>

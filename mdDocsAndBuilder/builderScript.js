@@ -45,6 +45,7 @@ marked.use({
         return katex.renderToString(token.text, {
           throwOnError: false,
           displayMode: true,
+          output: "html"
         });
       },
     },
@@ -67,6 +68,7 @@ marked.use({
       renderer(token) {
         return katex.renderToString(token.text, {
           throwOnError: false,
+          output: "html"
         });
       },
     },

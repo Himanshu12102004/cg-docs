@@ -150,7 +150,9 @@ th {
   display: block;
   width: 100%;
 }
-
+.katex-mathml{
+  height: fit-content !important;
+}
 .hljs {
   background-color: var(--block-code);
   margin-left: 1rem;
@@ -159,6 +161,7 @@ th {
 }
 .link {
   color: var(--accent);
+  display:inline;
 }
 .function-descriptor {
   display: grid;

@@ -228,6 +228,12 @@
           <li><a href="/cg-docs/docs/webgl/graphics-pipeline.html" data-key-path="webgl/graphics pipeline">Graphics Pipeline</a></li>
         
           <li><a href="/cg-docs/docs/webgl/utility-functions.html" data-key-path="webgl/utility functions">Utility Functions</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-triangle-i.html" data-key-path="webgl/rgb triangle i">RGB Triangle I</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-traiangle-ii.html" data-key-path="webgl/rgb traiangle ii">RGB Traiangle II</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/fixing-aspect-ratio.html" data-key-path="webgl/fixing aspect ratio">Fixing Aspect Ratio</a></li>
         </ul>
           </li>
         </ul>
@@ -254,11 +260,11 @@ Well, well today we will be getting ready for that with some basic terminology.<
 <li>Fragment Shader</li>
 <li>Compute Shaders (not supported by WebGL, so we will not discuss them here)</li>
 </ol>
-<p>Before understanding what is a Vertex Shader and Fragment Shader, let&#39;s first understand what is a vertex and fragment.</p>
+<p>Before understanding what is Vertex and Fragment Shader, let&#39;s first understand what is a vertex and fragment.</p>
 <ol>
-<li><p><strong>Vertex</strong>:  A vertex represents a point in 2D or 3D space and is used to define a graphics primitive. For now, assume that the graphics primitive is a triangle, in which case three vertices define its shape.</p>
+<li><p><strong>Vertex</strong>:<br>A vertex represents a point in 2D or 3D space. These points are used to define shapes.<br>For example, a triangle is defined using <strong>three vertices</strong>.</p>
 </li>
-<li><p><strong>Fragment</strong> : All the pixels that fall inside the triangle, and need to be painted are the fragments.</p>
+<li><p><strong>Fragment</strong>:<br>When a shape is drawn, the GPU breaks the area covered by that shape into many pixel-sized pieces.<br>Each of these pieces that needs to be colored is called a <strong>fragment</strong>.</p>
 </li>
 </ol>
 <p>Now lets see shaders:</p>
@@ -273,8 +279,9 @@ Well, well today we will be getting ready for that with some basic terminology.<
 </div>
 
 <ol start="2">
-<li><strong>Fragment Shader</strong>:<br>A fragment shader is a GPU program that runs once for each fragment. It runs after the vertex shader. The vertex shader defines the shape of the triangle, and then the pixels inside the triangle are determined as fragments. Only after this step are the fragment shaders executed, and they run in parallel. For example, if a triangle covers 1000 pixels, the fragment shader will run 1000 times, in parallel and the entire operation will take the time equivalent to processing just one fragment <sup>2</sup>. This is where you can see the massive parallel processing power of the GPU.</li>
+<li><strong>Fragment Shader</strong>:<br>A fragment shader is a GPU program that runs once for each fragment. It runs after the vertex shader. The vertex shader defines the shape of the triangle, and then the pixels inside the triangle are determined as fragments. Only after this step are the fragment shaders executed.Fragment shaders run <strong>in parallel</strong>. For example, if a triangle covers 1000 pixel-sized areas, the fragment shader will be executed around 1000 times, once for each fragment. Because GPUs are designed for massive parallelism, many of these executions happen at the same time, making fragment processing extremely fast. This is where the GPU’s parallel processing power becomes apparent.</li>
 </ol>
+<p><strong>Note:</strong> The same vertex shader code is executed for every vertex, and the same fragment shader code is executed for every fragment. In other words, the GPU applies the same set of instructions to many different data elements, which is similar to a <strong>SIMD (Single Instruction, Multiple Data)</strong> style of processing.</p>
 <div class="img-external">
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766476063/qg3u0epdoph74zhtan7m.png" alt="fragment shader illustration">
@@ -287,7 +294,6 @@ Well, well today we will be getting ready for that with some basic terminology.<
 <p>GLSL stands for <strong>OpenGL shading language</strong>, and is a language similar to C. Don&#39;t worry we will have a full length chapter on shaders and GLSL.  </p>
 <hr>
 <p><sup>1</sup> This is an overly simplified definition of GPU.</p>
-<p><sup>2</sup> Subject number of cores in GPU</p>
 
         <div class="nextPrev">
           <i>

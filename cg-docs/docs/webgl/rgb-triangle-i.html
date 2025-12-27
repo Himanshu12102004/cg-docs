@@ -5,26 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>CG Docs – # Let's make some utility functions</title>
+    <title>CG Docs – # Let's make RGB Triangle</title>
     <meta name="description" content="" />
-    <meta name="keywords" content="In the last three chapters - **Coordinate Spaces**, **Graphics Primitives** and **Graphics Pipeline** we had a lot of theory and now its time to shift back to some code." />
+    <meta name="keywords" content="Let's see what are we going to make today:" />
     <meta name="author" content="Himanshu Gupta" />
 
-    <meta property="og:title" content="CG Docs – # Let's make some utility functions" />
+    <meta property="og:title" content="CG Docs – # Let's make RGB Triangle" />
     <meta property="og:description" content="" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/utility-functions.html" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/rgb-triangle-i.html" />
     <meta property="og:image" content="../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CG Docs – # Let's make some utility functions" />
+    <meta name="twitter:title" content="CG Docs – # Let's make RGB Triangle" />
     <meta name="twitter:description" content="" />
     <meta
       name="twitter:image"
       content="../../assets/preview.png"
     />
 
-    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/utility-functions.html" />
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/rgb-triangle-i.html" />
 
     <link rel="icon" href="../../assets/images/logo.svg" />
 
@@ -46,7 +46,7 @@
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "# Let's make some utility functions",
+        "headline": "# Let's make RGB Triangle",
         "description": "",
         "author": {
           "@type": "Person",
@@ -242,118 +242,119 @@
 
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
-        <h1>Let&#39;s make some utility functions</h1>
-<p>In the last three chapters - <strong>Coordinate Spaces</strong>, <strong>Graphics Primitives</strong> and <strong>Graphics Pipeline</strong> we had a lot of theory and now its time to shift back to some code.</p>
-<p>You must have noticed a few things in the chapters <strong>Let&#39;s draw a point</strong> and <strong>Draw Multiple Points</strong>:</p>
+        <h1>Let&#39;s make RGB Triangle</h1>
+<p>Let&#39;s see what are we going to make today:</p>
+<div class="img-external">
+<div class= "img-container">
+  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766551612/ztmjvjmkjdieuqmgf6wk.png" alt="rasterization stage">
+</div>
+<i  class="image-description">Today's goal</i>
+</div>
+If you look at the image carefully, you’ll notice a few things:
+
 <ul>
-<li><p>The code used to create and compile a <strong>vertex shader</strong> and a <strong>fragment shader</strong> is identical, except for the shader type constants - <code>gl.VERTEX_SHADER</code> and <code>gl.FRAGMENT_SHADER</code>. Can we make single, reusable function for this?</p>
-</li>
-<li><p>As mentioned earlier, a WebGL application can use multiple <strong>programs</strong>, which means we must explicitly create, link, and select the program we want to use. Rather than repeating this setup code, can we encapsulate it into a function as well?</p>
-</li>
-<li><p>A program can have multiple <strong>attributes</strong>, yet the buffer creation logic remains the same each time. Instead of rewriting this code repeatedly, can we create a utility function for setting up attribute buffers?</p>
-</li>
+<li>The top vertex is colored <strong>red</strong></li>
+<li>The left vertex is <strong>green</strong></li>
+<li>The right vertex is <strong>blue</strong></li>
+<li>Every other point inside the triangle is just a blend all three  colors</li>
 </ul>
-<p>Well, we are going to reduce these pain points by creating a new file named <code>webgl-utilities.js</code> and importing it into our HTML files before <code>script.js</code> from now on.</p>
-<p><strong>New HTML template</strong>:</p>
-<pre><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin: 0&quot;</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../webgl-utilities.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./script.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-</code></pre><p>I have imported the <code>webgl-utilities.js</code> with a <code>../</code> because I have kept it outside my working folder.</p>
-<h3>Utility function to create and compile a shader</h3>
-<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">utilCreateShader</span>(<span class="hljs-params">gl, shaderType, shaderSource</span>) {
-  <span class="hljs-keyword">const</span> shader = gl.<span class="hljs-title function_">createShader</span>(shaderType);
-  gl.<span class="hljs-title function_">shaderSource</span>(shader,shaderSource);
-  gl.<span class="hljs-title function_">compileShader</span>(shader);
-  <span class="hljs-keyword">if</span> (!gl.<span class="hljs-title function_">getShaderParameter</span>(shader, gl.<span class="hljs-property">COMPILE_STATUS</span>)) {
-    <span class="hljs-keyword">if</span> (shaderType == gl.<span class="hljs-property">VERTEX_SHADER</span>) {
-      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;Error in vertex shader:&quot;</span>);
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&quot;Error in fragment shader:&quot;</span>);
-    }
-    <span class="hljs-keyword">const</span> error = gl.<span class="hljs-title function_">getShaderInfoLog</span>(shader);
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
-    <span class="hljs-keyword">throw</span> error;
-  }
-  <span class="hljs-keyword">return</span> shader;
-}
-</code></pre><p>Args of this function:</p>
+<p>So, how do we make this happen?</p>
+<p>One thing is clear: we need to tell the GPU that the top vertex is red, the left one is green, and the right one is blue.<br>And what do we use when we want to pass something <strong>per vertex</strong>?</p>
+<p>Yeah! You got it right — <strong>attributes</strong></p>
+<p>So, we’ll create a new attribute in the <strong>vertex shader</strong> that takes in the color for each vertex.</p>
+<p>For now, ignore how the blended colors inside the triangle are handled — the GPU takes care of that automatically. We will discuss this part towards in the end of this chapter in the <strong>Bonus Section</strong>.</p>
+<p>But there’s still a small problem.</p>
+<p>The actual coloring is done in the <strong>fragment shader</strong>, while the color information currently exists only in the <strong>vertex shader</strong>.</p>
+<p>So now the question is:<br>how do we pass these vertex colors from the vertex shader to the fragment shader?</p>
+<p>That’s exactly what we’re going to figure out next, by looking at the code for the vertex and fragment shader.</p>
+<p><strong>Vertex Shader</strong>: </p>
+<pre><code class="hljs language-js"><span class="hljs-comment">// vertex shader</span>
+<span class="hljs-keyword">const</span> vertexShaderSource = <span class="hljs-string">`#version 300 es
+in vec2 a_position;
+in vec3 a_color;
+out vec3 frag_color;
+void main(){
+  gl_Position = vec4(a_position,0,1);
+  gl_PointSize = 30.0;
+  frag_color = a_color;
+}`</span>;
+</code></pre><p>Notice that we have added two new lines at the top: </p>
 <ul>
-<li><strong>gl</strong>: The WebGL context</li>
-<li><strong>shaderType</strong>: The type of shader you want <code>gl.VERTEX_SHADER</code> or <code>gl.FRAGMENT_SHADER</code>.</li>
-<li><strong>shaderSource</strong>: The shader program string.</li>
+<li><code>in vec3 a_color;</code> </li>
+<li><code>out vec3 frag_color;</code></li>
 </ul>
-<p><strong>Function calling</strong></p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> vertexShader = <span class="hljs-title function_">utilCreateShader</span>(gl, gl.<span class="hljs-property">VERTEX_SHADER</span>, vertexShaderSource);
-<span class="hljs-keyword">const</span> fragmentShader = <span class="hljs-title function_">utilCreateShader</span>(gl, gl.<span class="hljs-property">FRAGMENT_SHADER</span>, fragmentShaderSource);
-</code></pre><h3>Utility function to create and link a program</h3>
-<pre><code class="hljs language-js">
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">utilCreateProgram</span>(<span class="hljs-params">gl, vertexShader, fragmentShader</span>) {
-  <span class="hljs-keyword">const</span> program = gl.<span class="hljs-title function_">createProgram</span>();
-  gl.<span class="hljs-title function_">attachShader</span>(program, vertexShader);
-  gl.<span class="hljs-title function_">attachShader</span>(program, fragmentShader);
-  gl.<span class="hljs-title function_">linkProgram</span>(program);
-  <span class="hljs-keyword">if</span> (!gl.<span class="hljs-title function_">getProgramParameter</span>(program, gl.<span class="hljs-property">LINK_STATUS</span>)) {
-    <span class="hljs-keyword">const</span> error = gl.<span class="hljs-title function_">getProgramInfoLog</span>(program);
-    <span class="hljs-keyword">throw</span> error;
-  }
-  <span class="hljs-keyword">return</span> program;
-}
-</code></pre><p>Args of this function:</p>
-<ul>
-<li><strong>gl</strong>: The WebGL context</li>
-<li><strong>vertexShader</strong>: The vertex shader you got in return when you called <code>utilCreateShader</code> with <code>gl.VERTEX_SHADER</code> as the shaderType.</li>
-<li><strong>fragmentShader</strong>: The fragment shader you got in return when you called <code>utilCreateShader</code> with <code>gl.FRAGMENT_SHADER</code> as the shaderType.</li>
-</ul>
-<p><strong>Function calling</strong></p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> program = <span class="hljs-title function_">utilCreateProgram</span>(gl, vertexShader, fragmentShader);
-</code></pre><h3>Utility function to create and set data in the buffer</h3>
-<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">utilCreateBuffer</span>(<span class="hljs-params">gl,data</span>) {
-  <span class="hljs-keyword">const</span> buffer = gl.<span class="hljs-title function_">createBuffer</span>();
-  gl.<span class="hljs-title function_">bindBuffer</span>(gl.<span class="hljs-property">ARRAY_BUFFER</span>, buffer);
-  gl.<span class="hljs-title function_">bufferData</span>(gl.<span class="hljs-property">ARRAY_BUFFER</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Float32Array</span>(data), gl.<span class="hljs-property">STATIC_DRAW</span>);
-  <span class="hljs-keyword">return</span> buffer;
-}
-</code></pre><p>Args of this function:</p>
-<ul>
-<li><strong>gl</strong>: The WebGL rendering context.</li>
-<li><strong>data</strong>: A JavaScript array containing the vertex data that will be uploaded to the GPU.</li>
-</ul>
-<p><strong>Note: From now we will put any webgl utility function we make in the file <code>webgl-utilities.js</code></strong></p>
-<p><strong>Function calling</strong></p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> pointsBuffer = <span class="hljs-title function_">utilCreateBuffer</span>(gl,  pointsCoordinates);
-</code></pre><h3>Sample program using these functions ( Draw Triangle ):</h3>
+<p>You are already familiar with the first one, it&#39;s there for taking vertex color inputs.</p>
+<p>The next line is outputting a <code>vec3 frag_color</code>, but for whom it&#39;s outputting?</p>
+<p>It&#39;s for the fragment shader. The vertex shader&#39;s outputs are grabbed by the fragment shader.</p>
+<p>Note that the <code>frag_color</code> is being initialized in the function with the <code>a_color</code>, that is the color that is passed as the attribute.</p>
+<p>Let&#39;s see fragment shader:</p>
+<p><strong>Fragment Shader</strong></p>
+<pre><code class="hljs language-js"><span class="hljs-comment">// fragment shader</span>
+<span class="hljs-keyword">const</span> fragmentShaderSource = <span class="hljs-string">`# version 300 es
+precision mediump float;
+in vec3 frag_color;
+out vec4 color;
+void main(){
+  color = vec4(frag_color,1);
+}`</span>;
+</code></pre><p>In the fragment shader, we add the line <code>in vec3 frag_color</code>.</p>
+<p>Did you notice something important here? The output variable from the vertex shader is also named <code>frag_color</code>. This is not a coincidence.</p>
+<p>This variable <strong>must have the exact same name and type</strong> in both the vertex shader (as an output) and the fragment shader (as an input). Because of this exact matching, the GPU knows that the <code>frag_color</code> value produced by the vertex shader should be passed to <code>frag_color</code> in the fragment shader.</p>
+<p>Now you can follow the same eight steps explained earlier in the chapter <strong>Draw Multiple Points</strong> to pass color and coordinate data to the GPU.</p>
+<p>This time, instead of only passing position data, you will also pass <strong>color data</strong> to the <code>a_color</code> attribute in the vertex shader. You can either follow those steps manually or use the utility function we defined to create the buffer and set the data for the <code>a_color</code> attribute.</p>
+<p>The process is exactly the same — only the attribute and the data change.</p>
+<p>Lets see the code to send color data to the vertex shader (rest of the code is same as for the <strong>Draw a Triangle</strong>):</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> vertexColor = [
+  <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-comment">// first vertex color</span>
+  <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-comment">// second vertex color</span>
+  <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span> <span class="hljs-comment">// third vertex color</span>
+];
+
+<span class="hljs-keyword">const</span> a_color_location = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_color&quot;</span>);
+
+<span class="hljs-keyword">const</span> colorBuffer = gl.<span class="hljs-title function_">createBuffer</span>();
+gl.<span class="hljs-title function_">bindBuffer</span>(gl.<span class="hljs-property">ARRAY_BUFFER</span>, colorBuffer);
+gl.<span class="hljs-title function_">bufferData</span>(
+  gl.<span class="hljs-property">ARRAY_BUFFER</span>,
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Float32Array</span>(vertexColor),
+  gl.<span class="hljs-property">STATIC_DRAW</span>
+);
+gl.<span class="hljs-title function_">vertexAttribPointer</span>(a_color_location, <span class="hljs-number">3</span>, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+
+gl.<span class="hljs-title function_">enableVertexAttribArray</span>(a_color_location);
+</code></pre><p>Oh! I forgot about the black background, but I am sure you know how to achieve it.<br>Still to make these docs complete, include the lines below before issuing the draw call: </p>
+<p>Now once you save the script.js file and open the browser you will see the RGB Triangle:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">clearColor</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
+gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>)
+</code></pre><h2>Final Code</h2>
+<p><strong>script.js</strong></p>
 <pre><code class="hljs language-js"><span class="hljs-comment">//Step 1: Set the viewport</span>
 <span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
 <span class="hljs-keyword">const</span> gl = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;webgl2&quot;</span>);
 canvas.<span class="hljs-property">height</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>; <span class="hljs-comment">// For making the canvas full screen</span>
 canvas.<span class="hljs-property">width</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>; <span class="hljs-comment">// For making the canvas full screen</span>
 gl.<span class="hljs-title function_">viewport</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, canvas.<span class="hljs-property">width</span>, canvas.<span class="hljs-property">height</span>);
-
+gl.<span class="hljs-title function_">clearColor</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>);
 <span class="hljs-comment">//Step 2: Write the shaders</span>
 <span class="hljs-comment">// vertex shader</span>
 <span class="hljs-keyword">const</span> vertexShaderSource = <span class="hljs-string">`#version 300 es
 in vec2 a_position;
+in vec3 a_color;
+out vec3 frag_color;
 void main(){
   gl_Position = vec4(a_position,0,1);
   gl_PointSize = 30.0;
+  frag_color = a_color;
 }`</span>;
 
 <span class="hljs-comment">// fragment shader</span>
-<span class="hljs-keyword">const</span> fragmentShaderSource = <span class="hljs-string">`#version 300 es
+<span class="hljs-keyword">const</span> fragmentShaderSource = <span class="hljs-string">`# version 300 es
 precision mediump float;
+in vec3 frag_color;
 out vec4 color;
 void main(){
-  color = vec4(1,0,0,1); 
+  color = vec4(frag_color,1);
 }`</span>;
 
 <span class="hljs-comment">// Step 3: Compile the shaders</span>
@@ -368,28 +369,47 @@ void main(){
 <span class="hljs-comment">// Step 4: Create a WebGL program</span>
 <span class="hljs-keyword">const</span> program = <span class="hljs-title function_">utilCreateProgram</span>(gl, vertexShader, fragmentShader);
 
-<span class="hljs-keyword">const</span> pointsCoordinates = [
-  <span class="hljs-number">0</span>, <span class="hljs-number">0.5</span>, <span class="hljs-comment">// First point</span>
-  -<span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Second point</span>
-  <span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Third point</span>
+<span class="hljs-keyword">const</span> vertexCoordinatesAndColors = [
+  <span class="hljs-number">0.0</span>,  <span class="hljs-number">0.5</span>,  <span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>,  <span class="hljs-comment">// Vertex 1 → (x, y) + (r, g, b)</span>
+ -<span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>,  <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>,  <span class="hljs-comment">// Vertex 2 → (x, y) + (r, g, b)</span>
+  <span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>,  <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>,  <span class="hljs-comment">// Vertex 3 → (x, y) + (r, g, b)</span>
 ];
 
 <span class="hljs-keyword">const</span> a_position_location = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_position&quot;</span>);
-<span class="hljs-comment">// Create Buffer</span>
-<span class="hljs-keyword">const</span> pointsBuffer = <span class="hljs-title function_">utilCreateBuffer</span>( gl, pointsCoordinates);
-gl.<span class="hljs-title function_">vertexAttribPointer</span>(a_position_location, <span class="hljs-number">2</span>, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">const</span> a_color_location = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_color&quot;</span>);
 
-gl.<span class="hljs-title function_">enableVertexAttribArray</span>(a_position_location)
 <span class="hljs-comment">// Step 7: Use the WebGL program</span>
 gl.<span class="hljs-title function_">useProgram</span>(program);
+<span class="hljs-keyword">const</span> pointsBuffer = <span class="hljs-title function_">utilCreateBuffer</span>(gl, vertexCoordinatesAndColors);
+gl.<span class="hljs-title function_">vertexAttribPointer</span>(a_position_location, <span class="hljs-number">2</span>, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">5</span>*<span class="hljs-number">4</span> , <span class="hljs-number">0</span>);
+gl.<span class="hljs-title function_">enableVertexAttribArray</span>(a_position_location);
+gl.<span class="hljs-title function_">vertexAttribPointer</span>(a_color_location, <span class="hljs-number">3</span>, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">5</span> * <span class="hljs-number">4</span>, <span class="hljs-number">2</span> * <span class="hljs-number">4</span>);
+gl.<span class="hljs-title function_">enableVertexAttribArray</span>(a_color_location);
 
 <span class="hljs-comment">// Step 8: Issue the draw call</span>
 gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
-</code></pre><p><a href="https://github.com/Himanshu12102004/cg-docs-examples/blob/main/webgl-utilities.js" class="link" target="blank">Checkout the full webgl-utilities.js</a></p>
+</code></pre><p><strong>Note: In the code above I have used the utility functions made in the last chapter</strong></p>
+<h2>Bonus Section: How is the blending of colors happening?</h2>
+<p>Do you remember this line from the chapter <strong>Graphics Pipeline</strong> in the <strong>Rasterization Stage</strong>:<br><em>&quot;This stage also performs interpolation of the outputs produced by the vertex shader across the primitive. We will explore this in detail later while building the RGB Triangle.&quot;</em> ?</p>
+<p>Now that we have actually built the RGB triangle, we can finally see what that line really meant in practice.</p>
+<p>After the vertex shader finishes executing, all the <code>gl_Position</code> values along with their corresponding outputs (in our case, <code>frag_color</code>) move into the <strong>primitive assembly stage</strong>. Here, the GPU forms the primitive (a triangle) and forwards both the primitive and the vertex shader outputs to the <strong>rasterization stage</strong>.</p>
+<p>Now consider this: suppose the triangle covers 1000 pixels on the screen. During rasterization, the GPU will generate 1000 fragments. But we have only provided <strong>three colors</strong> — one for each vertex. So how does the GPU decide the color of every fragment using just these three colors?</p>
+<p>There are a few theoretical possibilities:</p>
+<ul>
+<li><p>The GPU could assign each fragment the color of the nearest vertex, based on distance.<br>In that case, fragments near the red vertex would be red, those near the green vertex would be green, and those near the blue vertex would be blue — producing sharp color boundaries.</p>
+</li>
+<li><p>Alternatively, the GPU could smoothly blend the colors of all three vertices, generating new colors for each fragment and creating a gradual transition across the triangle.</p>
+</li>
+</ul>
+<p>The GPU follows the second approach.</p>
+<p>It uses <strong>interpolation</strong> to compute a weighted blend of the vertex colors for every fragment, which is why we see smooth color gradients instead of abrupt color changes.</p>
+<p>For now, you can think of interpolation as smoothly calculating intermediate values between known values. We will use interpolation extensively in the <strong>Mapping Domains</strong> chapter, where we will also discuss its mathematical formulation.</p>
+<p>For your information, for three point interpolation, as in case of triangles GPU uses Barycentric coordinates, you can explore it yourself on <a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/barycentric-coordinates.html" class="link" target="blank">scratchapixel docs</a>.</p>
+<p><a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/11-RGBTriangle-I" class="link" target="blank">Checkout the full code on github</a></p>
 
         <div class="nextPrev">
           <i>
-            <a href="/cg-docs/docs/webgl/graphics-pipeline.html">
+            <a href="/cg-docs/docs/webgl/utility-functions.html">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -407,7 +427,7 @@ gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-pro
             </a>
           </i>
           <i>
-            <a href="/cg-docs/docs/webgl/rgb-triangle-i.html">
+            <a href="/cg-docs/docs/webgl/rgb-traiangle-ii.html">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg

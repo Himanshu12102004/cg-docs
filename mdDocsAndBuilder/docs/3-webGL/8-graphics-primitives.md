@@ -1,12 +1,12 @@
 # Graphics Primitives
-In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:
+In chapters **Let's draw a point** and **Draw multiple points** we issued the draw call and if you recall it, it was something like this:
 
 ```js
 gl.drawArrays(gl.POINTS, 0, 3);
 ```
 You must have wondered what is `gl.POINTS` here.
 
-Well today we will discuss in detail on this.
+Well today we will discuss on this in detail.
 
 ## Fundamental elements of Plane geometry
 
@@ -36,7 +36,16 @@ Because you can make pretty much anything just from these three geometric elemen
 
 Modern GPUs are extremely optimized to work with **triangles**, which is why triangles are the backbone of real-time graphics.
 
+However, triangles alone cannot represent everything efficiently.  
+A single **point** or a **line** cannot be represented as a triangle without adding extra geometry.
+
+That is why graphics APIs also provide **points** and **lines** as basic drawing primitives, alongside **triangles**.
+
 ## Graphics Primitives
+
+A **graphics primitive** is the simplest shape that the GPU can draw **directly, individually, and efficiently**.  
+More complex shapes are built by combining these basic primitives.
+
 
 There are a total of **7 graphics primitives in WebGL**.
 
@@ -64,9 +73,12 @@ Vertices used to draw this: `[V₀, V₁, V₂]`
 Draw Call: `gl.drawArrays(gl.POINTS, 0, 3);`
 
 ### 2. `gl.LINES`
-Two points make up a line, hence to define a line we need 2 vertices, for 2 lines 4 vertices and so on.
 
-Let's see a illustration to be more clear:
+Two points make up a line. Therefore, to define **one line**, we need **2 vertices**.  
+To define **two lines**, we need **4 vertices**, and so on.
+
+Let’s look at an illustration to make this clearer:
+
 
 <div class="img-external">
 <div class= "img-container img-square">

@@ -4,11 +4,12 @@ In the last three chapters - **Coordinate Spaces**, **Graphics Primitives** and 
 
 You must have noticed a few things in the chapters **Let's draw a point** and **Draw Multiple Points**:
 
-- The code used to create and compile a **vertex shader** and a **fragment shader** is identical, except for the shader type constants `gl.VERTEX_SHADER` and `gl.FRAGMENT_SHADER`. Can we make single, reusable function for this?
+- The code used to create and compile a **vertex shader** and a **fragment shader** is identical, except for the shader type constants - `gl.VERTEX_SHADER` and `gl.FRAGMENT_SHADER`. Can we make single, reusable function for this?
+
+- As mentioned earlier, a WebGL application can use multiple **programs**, which means we must explicitly create, link, and select the program we want to use. Rather than repeating this setup code, can we encapsulate it into a function as well?
 
 - A program can have multiple **attributes**, yet the buffer creation logic remains the same each time. Instead of rewriting this code repeatedly, can we create a utility function for setting up attribute buffers?
 
-- As mentioned earlier, a WebGL application can use multiple **programs**, which means we must explicitly create, link, and select the program we want to use. Rather than repeating this setup code, can we encapsulate it into a function as well?
 
 Well, we are going to reduce these pain points by creating a new file named `webgl-utilities.js` and importing it into our HTML files before `script.js` from now on.
 
@@ -101,12 +102,10 @@ const program = utilCreateProgram(gl, vertexShader, fragmentShader);
 ### Utility function to create and set data in the buffer
 
 ```js
-function utilCreateBuffer(gl, attribLocation, data, size, stride, offset) {
+function utilCreateBuffer(gl,data) {
   const buffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
-  gl.vertexAttribPointer(attribLocation, size, gl.FLOAT, false, stride, offset);
-  gl.enableVertexAttribArray(attribLocation);
   return buffer;
 }
 ```
@@ -114,18 +113,14 @@ function utilCreateBuffer(gl, attribLocation, data, size, stride, offset) {
 Args of this function:
 
 - **gl**: The WebGL rendering context.
-- **attribLocation**: The location of the vertex attribute in the shader program (obtained using `gl.getAttribLocation`).
 - **data**: A JavaScript array containing the vertex data that will be uploaded to the GPU.
-- **size**: The number of components per vertex attribute (e.g., `2` for `(x, y)`, `3` for `(r, g, b)`).
-- **stride**: The total size (in bytes) of one vertex. Use `0` if the data is tightly packed.
-- **offset**: The byte offset in the buffer where this attribute starts.
 
 **Note: From now we will put any webgl utility function we make in the file `webgl-utilities.js`**
 
 **Function calling**
 
 ```js
-const pointsBuffer = utilCreateBuffer(gl, a_position_location ,pointsCoordinates, 2, 0, 0);
+const pointsBuffer = utilCreateBuffer(gl,  pointsCoordinates);
 ```
 
 ### Sample program using these functions ( Draw Triangle ):
@@ -141,18 +136,14 @@ gl.viewport(0, 0, canvas.width, canvas.height);
 // vertex shader
 const vertexShaderSource = `#version 300 es
 in vec2 a_position;
-in vec3 a_color;
-out vec3 frag_color;
 void main(){
   gl_Position = vec4(a_position,0,1);
   gl_PointSize = 30.0;
-  frag_color = a_color;
 }`;
 
 // fragment shader
-const fragmentShaderSource = `# version 300 es
+const fragmentShaderSource = `#version 300 es
 precision mediump float;
-
 out vec4 color;
 void main(){
   color = vec4(1,0,0,1); 
@@ -178,7 +169,10 @@ const pointsCoordinates = [
 
 const a_position_location = gl.getAttribLocation(program, "a_position");
 // Create Buffer
-const pointsBuffer = utilCreateBuffer( gl, a_position_location, pointsCoordinates, 2, 0, 0);
+const pointsBuffer = utilCreateBuffer( gl, pointsCoordinates);
+gl.vertexAttribPointer(a_position_location, 2, gl.FLOAT, false, 0, 0);
+
+gl.enableVertexAttribArray(a_position_location)
 // Step 7: Use the WebGL program
 gl.useProgram(program);
 

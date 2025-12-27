@@ -31,7 +31,7 @@ From a beginners perspective, WebGL can be seen as a way to make dynamic 2D/3D s
 
 1. WebGL is a good starting point for leaning CG as it is lot more simpler than any other API like Vulkan or DirectX.
 2. You need nothing more than a simple text editor, a web browser.
-3. Easy to share and host.You can host it like any other website and share the link.
+3. Easy to share and host. You can host it like any other website and share the link.
 4. You can use other HTML elements along with the graphics,
 with this you can make your stunning 3D portfolio.
 

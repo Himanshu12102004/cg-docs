@@ -7,7 +7,7 @@ In CG whether you are rendering a single point or a full 3D scene the underlying
 
 1. Set the viewport  
 2. Write the vertex and fragment shaders  
-3. Compile the shaders  
+3. Prepare the Shaders for the GPU
 4. Create a WebGL program  
 5. Attach the shaders to the program  
 6. Link the program  
@@ -41,7 +41,8 @@ takes four arguments:
 4. **height**: The height of the viewport in pixels.
 
 ### 2. Write the vertex and fragment shaders
-We know that we are using JS as a wrapper for using WebGL so actually the shader code will be written as JS strings, then we will be sending it to the GPU for execution.
+
+We are using JS as a wrapper for using WebGL so actually the shader code will be written as JS strings, then we will be sending it to the GPU for execution.
 
 Lets see the **vertex shader** to render a point at the center of the screen:
 
@@ -56,26 +57,26 @@ void main(){
 
 The first line of the shader defines the version of the GLSL we are using that is 3.00 es, here es stands for Embedded Systems<sup>1</sup>.
 
-The next line defines the `main` function which serves as the entry point for the program
+The next line defines the `main` function which serves as the entry point for the shader, similar to what we have in C/C++.
 
 Then we initialize the `gl_Position`. It is a built-in variable available in the WebGL vertex shader. It is the responsibility of the vertex shader to assign a value to `gl_Position` , and this value represents the position of the vertex.  
 
 Now you would have a question that, ok fine we have predefined variables in other languages as well but what is that `vec4`?  We have never seen it.
 
-To answer that let's see the core purpose of GLSL. GLSL is designed to render high performance graphics, and in CG vectors are so indispensable that we have specialized data types for them, and  `vec4` is one of them representing a 4 dimensional vector.    
+To answer that let's see the core purpose of GLSL. GLSL is designed to render high performance graphics, and in CG, vectors are so indispensable that we have specialized data types for them, and  `vec4` is one of them representing a 4 dimensional vector.    
 These data types also have constructors and hence can be invoked to create vector values by directly providing their components.
 For example, `vec4(0, 0, 0, 1)` creates a 4D vector.
 There are other such data types as well for example `mat2x2`, `sampler_2d` etc. we will see them in later chapters.
 
-One thing that might bother you, is why we need **4D vector** to describe a position in a 3D world? These 4D coordinates are called **homogeneous coordinates**. In this representation, the first three components represent the usual `x, y, z` coordinates, and the fourth component is called `w`.
+One more thing that might bother you, is why we need **4D vector** to describe a position in a 3D world? These 4D coordinates are called **homogeneous coordinates**. In this representation, the first three components represent the usual `x, y, z` coordinates, and the fourth component is called `w`.
 
 For the time being, you can simply understand that the 4D vector `(x, y, z, w)` represents the 3D point  
-`(x / w, y / w, z / w)`.
-
-This way of representing points is called **homogeneous coordinates**, and we’ll have a full discussion about it in later chapters.  
+`(x / w, y / w, z / w)`, we’ll have a full discussion about it in later chapters.  
 For now, just remember that the presence of the `w` component allows us to express transformations in a more general and unified way.
 
-After this we have another predefined variable `gl_PointSize` whose default value is 1 and it means that the size of the point will be having a size of 1px and in this line we are setting it to 30px.
+**NOTE: The origin lies at the center of the canvas hence the point `(0,0,0)` means the center of the canvas.**
+
+After this we have another predefined variable `gl_PointSize` whose default value is 1 which  means that the size of the point will be 1px, and in this line we are setting it to 30px.
 
 **Fragment Shader**:
 ```JS
@@ -88,14 +89,16 @@ void main(){
 }`;
 ```
 
-The fragment shader is also written in GLSL, just like the vertex shader, so it looks similar to the vertex shader with a few differences.
+The fragment shader is also written in GLSL, just like the vertex shader, so it looks similar to it with a few differences.
 
 First, in the fragment shader we must specify the precision for floating-point values. Here, we declare that we want **medium precision** for `float` data types. We will discuss precision qualifiers in detail later, when we study shaders more deeply.
 
 Second, just as the vertex shader is responsible for setting `gl_Position`, the fragment shader is responsible for producing the final color of each fragment. In GLSL, we declare an output variable using the `out` keyword before the `main` function. Then, inside the `main` function, we assign a value to this output variable. In our case, the output variable `vec4 color` is responsible for doing so. Color is also a **4D vector** representing **RGBA** values which are normalized to the range of 0 to 1.
 
-### 3. Compile the shaders
-Now that we have the shaders as JS strings we need to let the WebGL system know that this is our fragment shader and this is our vertex shader to do this we have two functions `gl.createShader` and `gl.shaderSource`.
+### 3. Prepare the Shaders for the GPU
+Now that we have the shaders as JS strings we need to let the WebGL system know that this is our fragment shader and this is our vertex shader.
+
+ To do this we have two functions `gl.createShader` and `gl.shaderSource`.
 
 First let's look at the code then we will understand what these functions do.
 
@@ -107,13 +110,13 @@ gl.shaderSource(vertexShader, vertexShaderSource);
 
 For fragment shader:
 ```JS
-
 const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
 gl.shaderSource(fragmentShader, fragmentShaderSource);
 
 ```
 
-The `gl.createShader` function takes in a flag, which is simply a numeric value that identifies whether we are referring to a vertex shader or a fragment shader, and it returns a handle (reference) to the shader object managed by the WebGL system.
+The `gl.createShader` function creates a **shader object** managed by the WebGL system. The argument you pass (`gl.VERTEX_SHADER` or `gl.FRAGMENT_SHADER`) tells WebGL **what type of shader** you are creating. This function returns a reference to the newly created shader object, which we can then use to attach source code and compile it.
+
 
 Now once the shader object is created we need to put the shader source code into the object which is done using the function `gl.shaderSource`. This function takes in two arguments, the first one is the shader object reference in which you want to put your shader code and the other argument is a string which is the shader source code we had written before.
 
@@ -143,7 +146,7 @@ if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
 
 `gl.compileShader` function takes a reference to a shader object and compiles the source code attached to it. If the compilation is successful, the shader is marked as compiled; otherwise, the compilation status is set to false and an error log is generated.
 
-The lines that follow are optional and are mainly used for debugging. We query the compile status of the shader, and if it is false, we print the error log to the console. This helps us understand what went wrong during compilation.
+The `if` block in the code above is optional and mainly used for debugging. We query the compile status of the shader, and if it is false, we print the error log to the console. This helps us understand what went wrong during compilation.
 
 Querying shader parameters have a small performance cost, so it is usually avoided in production code.
 
@@ -195,7 +198,7 @@ Code:
 gl.useProgram(program);
 ```
 
-The `gl.useProgram` function tells WebGL that use this particular program for the draw call.
+The `gl.useProgram` function sets this program as the current active program. From this point onward, all subsequent draw calls will use this program until another program is selected.
 
 ### 8. Issue the draw call
 Now you are all set to draw a point and to do that we have to issue a draw call, let's see the code:

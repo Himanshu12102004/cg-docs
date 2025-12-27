@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>CG Docs – # Graphics Primitives</title>
-    <meta name="description" content="In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:" />
+    <meta name="description" content="In chapters **Let's draw a point** and **Draw multiple points** we issued the draw call and if you recall it, it was something like this:" />
     <meta name="keywords" content="" />
     <meta name="author" content="Himanshu Gupta" />
 
     <meta property="og:title" content="CG Docs – # Graphics Primitives" />
-    <meta property="og:description" content="In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:" />
+    <meta property="og:description" content="In chapters **Let's draw a point** and **Draw multiple points** we issued the draw call and if you recall it, it was something like this:" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/graphics-primitives.html" />
     <meta property="og:image" content="../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="CG Docs – # Graphics Primitives" />
-    <meta name="twitter:description" content="In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:" />
+    <meta name="twitter:description" content="In chapters **Let's draw a point** and **Draw multiple points** we issued the draw call and if you recall it, it was something like this:" />
     <meta
       name="twitter:image"
       content="../../assets/preview.png"
@@ -47,7 +47,7 @@
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "# Graphics Primitives",
-        "description": "In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:",
+        "description": "In chapters **Let's draw a point** and **Draw multiple points** we issued the draw call and if you recall it, it was something like this:",
         "author": {
           "@type": "Person",
           "name": "Himanshu Gupta"
@@ -228,6 +228,12 @@
           <li><a href="/cg-docs/docs/webgl/graphics-pipeline.html" data-key-path="webgl/graphics pipeline">Graphics Pipeline</a></li>
         
           <li><a href="/cg-docs/docs/webgl/utility-functions.html" data-key-path="webgl/utility functions">Utility Functions</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-triangle-i.html" data-key-path="webgl/rgb triangle i">RGB Triangle I</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-traiangle-ii.html" data-key-path="webgl/rgb traiangle ii">RGB Traiangle II</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/fixing-aspect-ratio.html" data-key-path="webgl/fixing aspect ratio">Fixing Aspect Ratio</a></li>
         </ul>
           </li>
         </ul>
@@ -237,10 +243,10 @@
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
         <h1>Graphics Primitives</h1>
-<p>In chapter 4 and 5 we issued the draw call and if you recall it, it was something like this:</p>
+<p>In chapters <strong>Let&#39;s draw a point</strong> and <strong>Draw multiple points</strong> we issued the draw call and if you recall it, it was something like this:</p>
 <pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
 </code></pre><p>You must have wondered what is <code>gl.POINTS</code> here.</p>
-<p>Well today we will discuss in detail on this.</p>
+<p>Well today we will discuss on this in detail.</p>
 <h2>Fundamental elements of Plane geometry</h2>
 <p>Let’s start with a simple question:</p>
 <p><strong>What is the smallest thing you can draw?</strong></p>
@@ -258,7 +264,10 @@
 <li>3D Models made in blender are also millions of triangles stitched together.</li>
 </ul>
 <p>Modern GPUs are extremely optimized to work with <strong>triangles</strong>, which is why triangles are the backbone of real-time graphics.</p>
+<p>However, triangles alone cannot represent everything efficiently.<br>A single <strong>point</strong> or a <strong>line</strong> cannot be represented as a triangle without adding extra geometry.</p>
+<p>That is why graphics APIs also provide <strong>points</strong> and <strong>lines</strong> as basic drawing primitives, alongside <strong>triangles</strong>.</p>
 <h2>Graphics Primitives</h2>
+<p>A <strong>graphics primitive</strong> is the simplest shape that the GPU can draw <strong>directly, individually, and efficiently</strong>.<br>More complex shapes are built by combining these basic primitives.</p>
 <p>There are a total of <strong>7 graphics primitives in WebGL</strong>.</p>
 <p>You might wonder:<br><em>“How can there be 7 when we earlier said there are only three basic elements — point, line, and triangle?”</em><br>Actually the others are derived from the basic elements, and they help to reduce the buffer data you need to render things.</p>
 <p>Let&#39;s see each one by one</p>
@@ -274,8 +283,8 @@
 <p>Vertices used to draw this: <code>[V₀, V₁, V₂]</code></p>
 <p>Draw Call: <code>gl.drawArrays(gl.POINTS, 0, 3);</code></p>
 <h3>2. <code>gl.LINES</code></h3>
-<p>Two points make up a line, hence to define a line we need 2 vertices, for 2 lines 4 vertices and so on.</p>
-<p>Let&#39;s see a illustration to be more clear:</p>
+<p>Two points make up a line. Therefore, to define <strong>one line</strong>, we need <strong>2 vertices</strong>.<br>To define <strong>two lines</strong>, we need <strong>4 vertices</strong>, and so on.</p>
+<p>Let’s look at an illustration to make this clearer:</p>
 <div class="img-external">
 <div class= "img-container img-square">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766143991/itaaqgdpmjzbfyceddtd.png" alt="fragment shader illustration">

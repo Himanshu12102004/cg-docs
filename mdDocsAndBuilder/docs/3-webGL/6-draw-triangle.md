@@ -9,6 +9,7 @@ gl.drawArrays(gl.TRIANGLES, 0, 3);
 
 You might wonder why the third arg is 3 when we are drawing only one triangle. Well this argument does not signify how many `gl.TRIANGLES` you are drawing but it signifies how many vertices you want to render and as a triangle requires 3 vertices hence the third arg is 3. 
 
+Now once you save the script.js file and open the browser you will se something like this:
 <div class="img-external">
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766225147/dzqemcdhmczwdobzezwg.png" alt="fragment shader illustration">
@@ -22,6 +23,7 @@ You might wonder why the third arg is 3 when we are drawing only one triangle. W
 //Step 1: Set the viewport
 const canvas = document.querySelector("canvas");
 const gl = canvas.getContext("webgl2");
+
 canvas.height = window.innerHeight; // For making the canvas full screen
 canvas.width = window.innerWidth; // For making the canvas full screen
 gl.viewport(0, 0, canvas.width, canvas.height);
@@ -80,13 +82,10 @@ if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
   );
 }
 
-const pointsCoordinates = [
-  0,
-  0.5, // First point
-  -0.5,
-  -0.5, // Second point
-  0.5,
-  -0.5, // Third point
+const vertexCoordinates = [
+  0, 0.5, // First vertex
+  -0.5, -0.5, // Second vertex
+  0.5, -0.5, // Third vertex
 ];
 
 const a_position_location = gl.getAttribLocation(program, "a_position");
@@ -95,7 +94,7 @@ const pointsBuffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, pointsBuffer);
 gl.bufferData(
   gl.ARRAY_BUFFER,
-  new Float32Array(pointsCoordinates),
+  new Float32Array(vertexCoordinates),
   gl.STATIC_DRAW
 );
 gl.vertexAttribPointer(a_position_location, 2, gl.FLOAT, false, 0, 0);

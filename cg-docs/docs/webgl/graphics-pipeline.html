@@ -228,6 +228,12 @@
           <li><a href="/cg-docs/docs/webgl/graphics-pipeline.html" data-key-path="webgl/graphics pipeline">Graphics Pipeline</a></li>
         
           <li><a href="/cg-docs/docs/webgl/utility-functions.html" data-key-path="webgl/utility functions">Utility Functions</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-triangle-i.html" data-key-path="webgl/rgb triangle i">RGB Triangle I</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-traiangle-ii.html" data-key-path="webgl/rgb traiangle ii">RGB Traiangle II</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/fixing-aspect-ratio.html" data-key-path="webgl/fixing aspect ratio">Fixing Aspect Ratio</a></li>
         </ul>
           </li>
         </ul>
@@ -241,28 +247,30 @@
 <p>Now, finally, it’s the right time to understand the foundation of all graphics: the <strong>Graphics Pipeline</strong>.</p>
 <p>Some of you might be wondering why we are talking about the foundation in the 9th chapter. That might feel a bit unusual, right?</p>
 <p>Most books introduce the graphics pipeline right at the beginning—and I did study it at the very start as well. However, I couldn’t fully understand it back then. In my experience, having a basic understanding of shaders is essential before the graphics pipeline really starts to make sense.</p>
+<p>Let&#39;s start by understanding the stages involved in the graphics pipeline:</p>
 <h2>Stages of the Graphics Pipeline</h2>
-<p>Broadly there are seven stages in the Graphics Pipeline:</p>
+<p>The graphics pipeline starts <strong>after the vertex data has been prepared and copied from system RAM to GPU memory (VRAM)</strong>, and a <strong>draw call</strong> is issued.</p>
+<p>Broadly, there are <strong>six stages</strong> in the graphics pipeline.  </p>
 <ol>
-<li><strong>Vertex Data Stage</strong>  </li>
 <li><strong>Vertex Shader Stage</strong>  </li>
 <li><strong>Primitive Assembly Stage</strong>  </li>
-<li><strong>Rasterization Stage</strong> </li>
-<li><strong>Fragment Shader Stage</strong></li>
-<li><strong>Per-Fragment Operations Stage</strong> </li>
+<li><strong>Rasterization Stage</strong>  </li>
+<li><strong>Fragment Shader Stage</strong>  </li>
+<li><strong>Per-Fragment Operations Stage</strong>  </li>
 <li><strong>Framebuffer Stage</strong></li>
 </ol>
-<p>Let&#39;s see each one in detail:</p>
-<h3>1. Vertex Data Stage</h3>
-<p>This is the stage where we transfer the vertex data like coordinates, normals etc. from the CPU to the GPU.</p>
-<p>Recall that we used a function <code>gl.bufferData(WebGLBuffer, Float32Array, mode)</code> to transfer data from the CPU to the GPU.
-This function belongs to Vertex Data stage.</p>
-<h3>2. Vertex Shader Stage</h3>
-<p>After the Vertex data stage all the next stages happen after we call the <code>gl.drawArrays</code> function inside the GPU.</p>
-<p>Recall that the function <code>gl.drawArrays</code> takes in three args the first one being what is the graphics primitive we want to draw, the next one is the vertex index you want to start drawing from then the third is the number of vertices you want to draw.</p>
-<p>Let&#39;s understand with an example ( this example will be used in the next stages as well):</p>
-<p>Say we have put 6 distinct vertex coordinates in the buffer, now we issue the draw call like this:</p>
-<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>);
+<p>To understand each stage, we will use an example of drawing <strong>two triangles</strong>
+using <strong>6 vertices</strong>: <code>[P0, P1, P2, P3, P4, P5]</code>.</p>
+<p>Let’s look at each one in detail.</p>
+<h3>1. Vertex Shader Stage</h3>
+<p>The graphics pipeline begins with the execution of the <strong>vertex shader</strong>.</p>
+<p>When a draw call is made, its last argument tells the GPU <strong>how many vertices</strong>
+it needs to process. The vertex shader then runs <strong>once per vertex</strong>, and all
+invocations happen <strong>in parallel</strong>.</p>
+<p>Let’s understand this using our example of drawing two triangles.</p>
+<p>We have <strong>6 vertex coordinates</strong> stored in a buffer, and we issue the following
+draw call:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>);
 </code></pre><p>For the above draw call the vertex shader runs 6 times once for each coordinate in parallel and for each coordinate it sets the value of  <code>gl_Position</code>.<br>Do not think that the <code>gl_Position</code> is a kind of global variable, its different for each vertex.</p>
 <p>The figure below will help you understand this stage better:</p>
 <div class="img-external">
@@ -275,14 +283,13 @@ I made the full diagram in one go then took ss : ) </i>
 
 <p>The vertex shader stage does not depend on the primitive you are drawing it just depends on the starting vertex and the number of vertices you want to draw.</p>
 <p>All the transformations such as rotation, scaling etc. on the input points <code>P0, P1, ..., P5</code> happen in this stage in the vertex shader. The final transformed position of each vertex is written to the built-in variable <code>gl_Position</code>.</p>
+<p>We will refer to the outputs of the vertex shader stage as <code>V0, V1, ..., V5</code>, and these are passed to the next stage that is the <strong>Primitive Assembly Stage</strong>.</p>
 <h3>3. Primitive Assembly Stage</h3>
 <p>Let’s understand this stage in a conversational way.</p>
-<p>After the <strong>Vertex Shader Stage</strong>, the GPU knows which vertices are available for drawing, because each vertex has produced a <code>gl_Position</code>.<br>Now the GPU asks, <em>“What is it that we need to draw?”</em></p>
-<p>The answer comes from the first argument of <code>gl.drawArrays</code>.<br>Continuing with the last stage example, where we used <code>gl.drawArrays(gl.TRIANGLES, 0, 6)</code>, the GPU knows that the vertices should be interpreted as triangles.</p>
-<p>Now the GPU thinks: <em>“One triangle requires 3 vertices. If I have 6 vertices, I can draw 2 triangles.”</em></p>
-<p>So, following the rule defined by the draw call, the GPU assembles primitives from the vertices in serial order.<br>Suppose the vertex shader transforms the input points <code>P0, P1, ..., P5</code> into:</p>
-<p><code>V0, V1, ..., V5</code></p>
-<p>The Primitive Assembly Stage then forms the following <strong>triangle primitives</strong>:</p>
+<p>After the <strong>Vertex Shader Stage</strong>, the GPU knows what are the vertices that will be used to draw.<br>Now the GPU asks, <em>“What is it that we need to draw?”</em></p>
+<p>The answer comes from the first argument of <code>gl.drawArrays</code> which says <em>&quot;Draw triangles, my lord!&quot;</em>.<br>Now the GPU knows that the vertices should be interpreted as triangles.</p>
+<p>Then the GPU thinks: <em>“One triangle requires 3 vertices. If I have 6 vertices, <code>V0, V1, ..., V5</code>, I can draw 2 triangles.”</em></p>
+<p>Now in the Primitive Assembly Stage GPU forms the following <strong>triangle primitives</strong>:</p>
 <ul>
 <li>Triangle 1 → <code>V0, V1, V2</code></li>
 <li>Triangle 2 → <code>V3, V4, V5</code></li>
@@ -298,8 +305,11 @@ I made the full diagram in one go then took ss : ) </i>
 
 <h3>4. Rasterization Stage</h3>
 <p>Rasterization is the process of determining which screen pixels are covered by a primitive and generating fragments for those pixels.</p>
-<p>The rasterization stage takes in the primitives generated by the primitive assembly stage and determines what all pixels lie inside the primitive, the pixels that lie inside are termed as fragments and they go to the next stage.</p>
-<p>This stage also performs interpolation of the outputs produced by the vertex shader across the primitive. We will explore this in detail later while building the RGB Triangle.</p>
+<p>In the chapter <strong>GPU and Shaders</strong>, fragments were described as the pixels inside a primitive that are to be painted. However, that was a simplification. In reality, a fragment is <strong>not a pixel</strong>.</p>
+<p>A fragment is a digital representation of a pixel that stores information like the position on the screen of that pixel, it&#39;s depth value, and interpolated data from the vertex shader. In this sense, a fragment is similar to an object in OOP: it represents an entity and holds its data, but it is not the final entity itself.</p>
+<p>The rasterization stage takes in the primitives generated by the primitive assembly stage and determines what all pixels lie inside the primitive and then generates <strong>fragments</strong> for those.</p>
+<p>So you can say that the rasterization stage generates a bunch of fragments which can be assumed to be like objects representing pixels, storing data like pixel position, depth etc.</p>
+<p>This stage also performs interpolation of the outputs produced by the vertex shader across the primitive. We will explore this in detail later while building the <strong>RGB Triangle</strong>.</p>
 <div class="img-external">
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766411881/wqvpixqnasltvfmaedgn.png" alt="rasterization stage">
@@ -308,10 +318,7 @@ I made the full diagram in one go then took ss : ) </i>
 </div> 
 
 <h3>5. Fragment Shader Stage</h3>
-<p>In the chapter <strong>GPU and Shaders</strong>, fragments were described as the pixels inside a primitive that are to be painted. However, that was a simplification. In reality, a fragment is <strong>not a pixel</strong>.</p>
-<p>A fragment is a digital representation of a pixel that stores information like the position on the screen of that pixel, it&#39;s depth value, and interpolated data from the vertex shader. In this sense, a fragment is similar to an object in OOP: it represents an entity and holds its data, but it is not the final entity itself.</p>
-<p>So you can say that the rasterization stage generates a bunch of fragments which can be assumed to be like objects representing pixels, storing data like pixel position, depth etc.</p>
-<p>Only after passing per-fragment tests (the next stage) does a fragment update a pixel in the framebuffer.</p>
+<p>The fragments generated by the Rasterization stage are received by the fragment shader stage.</p>
 <p>In the fragment shader stage, all these fragments are processed by passing them through the fragment shader. The fragment shader runs once for each fragment and outputs a color value for that fragment.<br>Let&#39;s see a illustration to understand better:</p>
 <div class="img-external">
 <div class= "img-container">
@@ -321,9 +328,9 @@ I made the full diagram in one go then took ss : ) </i>
 </div> 
 
 <h3>6. Per-Fragment Operations Stage</h3>
-<p>You could write the colors of each pixel directly to the frame buffer and display it, just after the fragment shader stage, but and WebGL works with 3D scenes and it comes with a nuance:</p>
-<p>Say we have two triangles one behind the other in a 3D scene, now the question arises which one to show and which to not?
-Here&#39;s where this Per-fragment operations stage comes to our rescue.<br>In this stage all kinds of tests like depth test, stencil test, scissors test etc are done. Fragments which fail any of these test are discarded, and final fragments that are ready to be written to the frame buffer and displayed are outputted.</p>
+<p>You could write the color of each pixel directly to the framebuffer right after the fragment shader stage and display it. However, since WebGL works with 3D scenes, this introduces an important nuance.</p>
+<p>Imagine two triangles in a 3D scene, one placed behind the other. The question then arises: <strong>which triangle should be visible on the screen, and which one should be hidden?</strong></p>
+<p>Here&#39;s where this Per-fragment operations stage comes to our rescue.<br>In this stage all kinds of tests like depth test, stencil test, scissors test etc are done. Fragments which fail any of these test are discarded, and final fragments that are ready to be written to the frame buffer and displayed are outputted.</p>
 <p>We will see these tests and how are they performed internally in later chapters.</p>
 <p>Let&#39;s see the illustration:</p>
 <div class="img-external">

@@ -40,7 +40,7 @@ Before we dive into Computer Graphics, let’s answer the big question — why e
 - Like to see **fluid or smoke simulations**? Now you can code it
 - Bad at drawing? I got your back, now you can make drawings impossible to draw by hand
 - Curious about what secret sauce powers Unity and Unreal? Well… why not cook up your own **game engine** from scratch? <sup>**1**</sup>
-- And many more things but it will take whole day to write them all, so I am quitting it here ; )
+- And many more things but it will take whole day to write them all, so I am quitting here ; )
 
 **I know you’re motivated — that’s why you’ve made it this far.**
 And trust me, you’ll soon be able to build projects like these — *maybe even better!*  

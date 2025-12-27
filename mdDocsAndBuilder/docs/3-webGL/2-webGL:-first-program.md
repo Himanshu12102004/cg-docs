@@ -81,7 +81,8 @@ When you use a code editor like VS Code and type `canvas.getContext("")`, you wi
 <i  class="image-description">Image showing the different context types available</i>
 </div>
 
-As this is a **WebGL** doc so we will not dwell much on the other contexts but for your information the **2d** context is used for only drawing the 2D CG and it uses CPU for rendering, **bitmaprenderer** must also be used for something I don't know : ), **webgl** context is the older version of webgl and the **webgl2** is the new version of webgl with enhanced speed and new functionalities.
+In the image above you can see different types of contexts available but,
+as this is a **WebGL** doc so we will not dwell much on the other contexts but for your information the **2d** context is used for only drawing the 2D CG and it uses CPU for rendering, **bitmaprenderer** must also be used for something I don't know : ), **webgl** context is the older version of webgl and the **webgl2** is the newer version of webgl with enhanced speed and functionalities.
 
 In these docs we would be using the **webgl2** rendering context.
 
@@ -93,13 +94,16 @@ const gl = canvas.getContext("webgl2")
 
 ### 3. Set Clear Color
 
-We have the canvas and our brush; now we need a color to paint with. To set the clear color, WebGL provides the function:
+Now that we have the canvas and our brush but before we start drawing, WebGL needs to know **what color to use when the canvas is reset or prepared for drawing**. This color is called the **clear color**, and WebGL lets us set it using the following function:
 
 ```js
 gl.clearColor(1, 0, 0, 1)
 ```
 
 You might be wondering what these four numbers mean. They represent the **RGBA** values, normalized to the range **0 to 1**. Here we are setting the color to red.
+
+Note: The term “clear” might seem confusing at this point. Its meaning will be explained in the next step.
+
 ### 4. Clear the Color Buffer
 
 To paint the canvas, WebGL provides the following function:
@@ -107,23 +111,21 @@ To paint the canvas, WebGL provides the following function:
 ```js
 gl.clear(gl.COLOR_BUFFER_BIT)
 ```
+Before understanding the `clear` function, let's look at `gl.COLOR_BUFFER_BIT`.  
 
-The function name `clear` might seem unintuitive at first. Taken literally, **to clear means to erase**. When WebGL clears the color buffer, it erases all previous pixel color data and **fills the buffer with default values**.
+`gl.COLOR_BUFFER_BIT` is one of many WebGL **constants**. In general, these constants act like **flags** that tell WebGL **what specific action to perform or which part of the system to affect**. For example, in the `clear` function, they indicate **which buffers of the framebuffer** should be cleared.  
 
-In this case, the default value is the **clear color** that we set in the previous step using `gl.clearColor`. As a result, the entire canvas is filled with that color.
+**Note: The framebuffer here is the same concept we discussed in  Basics chapter, where it stores pixel data for the current frame.**
 
-Now, what is the argument `gl.COLOR_BUFFER_BIT`?  
-A buffer is a block of memory that has been allocated to store data, and WebGL has different kinds of buffers like:
+Other similar constants include:
+- `gl.DEPTH_BUFFER_BIT` – for the depth buffer  
+- `gl.STENCIL_BUFFER_BIT` – for the stencil buffer  
 
-- **color buffer**: Stores color information of each pixel
-- **depth buffer**: As WebGL is a 3D rendering engine, hence we need a buffer to store depth of each pixel, this buffer will be studied in detail the 3D rendering chapters.
-- **Stencil buffer**: Works like a stencil or mask. It controls **where drawing is allowed or blocked** on the canvas.
-  Even if the GPU tries to draw everywhere, only the pixels that pass the stencil test are actually
-  written to the canvas. We generally do not need to deal with this.
+Using these constants allows WebGL functions to work in a **flexible and general way**, letting you specify exactly what you want to operate on.
 
-Now the argument `gl.COLOR_BUFFER_BIT` is a numeric constant that works like a flag and tells the clear function to clear the color buffer with the color specified by the `gl.clearColor` function.
+Now let's come to the `clear` function, the function name `clear` might seem unintuitive at first, because you may feel like clearing the canvas will make it kind of transparent or something like that, but in webgl `clear` with the `gl.COLOR_BUFFER_BIT` as arg means to erase all previous pixel color data and **fill the buffer with the clear color** that we set in the previous step using `gl.clearColor`.  
 
-Similarly we have `gl.DEPTH_BUFFER_BIT` for referring to depth buffer and `gl.STENCIL_BUFFER_BIT` for stencil buffer.
+You can also clear the depth buffer or the stencil buffer by passing the `gl.DEPTH_BUFFER_BIT`, and `gl.STENCIL_BUFFER_BIT` respectively.
 
 Once you follow all the above steps you will see the following result:
 

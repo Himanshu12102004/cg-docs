@@ -22,11 +22,15 @@ There are mainly three types of shaders:
 2. Fragment Shader
 3. Compute Shaders (not supported by WebGL, so we will not discuss them here)
 
-Before understanding what is a Vertex Shader and Fragment Shader, let's first understand what is a vertex and fragment.
+Before understanding what is Vertex and Fragment Shader, let's first understand what is a vertex and fragment.
 
-1. **Vertex**:  A vertex represents a point in 2D or 3D space and is used to define a graphics primitive. For now, assume that the graphics primitive is a triangle, in which case three vertices define its shape.
+1. **Vertex**:  
+   A vertex represents a point in 2D or 3D space. These points are used to define shapes.  
+   For example, a triangle is defined using **three vertices**.
 
-2. **Fragment** : All the pixels that fall inside the triangle, and need to be painted are the fragments.
+2. **Fragment**:  
+   When a shape is drawn, the GPU breaks the area covered by that shape into many pixel-sized pieces.  
+   Each of these pieces that needs to be colored is called a **fragment**.
 
 Now lets see shaders:
 
@@ -40,7 +44,9 @@ Now lets see shaders:
 </div>
 
 2. **Fragment Shader**:  
-A fragment shader is a GPU program that runs once for each fragment. It runs after the vertex shader. The vertex shader defines the shape of the triangle, and then the pixels inside the triangle are determined as fragments. Only after this step are the fragment shaders executed, and they run in parallel. For example, if a triangle covers 1000 pixels, the fragment shader will run 1000 times, in parallel and the entire operation will take the time equivalent to processing just one fragment <sup>2</sup>. This is where you can see the massive parallel processing power of the GPU.
+A fragment shader is a GPU program that runs once for each fragment. It runs after the vertex shader. The vertex shader defines the shape of the triangle, and then the pixels inside the triangle are determined as fragments. Only after this step are the fragment shaders executed.Fragment shaders run **in parallel**. For example, if a triangle covers 1000 pixel-sized areas, the fragment shader will be executed around 1000 times, once for each fragment. Because GPUs are designed for massive parallelism, many of these executions happen at the same time, making fragment processing extremely fast. This is where the GPU’s parallel processing power becomes apparent.
+
+**Note:** The same vertex shader code is executed for every vertex, and the same fragment shader code is executed for every fragment. In other words, the GPU applies the same set of instructions to many different data elements, which is similar to a **SIMD (Single Instruction, Multiple Data)** style of processing.
 
 <div class="img-external">
 <div class= "img-container">
@@ -58,4 +64,3 @@ GLSL stands for **OpenGL shading language**, and is a language similar to C. Don
 ---
 <sup>1</sup> This is an overly simplified definition of GPU.
 
-<sup>2</sup> Subject number of cores in GPU

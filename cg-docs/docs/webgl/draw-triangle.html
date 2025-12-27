@@ -228,6 +228,12 @@
           <li><a href="/cg-docs/docs/webgl/graphics-pipeline.html" data-key-path="webgl/graphics pipeline">Graphics Pipeline</a></li>
         
           <li><a href="/cg-docs/docs/webgl/utility-functions.html" data-key-path="webgl/utility functions">Utility Functions</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-triangle-i.html" data-key-path="webgl/rgb triangle i">RGB Triangle I</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/rgb-traiangle-ii.html" data-key-path="webgl/rgb traiangle ii">RGB Traiangle II</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/fixing-aspect-ratio.html" data-key-path="webgl/fixing aspect ratio">Fixing Aspect Ratio</a></li>
         </ul>
           </li>
         </ul>
@@ -241,6 +247,7 @@
 <p>Whole code will be exactly the same with the difference in the draw call , what you need to do in the draw call is just replace gl.POINTS with gl.TRIANGLES waking the draw call like this:</p>
 <pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
 </code></pre><p>You might wonder why the third arg is 3 when we are drawing only one triangle. Well this argument does not signify how many <code>gl.TRIANGLES</code> you are drawing but it signifies how many vertices you want to render and as a triangle requires 3 vertices hence the third arg is 3. </p>
+<p>Now once you save the script.js file and open the browser you will se something like this:</p>
 <div class="img-external">
 <div class= "img-container">
   <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766225147/dzqemcdhmczwdobzezwg.png" alt="fragment shader illustration">
@@ -253,6 +260,7 @@
 <pre><code class="hljs language-js"><span class="hljs-comment">//Step 1: Set the viewport</span>
 <span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
 <span class="hljs-keyword">const</span> gl = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;webgl2&quot;</span>);
+
 canvas.<span class="hljs-property">height</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>; <span class="hljs-comment">// For making the canvas full screen</span>
 canvas.<span class="hljs-property">width</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>; <span class="hljs-comment">// For making the canvas full screen</span>
 gl.<span class="hljs-title function_">viewport</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, canvas.<span class="hljs-property">width</span>, canvas.<span class="hljs-property">height</span>);
@@ -311,13 +319,10 @@ gl.<span class="hljs-title function_">linkProgram</span>(program);
   );
 }
 
-<span class="hljs-keyword">const</span> pointsCoordinates = [
-  <span class="hljs-number">0</span>,
-  <span class="hljs-number">0.5</span>, <span class="hljs-comment">// First point</span>
-  -<span class="hljs-number">0.5</span>,
-  -<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Second point</span>
-  <span class="hljs-number">0.5</span>,
-  -<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Third point</span>
+<span class="hljs-keyword">const</span> vertexCoordinates = [
+  <span class="hljs-number">0</span>, <span class="hljs-number">0.5</span>, <span class="hljs-comment">// First vertex</span>
+  -<span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Second vertex</span>
+  <span class="hljs-number">0.5</span>, -<span class="hljs-number">0.5</span>, <span class="hljs-comment">// Third vertex</span>
 ];
 
 <span class="hljs-keyword">const</span> a_position_location = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_position&quot;</span>);
@@ -326,7 +331,7 @@ gl.<span class="hljs-title function_">linkProgram</span>(program);
 gl.<span class="hljs-title function_">bindBuffer</span>(gl.<span class="hljs-property">ARRAY_BUFFER</span>, pointsBuffer);
 gl.<span class="hljs-title function_">bufferData</span>(
   gl.<span class="hljs-property">ARRAY_BUFFER</span>,
-  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Float32Array</span>(pointsCoordinates),
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Float32Array</span>(vertexCoordinates),
   gl.<span class="hljs-property">STATIC_DRAW</span>
 );
 gl.<span class="hljs-title function_">vertexAttribPointer</span>(a_position_location, <span class="hljs-number">2</span>, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
