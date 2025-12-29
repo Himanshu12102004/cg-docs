@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CG Docs – # WebGL: State Machine</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="You may remember that in the chapter **Draw Multiple Points**, I repeatedly used phrases like **“System State before calling this”** and **“System State after calling that”**, especially as captions under diagrams." />
+    <meta name="author" content="Himanshu Gupta" />
+
+    <meta property="og:title" content="CG Docs – # WebGL: State Machine" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/stage-1:-basics/webgl:-state-machine.html" />
+    <meta property="og:image" content="../../../assets/logo.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CG Docs – # WebGL: State Machine" />
+    <meta name="twitter:description" content="" />
+    <meta
+      name="twitter:image"
+      content="../../../assets/preview.png"
+    />
+
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/stage-1:-basics/webgl:-state-machine.html" />
+
+    <link rel="icon" href="../../../assets/images/logo.svg" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+    />
+    <link id="hljs-theme" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../../css/theming.css" />
+    <link
+      rel="stylesheet"
+      href="../../../css/articleStyling.css"
+    />
+    <link rel="stylesheet" href="../../../css/mdStyling.css" />
+
+    
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "# WebGL: State Machine",
+        "description": "",
+        "author": {
+          "@type": "Person",
+          "name": "Himanshu Gupta"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CG Docs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    
+    <script>
+      const root = document.documentElement;
+      const hljsLink = document.getElementById("hljs-theme");
+
+      let savedTheme = localStorage.getItem("theme");
+
+      if (!savedTheme) {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+
+        savedTheme = prefersDark ? "dark" : "light";
+        localStorage.setItem("theme", savedTheme);
+      }
+
+      if (savedTheme === "light") {
+        root.classList.add("light");
+        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+      } else {
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
+      }
+    </script>
+
+    <div class="overlay"></div>
+    <nav>
+      <div>
+        <img
+          class="logo"
+          src="../../../assets/images/logo.svg"
+          alt="logo"
+        />
+        <svg
+          class="hamburgerMenu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="searchBar">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 256 256"
+          class="searchIcon"
+        >
+          <path
+            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+          ></path>
+        </svg>
+
+        <input
+          type="text"
+          class="searchInput"
+          placeholder="Search docs..."
+          aria-label="Search docs"
+        />
+      </div>
+      <div class="githubAndLightToggler">
+        
+        <svg
+          class="gitHub"
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          width="240.000000pt"
+          height="240.000000pt"
+          viewBox="0 0 240.000000 240.000000"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g
+            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+            stroke="none"
+          >
+            <path
+              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+-1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
+118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
+-144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
+49 -10 94 -6 162 14 9 3 21 24 27 48 6 23 22 58 35 77 l24 35 -81 16 c-170 35
+-275 96 -344 200 -64 96 -85 179 -86 334 0 146 16 206 79 288 28 36 31 47 23
+68 -15 36 -11 188 5 234 13 34 20 40 47 43 45 5 129 -24 214 -72 l73 -42 64
+15 c91 21 364 20 446 0 l62 -16 58 35 c77 46 175 82 224 82 39 0 39 -1 55 -52
+17 -59 20 -166 5 -217 -8 -30 -6 -39 16 -68 109 -144 121 -383 29 -579 -62
+-129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
+-15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
+-419 518 -733 602 -137 36 -395 44 -525 15z"
+            />
+          </g>
+        </svg>
+        
+        <div class="theme-toggler">
+          <svg
+            class="sun theme-icon hide"
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M277.3 32h-42.7v64h42.7V32zm129.1 43.7L368 114.1l29.9 29.9 38.4-38.4-29.9-29.9zm-300.8 0l-29.9 29.9 38.4 38.4 29.9-29.9-38.4-38.4zM256 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128zm224 106.7h-64v42.7h64v-42.7zm-384 0H32v42.7h64v-42.7zM397.9 368L368 397.9l38.4 38.4 29.9-29.9-38.4-38.4zm-283.8 0l-38.4 38.4 29.9 29.9 38.4-38.4-29.9-29.9zm163.2 48h-42.7v64h42.7v-64z"
+            ></path>
+          </svg>
+          
+          <svg
+            class="moon theme-icon"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M195 125c0-26.3 5.3-51.3 14.9-74.1C118.7 73 51 155.1 51 253c0 114.8 93.2 208 208 208 97.9 0 180-67.7 202.1-158.9-22.8 9.6-47.9 14.9-74.1 14.9-106 0-192-86-192-192z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </nav>
+    <main class="layout">
+      <aside class="layout__sidebar">
+    <div class="sidebar">
+    <div class="sidebarHeader">
+    <div class="sidebarLogoContainer">
+    <img
+    class="logo-phone"
+    src="../../../assets/images/logo.svg"
+    alt="logo"
+    />
+    <h1 class="sidebarTitle">CG Docs</h1>
+    </div>
+    <svg class="menuClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+    </div> 
+      <ul class="level-0">
+          <li><a href="/cg-docs/docs/introduction.html" data-key-path="introduction">Introduction</a></li>
+        
+          <li><a href="/cg-docs/docs/basics.html" data-key-path="basics">Basics</a></li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="WebGL/">WebGL</span>
+            <ul class="level-1">
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="webgl/Stage 1: Basics/">Stage 1: Basics</span>
+            <ul class="level-2">
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/overview.html" data-key-path="webgl/stage 1: basics/overview">Overview</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/webgl:-first-program.html" data-key-path="webgl/stage 1: basics/webgl: first program">WebGL: First Program</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/gpu-and-shaders.html" data-key-path="webgl/stage 1: basics/gpu and shaders">GPU And Shaders</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/lets-draw-a-point.html" data-key-path="webgl/stage 1: basics/lets draw a point">Lets Draw A Point</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/draw-multiple-points.html" data-key-path="webgl/stage 1: basics/draw multiple points">Draw Multiple Points</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/draw-triangle.html" data-key-path="webgl/stage 1: basics/draw triangle">Draw Triangle</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/coordinate-space.html" data-key-path="webgl/stage 1: basics/coordinate space">Coordinate Space</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/graphics-primitives.html" data-key-path="webgl/stage 1: basics/graphics primitives">Graphics Primitives</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/graphics-pipeline.html" data-key-path="webgl/stage 1: basics/graphics pipeline">Graphics Pipeline</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/utility-functions.html" data-key-path="webgl/stage 1: basics/utility functions">Utility Functions</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/rgb-triangle-i.html" data-key-path="webgl/stage 1: basics/rgb triangle i">RGB Triangle I</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/rgb-traiangle-ii.html" data-key-path="webgl/stage 1: basics/rgb traiangle ii">RGB Traiangle II</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/fixing-aspect-ratio.html" data-key-path="webgl/stage 1: basics/fixing aspect ratio">Fixing Aspect Ratio</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-1:-basics/webgl:-state-machine.html" data-key-path="webgl/stage 1: basics/webgl: state machine">WebGL: State Machine</a></li>
+        </ul>
+          </li>
+        
+          <li class="folder">
+            <span class="folder-toggle" data-key-path="webgl/Stage 2: Intermediate/">Stage 2: Intermediate</span>
+            <ul class="level-2">
+          <li><a href="/cg-docs/docs/webgl/stage-2:-intermediate/animating-stuff.html" data-key-path="webgl/stage 2: intermediate/animating stuff">Animating Stuff</a></li>
+        </ul>
+          </li>
+        </ul>
+          </li>
+        </ul>
+    </div>
+  </aside>
+
+      <section class="layout__content">
+        <div class="whereAmI">{Where Am I}</div>
+        <h1>WebGL: State Machine</h1>
+<p>You may remember that in the chapter <strong>Draw Multiple Points</strong>, I repeatedly used phrases like <strong>“System State before calling this”</strong> and <strong>“System State after calling that”</strong>, especially as captions under diagrams.</p>
+<p>At that time, these phrases were introduced without fully explaining <em>what this “system state” actually is</em>.</p>
+<p>I also intentionally left a few notes like:</p>
+<ul>
+<li><strong>NOTE:</strong> Binding a buffer to a target may not make sense right now.<br><em>Bear with me—we will discuss this in the WebGL: State Machine chapter.</em></li>
+<li><strong>NOTE:</strong> Use the program before making the <code>vertexAttribPointer</code> call.<br><em>I will explain this later in the WebGL: State Machine chapter.</em></li>
+</ul>
+<p>This chapter exists to finally connect all those dots.</p>
+<p>Here, we will understand:</p>
+<ul>
+<li>what “system state” really means in WebGL,</li>
+<li>why the <strong>order</strong> of function calls matters,</li>
+<li>why WebGL behaves differently from normal function-based APIs,</li>
+<li>and why certain rules (like using a program before setting attributes) are not arbitrary, but a direct result of WebGL being a <strong>state machine</strong>.</li>
+</ul>
+<p>Once you understand this chapter, many things that earlier felt like “rules to memorize” will start to feel logical and obvious.</p>
+<h2>What does &quot;State&quot; mean in WebGL</h2>
+<p>Imagine you are going to draw on a piece of paper. Before you start, you decide:</p>
+<ul>
+<li>The size of the paper (say A3)  </li>
+<li>What you are going to draw (say a house)  </li>
+<li>The pencil you will use (say HB1)</li>
+</ul>
+<p>Now, when you make each stroke, you <strong>don’t have to repeat</strong> “Use A3 paper, take the HB1 pencil, draw a house.” You already decided all of that, and your brain <strong>remembers it as a state</strong>.</p>
+<p>WebGL works in a very similar way:</p>
+<ul>
+<li>You set the <strong>canvas size</strong>  </li>
+<li>You decide <strong>what to draw</strong> and put it in <strong>buffers</strong> as vertex data  </li>
+<li>You create <strong>shaders</strong> and a <strong>program</strong>  and <strong>use</strong> it.</li>
+</ul>
+<p>When you call <code>gl.drawArrays()</code> or <code>gl.drawElements()</code>, WebGL <strong>doesn’t need you to repeat all the details</strong>. It simply looks at the <strong>current state</strong>—the buffers, shaders, and program you’ve set—and draws using that information.  </p>
+<p>In short, <strong>WebGL remembers your settings (state)</strong> so you don’t have to specify them every time you draw.
+Now that you have an idea of what &quot;state&quot; means in WebGL, let&#39;s address your common doubts:</p>
+<h2>Why bind buffers to a target?</h2>
+<p>At any given time, you can have multiple buffers—for example:  </p>
+<ul>
+<li>a <strong>vertex coordinate buffer</strong>  </li>
+<li>a <strong>color buffer</strong></li>
+</ul>
+<p>Binding a buffer to a <strong>target</strong> tells WebGL <strong>which buffer should be used for subsequent operations</strong>.  </p>
+<h2>Why two different types of targets: <code>ARRAY_BUFFER</code> and <code>ELEMENT_ARRAY_BUFFER</code>?</h2>
+<p>The reason is <strong>predictability and performance</strong>:</p>
+<ul>
+<li><p>When you bind a buffer to <strong><code>ARRAY_BUFFER</code></strong>, the GPU knows:<br><em>“This buffer contains per-vertex data such as positions, colors, or normals.”</em>  </p>
+</li>
+<li><p>When you bind a buffer to <strong><code>ELEMENT_ARRAY_BUFFER</code></strong>, the GPU knows:<br><em>“This buffer contains index data that references vertices in an <code>ARRAY_BUFFER</code>.”</em></p>
+</li>
+</ul>
+<p>By explicitly telling the GPU how a buffer will be used, it can <strong>store and interpret the data efficiently</strong>, improving performance and making behavior more predictable.  </p>
+<p>So when you call <code>vertexAttribPointer</code>, WebGL <strong>stores this information as part of its state</strong>:<br><em>“For this attribute location, use the data from the buffer that is currently bound to <code>ARRAY_BUFFER</code> at the time of this call, and interpret it according to this specification—until this state is changed by another call.”</em></p>
+<p>This makes it clear that WebGL remembers <strong>the buffer and its layout at the moment of the call</strong>, illustrating how the <strong>state machine</strong> works: once set, this state persists for subsequent draw calls until explicitly changed.</p>
+<h2>Why call <code>gl.useProgram</code> before <code>gl.vertexAttribPointer</code>?</h2>
+<p>Before understanding this, let’s clarify <strong>attribute locations</strong> you get by calling the function <code>gl.vertexAttribLocation</code>:  </p>
+<ul>
+<li>Attribute locations are natural numbers.  </li>
+<li>By default, they are assigned <strong>in order of their declaration</strong> in the vertex shader: the first attribute gets location 0, the second gets 1, the third gets 2, and so on (unless explicitly specified).  </li>
+<li>These locations are <strong>fixed at program linking</strong> and do not change during the lifetime of the program.</li>
+</ul>
+<p>Example in GLSL:</p>
+<pre><code class="hljs language-glsl"><span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> a_position; <span class="hljs-comment">// location -&gt; 0</span>
+<span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> a_normal;   <span class="hljs-comment">// location -&gt; 1</span>
+<span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> a_color;    <span class="hljs-comment">// location -&gt; 2</span>
+</code></pre><p>These sequential natural numbers introduce a specific nuance: if you use more than one program, different programs can have attributes assigned to the same locations. Let’s understand this with the example below:</p>
+<ul>
+<li><p><strong>Program A</strong> has three attributes: <code>a_position</code>, <code>a_normal</code>, <code>a_color</code>  </p>
+<ul>
+<li>Location 0 → <code>a_position</code>  </li>
+<li>Location 1 → <code>a_normal</code>  </li>
+<li>Location 2 → <code>a_color</code></li>
+</ul>
+</li>
+<li><p><strong>Program B</strong> has two attributes: <code>a_position</code>, <code>a_color</code>  </p>
+<ul>
+<li>Location 0 → <code>a_position</code>  </li>
+<li>Location 1 → <code>a_color</code></li>
+</ul>
+</li>
+</ul>
+<p>Now let’s say you want to draw:</p>
+<ul>
+<li>a <strong>triangle</strong> using <strong>Program A</strong></li>
+<li>a <strong>square (triangle strip)</strong> using <strong>Program B</strong></li>
+</ul>
+<p>And you do the following:</p>
+<ol>
+<li><p>Create a buffer for the <strong>triangle data</strong>.</p>
+</li>
+<li><p>Bind this buffer to the target <code>gl.ARRAY_BUFFER</code>.</p>
+</li>
+<li><p>Upload the triangle vertex data into the buffer.</p>
+</li>
+<li><p>Call <code>gl.vertexAttribPointer</code> to say:<br><em>“For attribute location 0, use the buffer currently bound to <code>ARRAY_BUFFER</code> (triangle buffer).”</em></p>
+</li>
+<li><p>Create another buffer for the <strong>square data</strong>.</p>
+</li>
+<li><p>Bind this buffer to the target <code>gl.ARRAY_BUFFER</code>.  </p>
+<blockquote>
+<p>At this point, the <strong>square buffer</strong> is now bound to <code>ARRAY_BUFFER</code>, not the triangle buffer.</p>
+</blockquote>
+</li>
+<li><p>Call <code>gl.vertexAttribPointer</code> again to say:<br><em>“For attribute location 0, use the buffer currently bound to <code>ARRAY_BUFFER</code> (square buffer).”</em>  </p>
+<blockquote>
+<p>This <strong>overwrites the previous state</strong> for attribute location 0.</p>
+</blockquote>
+</li>
+<li><p>Now you call <code>gl.useProgram(ProgramA)</code> and issue:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
+</code></pre><p>Even though you are now using <strong>Program A</strong> (the triangle program), <strong>attribute location 0 still points to the square buffer</strong>, because that was the <strong>last attribute state that was set</strong> using <code>gl.vertexAttribPointer</code>, so the triangle program will use the vertices of the square and make a triangle using the first three coordinates of the square.</p>
+</li>
+<li><p>Now you call <code>gl.useProgram(ProgramB)</code> and issue:</p>
+<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLE_STRIP</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>);
+</code></pre><p>This draw call again uses the square buffer and draws the square.</p>
+</li>
+</ol>
+<p>Now you can clearly see how the <strong>WebGL state machine</strong> works.</p>
+<p>The key takeaway is this:</p>
+<ul>
+<li><p><code>gl.vertexAttribPointer</code> <strong>captures state</strong>:</p>
+<ul>
+<li>which attribute location</li>
+<li>which buffer was bound to <code>ARRAY_BUFFER</code> <em>at the time of the call</em></li>
+<li>how the data should be interpreted</li>
+</ul>
+</li>
+<li><p>This state is <strong>global</strong> and <strong>persists</strong> until you change it again, regardless of which program is currently active.</p>
+</li>
+</ul>
+<p>That is why I strongly recommend the following order to avoid hard-to-find bugs:</p>
+<ol>
+<li>Upload data into buffers (<code>gl.bufferData</code>)  <ul>
+<li>This can be done <strong>anytime earlier</strong>; it does <strong>not</strong> depend on the active program.</li>
+</ul>
+</li>
+<li>Call <code>gl.useProgram</code> for the program you intend to draw with.</li>
+<li>Bind the correct buffer to <code>gl.ARRAY_BUFFER</code>.</li>
+<li>Call <code>gl.vertexAttribPointer</code> to set the attribute state.</li>
+<li>Issue the draw call.</li>
+</ol>
+<p>By following this order, you ensure that the <strong>attribute state matches the program you are drawing with</strong>, making your code predictable and easier to reason about.</p>
+<p> <strong>Note:</strong><br> This order can be treated as a <strong>convention</strong>, not a strict rule.<br>  What truly matters is that the <strong>correct <code>gl.vertexAttribPointer</code> state is set before the draw call</strong>.<br> As long as the attribute state matches the intended program and buffers at draw time, WebGL will work correctly.</p>
+
+        <div class="nextPrev">
+          <i>
+            <a href="/cg-docs/docs/webgl/stage-1:-basics/fixing-aspect-ratio.html">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"
+                  ></path>
+                </svg>
+              </span>
+              <span style="padding-bottom: 4px"> Previous </span>
+            </a>
+          </i>
+          <i>
+            <a href="/cg-docs/docs/webgl/stage-2:-intermediate/animating-stuff.html">
+              <span style="padding-bottom: 4px"> Next </span>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+          </i>
+        </div>
+      </section>
+    </main>
+
+    <script src="../../../mdScript.js"></script>
+  </body>
+</html>

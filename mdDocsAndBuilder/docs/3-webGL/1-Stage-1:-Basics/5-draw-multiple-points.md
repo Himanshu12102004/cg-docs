@@ -178,7 +178,7 @@ Let's have a look at the system state after calling this function:
 <i  class="image-description">System state after calling gl.bindBuffer function. The double headed arrow shows the target binding</i>
 </div> 
 
-**NOTE: This step might not make sense to you right now but bear with me for some time we will discuss this in the chapter WebGL: State Machine**
+**NOTE: Binding buffer to the target may not make sense to you right now but bear with me for some time we will discuss this in the chapter WebGL: State Machine**
 
 ### 5. Insert data into the buffer
 Once the buffer is bound to a target, we are all set to transfer data from the system memory
