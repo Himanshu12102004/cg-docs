@@ -45,7 +45,7 @@ marked.use({
         return katex.renderToString(token.text, {
           throwOnError: false,
           displayMode: true,
-          output: "html"
+          output: "html",
         });
       },
     },
@@ -68,7 +68,7 @@ marked.use({
       renderer(token) {
         return katex.renderToString(token.text, {
           throwOnError: false,
-          output: "html"
+          output: "html",
         });
       },
     },
@@ -129,6 +129,21 @@ function wrapTables(html) {
 
   return result;
 }
+function addLineNumbers(html) {
+  const regex = /<pre><code class="([^"]*)">([\s\S]*?)<\/code><\/pre>/g;
+
+  return html.replace(regex, (full, codeClass, code) => {
+    const lineCount = code.split("\n").length;
+
+    const numbers = Array.from(
+      { length: lineCount-1 },
+      (_, i) => i + 1
+    ).join("\n");
+
+    return `<pre data-line-numbers="${numbers}"><code class="${codeClass}">${code}</code></pre>`;
+  });
+}
+
 
 function wrapHTML(
   content,
@@ -169,7 +184,7 @@ async function processFile(srcPath) {
   const pageUrl =
     `${envVariables.DOMAIN_NAME}/docs/` +
     removeNumericPrefixes(relative.replace(".md", ".html").toLowerCase());
-  const html = wrapTables(marked.parse(md));
+  const html = wrapTables(addLineNumbers(marked.parse(md)));
   const { prev, next } = getPrevNextMD(relative);
   await writeFile(
     destPath,

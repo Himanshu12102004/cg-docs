@@ -210,4 +210,4 @@ gl.enableVertexAttribArray(a_color_location);
 gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 ```
 
-<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/13-fixing-aspect-ratio" class="link" target="blank">Checkout the full code on github</a>
+<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/Stage-1/13-fixing-aspect-ratio" class="link" target="blank">Checkout the full code on github</a>

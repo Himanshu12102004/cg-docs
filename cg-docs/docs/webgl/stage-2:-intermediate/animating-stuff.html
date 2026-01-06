@@ -5,19 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>CG Docs – # Its time to move</title>
+    <title>CG Docs – # Animating Stuff</title>
     <meta name="description" content="" />
-    <meta name="keywords" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+    <meta name="keywords" content="Now that you are familiar with the basics of WebGL, it’s time to move on to something more exciting — **animation**." />
     <meta name="author" content="Himanshu Gupta" />
 
-    <meta property="og:title" content="CG Docs – # Its time to move" />
+    <meta property="og:title" content="CG Docs – # Animating Stuff" />
     <meta property="og:description" content="" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/stage-2:-intermediate/animating-stuff.html" />
     <meta property="og:image" content="../../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CG Docs – # Its time to move" />
+    <meta name="twitter:title" content="CG Docs – # Animating Stuff" />
     <meta name="twitter:description" content="" />
     <meta
       name="twitter:image"
@@ -46,7 +46,7 @@
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "# Its time to move",
+        "headline": "# Animating Stuff",
         "description": "",
         "author": {
           "@type": "Person",
@@ -78,7 +78,8 @@
 
       if (savedTheme === "light") {
         root.classList.add("light");
-        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
       } else {
         hljsLink.href =
           "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
@@ -128,21 +129,22 @@
       </div>
       <div class="githubAndLightToggler">
         
-        <svg
-          class="gitHub"
-          version="1.0"
-          xmlns="http://www.w3.org/2000/svg"
-          width="240.000000pt"
-          height="240.000000pt"
-          viewBox="0 0 240.000000 240.000000"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <g
-            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
-            stroke="none"
+        <a href="https://github.com/Himanshu12102004/cg-docs" target="_blank">
+          <svg
+            class="gitHub"
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width="240.000000pt"
+            height="240.000000pt"
+            viewBox="0 0 240.000000 240.000000"
+            preserveAspectRatio="xMidYMid meet"
           >
-            <path
-              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+            <g
+              transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+              stroke="none"
+            >
+              <path
+                d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
 -1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
 118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
 -144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
@@ -154,9 +156,10 @@
 -129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
 -15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
 -419 518 -733 602 -137 36 -395 44 -525 15z"
-            />
-          </g>
-        </svg>
+              />
+            </g>
+          </svg>
+        </a>
         
         <div class="theme-toggler">
           <svg
@@ -246,6 +249,8 @@
             <span class="folder-toggle" data-key-path="webgl/Stage 2: Intermediate/">Stage 2: Intermediate</span>
             <ul class="level-2">
           <li><a href="/cg-docs/docs/webgl/stage-2:-intermediate/animating-stuff.html" data-key-path="webgl/stage 2: intermediate/animating stuff">Animating Stuff</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-2:-intermediate/transformations.html" data-key-path="webgl/stage 2: intermediate/transformations">Transformations</a></li>
         </ul>
           </li>
         </ul>
@@ -256,10 +261,292 @@
 
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
-        <h1>Its time to move</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>lorem 
-lorem </p>
+        <h1>Animating Stuff</h1>
+<p>Now that you are familiar with the basics of WebGL, it’s time to move on to something more exciting — <strong>animation</strong>.</p>
+<p>In an earlier chapter on the basics of Computer Graphics, we discussed what animation really means. We learned that animation is essentially the <strong>illusion of motion</strong>, created by displaying <strong>many continuous images (frames) in rapid succession</strong>.</p>
+<p>In this chapter, we’ll revisit that idea, but this time we’ll focus on <strong>how to achieve animation using JavaScript</strong>. You’ll see how static drawings can be updated frame by frame to create motion, and how WebGL fits naturally into this process.</p>
+<h2>Key steps involved in any animation</h2>
+<p>No matter what you are animating — a moving point, a rotating triangle, or a complex scene — the underlying process always follows the same pattern:</p>
+<ol>
+<li><p><strong>Calculate the current frame</strong><br>Compute positions, colors, transformations, or any other values needed for this frame.</p>
+</li>
+<li><p><strong>Display the frame</strong><br>Render the calculated data to the screen.</p>
+</li>
+<li><p><strong>Calculate the next frame</strong><br>Update values slightly (for example, move an object forward in time).</p>
+</li>
+<li><p><strong>Erase the previous frame</strong><br>Clear the canvas so old pixels don’t interfere with the new frame.</p>
+</li>
+<li><p><strong>Draw the next frame</strong><br>Render the updated scene.</p>
+</li>
+<li><p><strong>Repeat these steps continuously</strong><br>Doing this again and again creates the illusion of motion.</p>
+</li>
+</ol>
+<hr>
+<h2>How to achieve this in JavaScript</h2>
+<p>For this chapter, create a fresh HTML and JavaScript setup.</p>
+<p><strong>index.html</strong></p>
+<pre data-line-numbers="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12"><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin: 0&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./script.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre><p>The JS file is currently empty hence I am not pasting it here, from here onwards we will be working in the JS file only.</p>
+<h2>The <code>requestAnimationFrame</code> function</h2>
+<p>The JavaScript <code>window</code> object<sup>1</sup> provides a <strong>non-blocking</strong> function<sup>2</sup> that allows you to do something <strong>over and over again</strong>, which is exactly what we need for animation. This function is called <code>requestAnimationFrame</code>.</p>
+<p>Let’s first see how it is used, and then we’ll understand how it actually works.</p>
+<pre data-line-numbers="1
+2
+3
+4"><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Animate function called&quot;</span>);
+}
+<span class="hljs-title function_">requestAnimationFrame</span>(animate);
+</code></pre><p>If you put this code in your <strong>script.js</strong>, open the HTML file in your browser, and open the inspector<sup>3</sup>, you’ll see something like this:</p>
+<div class="img-external">
+  <div class="img-container">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1767613597/hooxcoa9zh0wcsx0jnm6.png" alt="Inspector output">
+  </div>
+  <i class="image-description">
+    Inspector showing that the animate function runs only once
+  </i>
+</div>
+
+<p>But wait — we wanted a loop, yet the function ran only once. Why?</p>
+<h2>What <code>requestAnimationFrame</code> actually does</h2>
+<p>The function <code>requestAnimationFrame</code> tells the browser:</p>
+<blockquote>
+<p>“Before you repaint the next screen frame, run this function <strong>once</strong>.”</p>
+</blockquote>
+<p>Before every frame repaint? What does that mean?</p>
+<p>Here’s something important to understand:</p>
+<p>Your screen refreshes about <strong>60 times per second</strong> (or whatever your display’s refresh rate is), even if you are doing absolutely nothing and just staring at the screen.</p>
+<p>Every refresh is called a <strong>frame repaint</strong>.</p>
+<p>So when you call <code>requestAnimationFrame</code>, you are simply asking the browser:</p>
+<blockquote>
+<p>“Before the next screen refresh, please run this function.”</p>
+</blockquote>
+<p>Since we made this request <strong>only once</strong>, the browser ran our function <strong>only once</strong>.</p>
+<p>That’s why in the previous example, the <code>animate</code> function executed a single time instead of looping.</p>
+<h2>How do we get looping behavior?</h2>
+<p>If we want the function to run <strong>every frame</strong>, we must ask the browser again <strong>after each frame</strong>.</p>
+<p>In other words, we must call <code>requestAnimationFrame</code> <strong>inside the function itself</strong>:</p>
+<pre data-line-numbers="1
+2
+3
+4
+5
+6"><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Animate function called&quot;</span>);
+  <span class="hljs-title function_">requestAnimationFrame</span>(animate);
+}
+
+<span class="hljs-title function_">requestAnimationFrame</span>(animate);
+</code></pre><div class="img-external">
+  <div class="img-container">
+    <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1767613652/ngfm3bli2odp0bffyjaw.png" alt="Inspector output">
+  </div>
+  <i class="image-description">
+    Inspector showing that the animate function running in loop and consoled 910 times.
+  </i>
+</div>
+
+
+<h3>Now the flow becomes</h3>
+<ol>
+<li>Browser is about to repaint a frame</li>
+<li>Browser calls animate</li>
+<li>Inside animate, we request the next frame again</li>
+<li>Browser repaints the frame</li>
+<li>Repeat</li>
+</ol>
+<p>Now we have to put the code of clearing the previous frame and draw the next frame in the animate function and we are done.</p>
+<h2>Let&#39;s move a point</h2>
+<p>Now I want you to draw a point using vertex attribute at the center of the screen, we have already done this in previous chapters, so I will not explain it again.</p>
+<p>Let&#39;s see the script.js:</p>
+<p><strong>script.js</strong></p>
+<pre data-line-numbers="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41"><code class="hljs language-js"><span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
+<span class="hljs-keyword">const</span> gl = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;webgl2&quot;</span>);
+canvas.<span class="hljs-property">height</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>;
+canvas.<span class="hljs-property">width</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>;
+gl.<span class="hljs-title function_">viewport</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, canvas.<span class="hljs-property">width</span>, canvas.<span class="hljs-property">height</span>);
+gl.<span class="hljs-title function_">clearColor</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+
+<span class="hljs-keyword">const</span> vertexShaderSource = <span class="hljs-string">`#version 300 es
+in vec2 a_position;
+void main(){
+  gl_Position = vec4(a_position, 0, 1);
+  gl_PointSize = 30.0;
+}
+`</span>;
+
+<span class="hljs-keyword">const</span> fragmentShaderSource = <span class="hljs-string">`#version 300 es
+precision mediump float;
+out vec4 color;
+void main(){
+  color = vec4(1,0,0,1);
+}
+`</span>;
+
+<span class="hljs-keyword">const</span> vertexShader = <span class="hljs-title function_">utilCreateShader</span>(gl, gl.<span class="hljs-property">VERTEX_SHADER</span>, vertexShaderSource);
+<span class="hljs-keyword">const</span> fragmentShader = <span class="hljs-title function_">utilCreateShader</span>(
+  gl,
+  gl.<span class="hljs-property">FRAGMENT_SHADER</span>,
+  fragmentShaderSource
+);
+
+<span class="hljs-keyword">const</span> program = <span class="hljs-title function_">utilCreateProgram</span>(gl, vertexShader, fragmentShader);
+
+gl.<span class="hljs-title function_">useProgram</span>(program);
+
+<span class="hljs-keyword">let</span> pointPosition = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>];
+<span class="hljs-keyword">const</span> a_positionLocation = gl.<span class="hljs-title function_">getAttribLocation</span>(program, <span class="hljs-string">&quot;a_position&quot;</span>);
+<span class="hljs-keyword">const</span> buffer = <span class="hljs-title function_">utilCreateBuffer</span>(gl, pointPosition);
+gl.<span class="hljs-title function_">vertexAttribPointer</span>(a_positionLocation, <span class="hljs-number">2</span>, gl.<span class="hljs-property">FLOAT</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+gl.<span class="hljs-title function_">enableVertexAttribArray</span>(a_positionLocation);
+gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>)
+gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+</code></pre><p>The code above is our starting point now as I said lets animate it.</p>
+<p>Starting by wrapping the line numbers 40 and 41 in the <code>animate</code> function like this:</p>
+<pre data-line-numbers="1
+2
+3
+4"><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params"></span>) {
+  gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>);
+  gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+}
+</code></pre><p>now as explained earlier lets use the <code>requestAnimationFrame</code> function to call the <code>animate</code> function repeatedly:</p>
+<pre data-line-numbers="1
+2
+3
+4
+5
+6"><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params"></span>) {
+  gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>);
+  gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+  <span class="hljs-title function_">requestAnimationFrame</span>(animate);
+}
+<span class="hljs-title function_">requestAnimationFrame</span>(animate);
+</code></pre><p>Now if you run the code you will see the point is still static, to make it move we have to update its position in every frame.</p>
+<p>To do that we need to modify the point position each frame.
+Let&#39;s move it forward in x direction by incrementing the x coordinate each frame, if it goes out of the screen that is x coordinate goes over 1.0 we will make it come again to the center of the screen:</p>
+<pre data-line-numbers="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16"><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">animate</span>(<span class="hljs-params"></span>) {
+  gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>);
+  pointPosition[<span class="hljs-number">0</span>] += <span class="hljs-number">0.005</span>;
+  <span class="hljs-keyword">if</span>(pointPosition[<span class="hljs-number">0</span>] &gt; <span class="hljs-number">1</span>){
+    pointPosition[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+  }
+  gl.<span class="hljs-title function_">bindBuffer</span>(gl.<span class="hljs-property">ARRAY_BUFFER</span>, buffer);
+  gl.<span class="hljs-title function_">bufferData</span>(
+    gl.<span class="hljs-property">ARRAY_BUFFER</span>,
+    <span class="hljs-keyword">new</span> <span class="hljs-title class_">Float32Array</span>(pointPosition),
+    gl.<span class="hljs-property">STATIC_DRAW</span>
+  );
+  gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">POINTS</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+  <span class="hljs-title function_">requestAnimationFrame</span>(animate);
+}
+<span class="hljs-title function_">requestAnimationFrame</span>(animate);
+</code></pre><p>Once you do this you will see the result as shown below:</p>
+<div class="img-external">
+  <div class="img-container">
+    <video
+      src="https://res.cloudinary.com/dni3bvxqo/video/upload/v1767613044/wrfeqgzw6nsbhs10hmuc.mov"
+      autoplay
+      loop
+      muted
+      playsinline
+    ></video>
+  </div>
+  <i class="image-description">
+   Video showing the the point moving
+  </i>
+</div>
+
+
+
+<hr>
+<p><sup>1</sup> The <code>window</code> object is the global object in browsers and provides access to browser APIs such as <code>addEventListener</code>, <code>document</code>, <code>requestAnimationFrame</code>, <code>location</code>, etc.<br>Since <code>window</code> is the global object, its properties and methods can be accessed directly, so you can write <code>requestAnimationFrame(...)</code> instead of <code>window.requestAnimationFrame(...)</code>.</p>
+<p><sup>2</sup> <code>requestAnimationFrame</code> is non-blocking, meaning it does not block the main thread like a <code>while(true)</code> loop.<br>It tells the browser: <em>“Before the next screen repaint, run this callback once.”</em><br>The callback is executed once per repaint cycle (usually ~60 times per second), and must schedule itself again if continuous animation is needed.</p>
+<p><sup>3</sup> The browser inspector (Developer Tools) is a built-in tool that allows you to inspect and debug a webpage by viewing and modifying HTML, CSS, JavaScript, network activity, and performance in real time.</p>
+<p><strong>Ways to open it:</strong></p>
+<ul>
+<li>Right-click anywhere on the page and select <strong>Inspect</strong></li>
+<li><strong>Chrome / Edge:</strong> <code>Ctrl + Shift + I</code> (Windows/Linux), <code>Cmd + Option + I</code> (Mac)</li>
+<li><strong>Firefox:</strong> <code>Ctrl + Shift + I</code> (Windows/Linux), <code>Cmd + Option + I</code> (Mac)</li>
+<li><strong>Safari:</strong> Enable <em>Develop Menu</em> → <strong>Develop → Show Web Inspector</strong></li>
+</ul>
 
         <div class="nextPrev">
           <i>
@@ -281,7 +568,7 @@ lorem </p>
             </a>
           </i>
           <i>
-            <a href="#">
+            <a href="/cg-docs/docs/webgl/stage-2:-intermediate/transformations.html">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg

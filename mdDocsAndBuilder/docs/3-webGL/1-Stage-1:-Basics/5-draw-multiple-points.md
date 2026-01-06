@@ -458,4 +458,4 @@ gl.drawArrays(gl.POINTS, 0, 3);
 
 **NOTE: Use the program before making vertexAttribPointer call I will explain this later in Webgl: State Machine chapter**
 
-<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/5-MultiplePoint" class="link" target="blank">Checkout the full code on github</a>
+<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/Stage-1/5-MultiplePoint" class="link" target="blank">Checkout the full code on github</a>

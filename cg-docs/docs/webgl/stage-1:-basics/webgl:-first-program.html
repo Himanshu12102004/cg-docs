@@ -78,7 +78,8 @@
 
       if (savedTheme === "light") {
         root.classList.add("light");
-        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
       } else {
         hljsLink.href =
           "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
@@ -128,21 +129,22 @@
       </div>
       <div class="githubAndLightToggler">
         
-        <svg
-          class="gitHub"
-          version="1.0"
-          xmlns="http://www.w3.org/2000/svg"
-          width="240.000000pt"
-          height="240.000000pt"
-          viewBox="0 0 240.000000 240.000000"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <g
-            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
-            stroke="none"
+        <a href="https://github.com/Himanshu12102004/cg-docs" target="_blank">
+          <svg
+            class="gitHub"
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width="240.000000pt"
+            height="240.000000pt"
+            viewBox="0 0 240.000000 240.000000"
+            preserveAspectRatio="xMidYMid meet"
           >
-            <path
-              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+            <g
+              transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+              stroke="none"
+            >
+              <path
+                d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
 -1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
 118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
 -144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
@@ -154,9 +156,10 @@
 -129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
 -15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
 -419 518 -733 602 -137 36 -395 44 -525 15z"
-            />
-          </g>
-        </svg>
+              />
+            </g>
+          </svg>
+        </a>
         
         <div class="theme-toggler">
           <svg
@@ -246,6 +249,8 @@
             <span class="folder-toggle" data-key-path="webgl/Stage 2: Intermediate/">Stage 2: Intermediate</span>
             <ul class="level-2">
           <li><a href="/cg-docs/docs/webgl/stage-2:-intermediate/animating-stuff.html" data-key-path="webgl/stage 2: intermediate/animating stuff">Animating Stuff</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-2:-intermediate/transformations.html" data-key-path="webgl/stage 2: intermediate/transformations">Transformations</a></li>
         </ul>
           </li>
         </ul>
@@ -266,7 +271,17 @@
 <p>As discussed in the previous chapter, the <strong><code>&lt;canvas&gt;</code></strong> element is now widely supported by most browsers. But what exactly is a canvas?</p>
 <p>The <strong><code>&lt;canvas&gt;</code></strong> is an HTML tag that provides a <strong>drawing area</strong> on a web page. You can think of it like a <strong>real canvas used for painting</strong>. Just as you use pencils, brushes, or colors to draw on a physical canvas, we use JavaScript and WebGL as <strong>digital tools</strong> to draw pixels, shapes, and graphics on the HTML canvas.</p>
 <p>Here is the HTML to use the canvas element:</p>
-<pre><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<pre data-line-numbers="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11"><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
@@ -286,7 +301,8 @@
 
 <h2>Getting Started with WebGL</h2>
 <p>To use WebGL we need JS so let&#39;s make a new file named <code>script.js</code> and import it into the html after the canvas element like this:</p>
-<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;border: 1px solid red&quot;</span>&gt;</span>
+<pre data-line-numbers="1
+2"><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;border: 1px solid red&quot;</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./script.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre><p>Now let&#39;s see the steps that we would be taking further to paint the canvas red.</p>
 <ol>
@@ -298,7 +314,7 @@
 <p>Now let&#39;s see each step in detail:</p>
 <h3>1. Get the canvas reference in JS</h3>
 <p>We use the function <code>document.querySelector</code> to get a reference to the canvas element in JavaScript. If you’re a web developer, you’ve likely used this function countless times.</p>
-<pre><code class="hljs language-javaScript"><span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
+<pre data-line-numbers="1"><code class="hljs language-javaScript"><span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
 </code></pre><h3>2. Get the WebGL context from the canvas</h3>
 <p>Just like you need a brush to paint on paper, you also need a <strong>digital brush</strong> to draw on a canvas. In our case, this digital brush is <strong>WebGL</strong>.</p>
 <p>When you use a code editor like VS Code and type <code>canvas.getContext(&quot;&quot;)</code>, you will see a variety of available <strong>brushes</strong> to draw with. In CG, we refer to these brushes as <strong>contexts</strong>.</p>
@@ -312,16 +328,16 @@
 <p>In the image above you can see different types of contexts available but,
 as this is a <strong>WebGL</strong> doc so we will not dwell much on the other contexts but for your information the <strong>2d</strong> context is used for only drawing the 2D CG and it uses CPU for rendering, <strong>bitmaprenderer</strong> must also be used for something I don&#39;t know : ), <strong>webgl</strong> context is the older version of webgl and the <strong>webgl2</strong> is the newer version of webgl with enhanced speed and functionalities.</p>
 <p>In these docs we would be using the <strong>webgl2</strong> rendering context.</p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> gl = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;webgl2&quot;</span>)
+<pre data-line-numbers="1"><code class="hljs language-js"><span class="hljs-keyword">const</span> gl = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;webgl2&quot;</span>)
 </code></pre><p><strong>Note: We can have only one context per canvas</strong></p>
 <h3>3. Set Clear Color</h3>
 <p>Now that we have the canvas and our brush but before we start drawing, WebGL needs to know <strong>what color to use when the canvas is reset or prepared for drawing</strong>. This color is called the <strong>clear color</strong>, and WebGL lets us set it using the following function:</p>
-<pre><code class="hljs language-js">gl.<span class="hljs-title function_">clearColor</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+<pre data-line-numbers="1"><code class="hljs language-js">gl.<span class="hljs-title function_">clearColor</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
 </code></pre><p>You might be wondering what these four numbers mean. They represent the <strong>RGBA</strong> values, normalized to the range <strong>0 to 1</strong>. Here we are setting the color to red.</p>
 <p>Note: The term “clear” might seem confusing at this point. Its meaning will be explained in the next step.</p>
 <h3>4. Clear the Color Buffer</h3>
 <p>To paint the canvas, WebGL provides the following function:</p>
-<pre><code class="hljs language-js">gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>)
+<pre data-line-numbers="1"><code class="hljs language-js">gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>)
 </code></pre><p>Before understanding the <code>clear</code> function, let&#39;s look at <code>gl.COLOR_BUFFER_BIT</code>.  </p>
 <p><code>gl.COLOR_BUFFER_BIT</code> is one of many WebGL <strong>constants</strong>. In general, these constants act like <strong>flags</strong> that tell WebGL <strong>what specific action to perform or which part of the system to affect</strong>. For example, in the <code>clear</code> function, they indicate <strong>which buffers of the framebuffer</strong> should be cleared.  </p>
 <p><strong>Note: The framebuffer here is the same concept we discussed in  Basics chapter, where it stores pixel data for the current frame.</strong></p>
@@ -343,7 +359,18 @@ as this is a <strong>WebGL</strong> doc so we will not dwell much on the other c
 
 <h2>Final Code</h2>
 <p><strong>index.html</strong></p>
-<pre><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<pre data-line-numbers="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12"><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
@@ -356,11 +383,14 @@ as this is a <strong>WebGL</strong> doc so we will not dwell much on the other c
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre><p><strong>script.js</strong></p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
+<pre data-line-numbers="1
+2
+3
+4"><code class="hljs language-js"><span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&quot;canvas&quot;</span>);
 <span class="hljs-keyword">const</span> gl = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&quot;webgl2&quot;</span>);
 gl.<span class="hljs-title function_">clearColor</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
 gl.<span class="hljs-title function_">clear</span>(gl.<span class="hljs-property">COLOR_BUFFER_BIT</span>);
-</code></pre><p><a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/2-PaintCanvasRed" class="link" target="blank">Checkout the full code on github</a></p>
+</code></pre><p><a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/Stage-1/2-PaintCanvasRed" class="link" target="blank">Checkout the full code on github</a></p>
 
         <div class="nextPrev">
           <i>

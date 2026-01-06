@@ -5,26 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>CG Docs – # GPU & Shaders Explained</title>
-    <meta name="description" content="You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?" />
-    <meta name="keywords" content="Well, well today we will be getting ready for that with some basic terminology." />
+    <title>CG Docs – # What are Transformations</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="In the last chapter, we learned about animations, where we moved a single point in a specific direction." />
     <meta name="author" content="Himanshu Gupta" />
 
-    <meta property="og:title" content="CG Docs – # GPU & Shaders Explained" />
-    <meta property="og:description" content="You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?" />
+    <meta property="og:title" content="CG Docs – # What are Transformations" />
+    <meta property="og:description" content="" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/stage-1:-basics/gpu-and-shaders.html" />
+    <meta property="og:url" content="https://graphicsdocs.himanshugupta.in/docs/webgl/stage-2:-intermediate/transformations.html" />
     <meta property="og:image" content="../../../assets/logo.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CG Docs – # GPU & Shaders Explained" />
-    <meta name="twitter:description" content="You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?" />
+    <meta name="twitter:title" content="CG Docs – # What are Transformations" />
+    <meta name="twitter:description" content="" />
     <meta
       name="twitter:image"
       content="../../../assets/preview.png"
     />
 
-    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/stage-1:-basics/gpu-and-shaders.html" />
+    <link rel="canonical" href="https://graphicsdocs.himanshugupta.in/docs/webgl/stage-2:-intermediate/transformations.html" />
 
     <link rel="icon" href="../../../assets/images/logo.svg" />
 
@@ -46,8 +46,8 @@
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "# GPU & Shaders Explained",
-        "description": "You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?",
+        "headline": "# What are Transformations",
+        "description": "",
         "author": {
           "@type": "Person",
           "name": "Himanshu Gupta"
@@ -261,62 +261,22 @@
 
       <section class="layout__content">
         <div class="whereAmI">{Where Am I}</div>
-        <h1>GPU &amp; Shaders Explained</h1>
-<p>You made your first CG program in the last chapter, but you came here for GPU rendered graphics, right?
-Well, well today we will be getting ready for that with some basic terminology.</p>
-<h2>What is GPU?</h2>
-<p>If you are a gamer, you would already be familiar with GPUs, but to make these docs complete I need to explain a bit about them.</p>
-<p>So GPU (Graphical Processing Unit) is a brother of CPU that has thousands of basic arithmetic cores (very basic CPUs) that work in parallel and independent of each other to perform tasks.<sup>1</sup></p>
-<h2>How to run programs on the GPU?</h2>
-<p>To make the CPU perform a task, we write a program and execute it. The same idea applies to the GPU. To execute custom logic on the GPU, we write small programs called <strong>shaders</strong>. These shaders are executed on the GPU through graphics APIs (such as WebGL, OpenGL, or Vulkan), which act as an interface between our code and the GPU hardware.</p>
-<p>Although the underlying hardware differs between GPU manufacturers, graphics APIs provide a unified and portable way to run shader programs without dealing with hardware-specific details.</p>
-<h2>What is a shader?</h2>
-<p>A shader is a small program that runs on the GPU, operating on many data elements in parallel.</p>
-<h3>Types of shaders</h3>
-<p>There are mainly three types of shaders:</p>
-<ol>
-<li>Vertex Shader</li>
-<li>Fragment Shader</li>
-<li>Compute Shaders (not supported by WebGL, so we will not discuss them here)</li>
-</ol>
-<p>Before understanding what is Vertex and Fragment Shader, let&#39;s first understand what is a vertex and fragment.</p>
-<ol>
-<li><p><strong>Vertex</strong>:<br>A vertex represents a point in 2D or 3D space. These points are used to define shapes.<br>For example, a triangle is defined using <strong>three vertices</strong>.</p>
-</li>
-<li><p><strong>Fragment</strong>:<br>When a shape is drawn, the GPU breaks the area covered by that shape into many pixel-sized pieces.<br>Each of these pieces that needs to be colored is called a <strong>fragment</strong>.</p>
-</li>
-</ol>
-<p>Now lets see shaders:</p>
-<ol>
-<li><strong>Vertex Shader</strong>:<br>A vertex shader is a GPU program that runs once for each vertex, for example in a triangle we have three vertices and the vertex shader will run 3 times, once for each vertex, in parallel.</li>
-</ol>
-<div class="img-external">
-<div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766475971/vbtqkcmxd2jrf3e6oqwv.png" alt="Vertex Shader illustration">
-</div>
-<i  class="image-description">Vertex shader illustration</i>
-</div>
-
-<ol start="2">
-<li><strong>Fragment Shader</strong>:<br>A fragment shader is a GPU program that runs once for each fragment. It runs after the vertex shader. The vertex shader defines the shape of the triangle, and then the pixels inside the triangle are determined as fragments. Only after this step are the fragment shaders executed.Fragment shaders run <strong>in parallel</strong>. For example, if a triangle covers 1000 pixel-sized areas, the fragment shader will be executed around 1000 times, once for each fragment. Because GPUs are designed for massive parallelism, many of these executions happen at the same time, making fragment processing extremely fast. This is where the GPU’s parallel processing power becomes apparent.</li>
-</ol>
-<p><strong>Note:</strong> The same vertex shader code is executed for every vertex, and the same fragment shader code is executed for every fragment. In other words, the GPU applies the same set of instructions to many different data elements, which is similar to a <strong>SIMD (Single Instruction, Multiple Data)</strong> style of processing.</p>
-<div class="img-external">
-<div class= "img-container">
-  <img src="https://res.cloudinary.com/dni3bvxqo/image/upload/v1766476063/qg3u0epdoph74zhtan7m.png" alt="fragment shader illustration">
-</div>
-<i  class="image-description">Fragment shader illustration</i>
-</div> 
-
-<h3>Writing Shaders</h3>
-<p>Shaders can be written in different languages, depending which graphics API you are using, but in <strong>WebGL</strong> we write shaders in a language called <strong>GLSL</strong>.</p>
-<p>GLSL stands for <strong>OpenGL shading language</strong>, and is a language similar to C. Don&#39;t worry we will have a full length chapter on shaders and GLSL.  </p>
-<hr>
-<p><sup>1</sup> This is an overly simplified definition of GPU.</p>
+        <h1>What are Transformations</h1>
+<p>In the last chapter, we learned about animations, where we moved a single point in a specific direction.</p>
+<p>But what if we want to move an entire triangle, rotate it, or apply other changes that modify its vertices?</p>
+<p>This is where <strong>transformation matrices</strong> come in. They provide a powerful and elegant way to manipulate objects in computer graphics. Let’s dive in and understand them in detail.</p>
+<h2>Matrices</h2>
+<p>I hope you are familiar with matrices and basic operations like addition, subtraction, and multiplication.  </p>
+<p>Keeping my promise to explain every bit of math except for the simplest operations, let&#39;s take a brief look at matrices and how they are useful in computer graphics.</p>
+<p><strong>A matrix (singular of matrices) can be seen as a 2D array of numbers that has a fixed number of rows and columns.</strong></p>
+<p>Example Matrix (3×3): 
+<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.6em;vertical-align:-1.55em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.667em;height:3.600em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="3.600em" viewBox="0 0 667 3600"><path d="M403 1759 V84 H666 V0 H319 V1759 v0 v1759 h347 v-84
+H403z M403 1759 V0 H319 V1759 v0 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">7</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">5</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">8</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">6</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">9</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.667em;height:3.600em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="3.600em" viewBox="0 0 667 3600"><path d="M347 1759 V0 H0 V84 H263 V1759 v0 v1759 H0 v84 H347z
+M347 1759 V0 H263 V1759 v0 v1759 h84z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span></span></span></span></p>
 
         <div class="nextPrev">
           <i>
-            <a href="/cg-docs/docs/webgl/stage-1:-basics/webgl:-first-program.html">
+            <a href="/cg-docs/docs/webgl/stage-2:-intermediate/animating-stuff.html">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -334,7 +294,7 @@ Well, well today we will be getting ready for that with some basic terminology.<
             </a>
           </i>
           <i>
-            <a href="/cg-docs/docs/webgl/stage-1:-basics/lets-draw-a-point.html">
+            <a href="#">
               <span style="padding-bottom: 4px"> Next </span>
               <span>
                 <svg

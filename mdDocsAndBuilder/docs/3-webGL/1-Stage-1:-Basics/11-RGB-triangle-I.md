@@ -215,4 +215,4 @@ For now, you can think of interpolation as smoothly calculating intermediate val
 
 For your information, for three point interpolation, as in case of triangles GPU uses Barycentric coordinates, you can explore it yourself on <a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/barycentric-coordinates.html" class="link" target="blank">scratchapixel docs</a>.
 
-<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/11-RGBTriangle-I" class="link" target="blank">Checkout the full code on github</a>
+<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/Stage-1/11-RGBTriangle-I" class="link" target="blank">Checkout the full code on github</a>

@@ -160,4 +160,4 @@ gl.clearColor(1, 0, 0, 1);
 gl.clear(gl.COLOR_BUFFER_BIT);
 ```
 
-<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/2-PaintCanvasRed" class="link" target="blank">Checkout the full code on github</a>
+<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/Stage-1/2-PaintCanvasRed" class="link" target="blank">Checkout the full code on github</a>

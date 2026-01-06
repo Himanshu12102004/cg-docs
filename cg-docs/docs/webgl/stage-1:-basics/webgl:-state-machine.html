@@ -78,7 +78,8 @@
 
       if (savedTheme === "light") {
         root.classList.add("light");
-        hljsLink.href ="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+        hljsLink.href =
+          "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
       } else {
         hljsLink.href =
           "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
@@ -128,21 +129,22 @@
       </div>
       <div class="githubAndLightToggler">
         
-        <svg
-          class="gitHub"
-          version="1.0"
-          xmlns="http://www.w3.org/2000/svg"
-          width="240.000000pt"
-          height="240.000000pt"
-          viewBox="0 0 240.000000 240.000000"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <g
-            transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
-            stroke="none"
+        <a href="https://github.com/Himanshu12102004/cg-docs" target="_blank">
+          <svg
+            class="gitHub"
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width="240.000000pt"
+            height="240.000000pt"
+            viewBox="0 0 240.000000 240.000000"
+            preserveAspectRatio="xMidYMid meet"
           >
-            <path
-              d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
+            <g
+              transform="translate(0.000000,240.000000) scale(0.100000,-0.100000)"
+              stroke="none"
+            >
+              <path
+                d="M970 2301 c-305 -68 -555 -237 -727 -493 -301 -451 -241 -1056 143
 -1442 115 -116 290 -228 422 -271 49 -16 55 -16 77 -1 24 16 25 20 25 135 l0
 118 -88 -5 c-103 -5 -183 13 -231 54 -17 14 -50 62 -73 106 -38 74 -66 108
 -144 177 -26 23 -27 24 -9 37 43 32 130 1 185 -65 96 -117 133 -148 188 -160
@@ -154,9 +156,10 @@
 -129 -193 -219 -369 -252 l-84 -16 31 -55 32 -56 3 -223 4 -223 25 -16 c23
 -15 28 -15 76 2 80 27 217 101 292 158 446 334 590 933 343 1431 -145 293
 -419 518 -733 602 -137 36 -395 44 -525 15z"
-            />
-          </g>
-        </svg>
+              />
+            </g>
+          </svg>
+        </a>
         
         <div class="theme-toggler">
           <svg
@@ -246,6 +249,8 @@
             <span class="folder-toggle" data-key-path="webgl/Stage 2: Intermediate/">Stage 2: Intermediate</span>
             <ul class="level-2">
           <li><a href="/cg-docs/docs/webgl/stage-2:-intermediate/animating-stuff.html" data-key-path="webgl/stage 2: intermediate/animating stuff">Animating Stuff</a></li>
+        
+          <li><a href="/cg-docs/docs/webgl/stage-2:-intermediate/transformations.html" data-key-path="webgl/stage 2: intermediate/transformations">Transformations</a></li>
         </ul>
           </li>
         </ul>
@@ -316,7 +321,9 @@ Now that you have an idea of what &quot;state&quot; means in WebGL, let&#39;s ad
 <li>These locations are <strong>fixed at program linking</strong> and do not change during the lifetime of the program.</li>
 </ul>
 <p>Example in GLSL:</p>
-<pre><code class="hljs language-glsl"><span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> a_position; <span class="hljs-comment">// location -&gt; 0</span>
+<pre data-line-numbers="1
+2
+3"><code class="hljs language-glsl"><span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> a_position; <span class="hljs-comment">// location -&gt; 0</span>
 <span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> a_normal;   <span class="hljs-comment">// location -&gt; 1</span>
 <span class="hljs-keyword">in</span> <span class="hljs-type">vec3</span> a_color;    <span class="hljs-comment">// location -&gt; 2</span>
 </code></pre><p>These sequential natural numbers introduce a specific nuance: if you use more than one program, different programs can have attributes assigned to the same locations. Let’s understand this with the example below:</p>
@@ -363,11 +370,11 @@ Now that you have an idea of what &quot;state&quot; means in WebGL, let&#39;s ad
 </blockquote>
 </li>
 <li><p>Now you call <code>gl.useProgram(ProgramA)</code> and issue:</p>
-<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
+<pre data-line-numbers="1"><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLES</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);
 </code></pre><p>Even though you are now using <strong>Program A</strong> (the triangle program), <strong>attribute location 0 still points to the square buffer</strong>, because that was the <strong>last attribute state that was set</strong> using <code>gl.vertexAttribPointer</code>, so the triangle program will use the vertices of the square and make a triangle using the first three coordinates of the square.</p>
 </li>
 <li><p>Now you call <code>gl.useProgram(ProgramB)</code> and issue:</p>
-<pre><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLE_STRIP</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>);
+<pre data-line-numbers="1"><code class="hljs language-js">gl.<span class="hljs-title function_">drawArrays</span>(gl.<span class="hljs-property">TRIANGLE_STRIP</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>);
 </code></pre><p>This draw call again uses the square buffer and draws the square.</p>
 </li>
 </ol>

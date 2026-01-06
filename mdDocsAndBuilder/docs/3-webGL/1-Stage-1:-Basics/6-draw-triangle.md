@@ -107,4 +107,4 @@ gl.useProgram(program);
 gl.drawArrays(gl.TRIANGLES, 0, 3);
 ```
 
-<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/6-DrawTriangle" class="link" target="blank">Checkout the full code on github</a>
+<a href="https://github.com/Himanshu12102004/cg-docs-examples/tree/main/Stage-1/6-DrawTriangle" class="link" target="blank">Checkout the full code on github</a>
