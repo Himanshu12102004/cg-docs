@@ -4,7 +4,6 @@ import { removeNumericPrefixes } from "./utils.js";
 
 function formatName(name) {
   name = removeNumericPrefixes(name);
-  console.log("-----------", name);
   return name
     .replace(/\.md$/, "")
     .replace(/(^\w|-\w)/g, (m) => m.replace("-", " ").toUpperCase());

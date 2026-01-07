@@ -14,9 +14,9 @@ import envVariables from "./env.js";
 import { getHtmlFilePath, removeNumericPrefixes } from "./utils.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const inputDir = path.resolve(__dirname, "docs");
+const inputDir = path.resolve(__dirname, "../docs");
 const srcRoot = inputDir;
-const outputDir = path.resolve(__dirname, "../cg-docs/docs");
+const outputDir = path.resolve(__dirname, "../../cg-docs/docs");
 const templatePath = path.resolve(__dirname, "template.html");
 let folderStr = {};
 let flattenedIndexList = [];
@@ -223,7 +223,6 @@ async function processDir(src, dest) {
 async function buildAll() {
   console.log("Building documentation...");
   folderStr = await getSortedFolderStructure(inputDir);
-  console.log(folderStr);
   sidebarHTML = generateSidebarHTML(folderStr);
   flattenedIndexList = flatten(folderStr);
   await processDir(inputDir, outputDir, folderStr);
@@ -305,7 +304,6 @@ function getPrevNextMD(mdPath) {
   console.log(targetPath);
   const list = flattenedIndexList;
   const index = list.indexOf(targetPath);
-  console.log("============", index);
   if (index === -1) return { prev: null, next: null };
   return {
     prev: index > 0 ? list[index - 1] : null,

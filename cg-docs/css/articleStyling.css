@@ -198,7 +198,10 @@ hr {
   border-top: 1px solid var(--border);
   margin: 3rem 0 1rem 0;
 }
-
+.logo{
+  height: 40px;
+  width: auto;
+}
 /* Media Query */
 @media screen and (max-width: 500px) {
   :root {

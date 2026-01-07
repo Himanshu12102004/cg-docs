@@ -173,25 +173,26 @@ th {
   line-height: 2;
 }
 
+.hljs{
+  background-color: var(--block-code);
+}
 pre {
   position: relative;
-  padding-left: 4.5em;
+  padding-left: 3.5rem;
   background-color: var(--block-code);
-  margin-left: 1rem;
+  margin-left: 0rem;
   line-height: 2;
   font-size: 0.9rem;
 }
-
 pre::before {
   content: attr(data-line-numbers);
   position: absolute;
   top: 1em;
   left: 0;
-  width: 3.5em;
+  width:fit-content;
+  padding: 0 1.6rem;
   text-align: right;
   color: #6b7280;
-  white-space: pre;
-  line-height: 2;
   user-select: none;
 }
 
