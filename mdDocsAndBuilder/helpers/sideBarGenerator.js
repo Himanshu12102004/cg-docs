@@ -1,22 +1,20 @@
 function generateSidebarHTML(structure) {
   function renderItems(obj, level = 0, dataKey = "") {
+    dataKey = dataKey.toLowerCase();
     let html = `<ul class="level-${level}">`;
-    for (const key in obj) {
+    for (let key in obj) {
       const value = obj[key];
       const isFolder = typeof value === "object";
       if (isFolder) {
         html += `
           <li class="folder">
             <span class="folder-toggle" data-key-path="${
-              dataKey + key + "/"
+              dataKey + key.toLowerCase() + "/"
             }">${key}</span>
             ${renderItems(value, level + 1, dataKey + key.toLowerCase() + "/")}
           </li>
         `;
       } else {
-        if (key == "WebGL: First Program") {
-          console.log(dataKey + key);
-        }
         html += `
           <li><a href="${value}" data-key-path="${
           dataKey + key.toLowerCase()
@@ -35,15 +33,17 @@ function generateSidebarHTML(structure) {
     <div class="sidebarLogoContainer">
     <img
     class="logo-phone"
-    src="{cssAndJsFileLocation}assets/images/logo7.png"
+    src="{cssAndJsFileLocation}assets/images/logo.svg"
     alt="logo"
     />
     <h1 class="sidebarTitle">CG Docs</h1>
     </div>
     <svg class="menuClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
-    </div> 
+    </div>
+    <div class = "sidebarItems"> 
       ${renderItems(structure)}
     </div>
+      </div>
   `;
 }
 
