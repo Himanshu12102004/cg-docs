@@ -1,11 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="CSS/theming.css" />
+    <link rel="stylesheet" href="css/indexPage.css" />
+  </head>
+  <body>
+    <script>
+      const root = document.documentElement;
+
+      let savedTheme = localStorage.getItem("theme");
+
+      if (!savedTheme) {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+
+        savedTheme = prefersDark ? "dark" : "light";
+        localStorage.setItem("theme", savedTheme);
+      }
+
+      if (savedTheme === "light") {
+        root.classList.add("light");
+      } 
+    </script>
+
+    <div class="theme-toggler">
+      <svg
+        class="sun theme-icon hide"
+        stroke="currentColor"
+        fill="currentColor"
+        stroke-width="0"
+        viewBox="0 0 512 512"
+        height="1em"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M277.3 32h-42.7v64h42.7V32zm129.1 43.7L368 114.1l29.9 29.9 38.4-38.4-29.9-29.9zm-300.8 0l-29.9 29.9 38.4 38.4 29.9-29.9-38.4-38.4zM256 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128zm224 106.7h-64v42.7h64v-42.7zm-384 0H32v42.7h64v-42.7zM397.9 368L368 397.9l38.4 38.4 29.9-29.9-38.4-38.4zm-283.8 0l-38.4 38.4 29.9 29.9 38.4-38.4-29.9-29.9zm163.2 48h-42.7v64h42.7v-64z"
+        ></path>
+      </svg>
+      <!-- Moon Svg -->
+      <svg
+        class="moon theme-icon"
+        stroke-width="0"
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M195 125c0-26.3 5.3-51.3 14.9-74.1C118.7 73 51 155.1 51 253c0 114.8 93.2 208 208 208 97.9 0 180-67.7 202.1-158.9-22.8 9.6-47.9 14.9-74.1 14.9-106 0-192-86-192-192z"
+        ></path>
+      </svg>
+    </div>
+    <div class="background1">
+      <div class="emptyBox"></div>
+      <div style="display: flex">
+        <div class="emptyBox"></div>
+        <div class="content-box">
+          <h1 class="main-head">CG-Docs</h1>
+          <div class="intro">
+            Have you ever wondered how games, animations, or 3D visuals are
+            made?<br />
+            Computer Graphics is the magic behind all of that.<br /><br />
+
+            Learning CG often feels hard—not because the ideas are impossible,
+            but because resources are scattered. One teaches maths, another
+            shows implementation, another explains shaders, making it unclear
+            where to start or how to proceed.<br /><br />
+
+            I faced this problem myself, which led me to create CG-Docs.<br />
+            These docs teach Computer Graphics in a clear, sequential way and
+            apply every concept practically using <b>WebGL</b>.<br /><br />
+
+            You’ll learn by seeing things work on the screen through visuals,
+            explanations, and small projects. CG-Docs is designed for complete
+            beginners to start from zero and build real understanding.
+          </div>
+          <button class="readDocsButton">Read the docs</button>
+        </div>
+      </div>
+      <div class="background-images"></div>
+    </div>
+    <div class="features">
+      <h2>Docs Features</h2>
+      <div class="featureCard featureCard-even">
+        <div>
+          <div class="featureCard-head">Chronological order</div>
+          <div class="featureCard-description">
+            These docs are written keeping beginners in mind, it is ensured that
+            each chapter is built on the last on with nothing coming out of the
+            box. The content is divided into Sections and chapters, easy to
+            follow.
+          </div>
+        </div>
+        <div class="featureCard-imageSection">
+          <div class="featureCard-imageSection-wrapper">
+            <img src="./assets/images/HomePageImages/feature1.png" alt="" />
+            <div class="featureCard-imageDescription">
+              Screenshot showing the sidebar with chronologically arranged
+              chapters
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="featureCard featureCard-odd">
+        <div>
+          <div class="featureCard-head">Easy Language</div>
+          <div class="featureCard-description">
+            These docs often use conversational dialogue, questions in second
+            person which makes it different from the other boring docs you might
+            be familiar with. The english used is quite simple and easy to
+            understand.
+          </div>
+        </div>
+        <div class="featureCard-imageSection">
+          <div class="featureCard-imageSection-wrapper">
+            <img src="./assets/images/HomePageImages/feature2.png" alt="" />
+            <div class="featureCard-imageDescription">
+              Screenshot showing conversational style used to explain.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="featureCard featureCard-even">
+        <div>
+          <div class="featureCard-head">Engaging Diagrams</div>
+          <div class="featureCard-description">
+            These docs use excalidraw to make diagrams. The diagrams make it
+            easy for the reader to understand the concepts.
+          </div>
+        </div>
+        <div class="featureCard-imageSection">
+          <div class="featureCard-imageSection-wrapper">
+            <img src="./assets/images/HomePageImages/feature3.png" alt="" />
+            <div class="featureCard-imageDescription">
+              Screenshot showing diagram to explain fragment shader working.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="featureCard featureCard-odd">
+        <div>
+          <div class="featureCard-head">Read on any screen</div>
+          <div class="featureCard-description">
+            These docs are also compatible with small devices, so you can read even when you don't have you PC. 
+          </div>
+        </div>
+        <div class="featureCard-imageSection">
+          <div class="featureCard-imageSection-wrapper">
+            <img src="./assets/images/HomePageImages/feature2.png" alt="" />
+            <div class="featureCard-imageDescription">
+              Screenshot showing conversational style used to explain.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="featureCard featureCard-even">
+        <div>
+          <div class="featureCard-head">
+            Search Feature<sup>Coming Soon</sup>
+          </div>
+          <div class="featureCard-description">
+            The search feature is coming soon that will enable the user to
+            globally search any keyword across the docs.
+          </div>
+        </div>
+        <div class="featureCard-imageSection">
+          <div class="featureCard-imageSection-wrapper">
+            <img src="./assets/images/HomePageImages/feature4.png" alt="" />
+            <div class="featureCard-imageDescription">
+              Screenshot showing the searchbar on the top of the screen.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
 </html>

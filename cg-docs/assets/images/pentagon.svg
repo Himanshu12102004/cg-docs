@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="257.139" y1="127.315" x2="257.139" y2="328.329" id="gradient-1" gradientTransform="matrix(-0.258169, -0.9661, 0.969473, -0.259069, 87.91751, 541.739494)">
+      <stop offset="0" style="stop-color: rgb(72.941% 85.49% 33.333%)"/>
+      <stop offset="1" style="stop-color: rgb(37.355% 50.439% 0%)"/>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="191.172" y1="31.215" x2="191.172" y2="161.852" id="gradient-0" gradientTransform="matrix(-0.168965, -0.985621, 1.030988, -0.176743, 146.103102, 326.527953)">
+      <stop offset="0" style="stop-color: #bada55"/>
+      <stop offset="1" style="stop-color: #758d29"/>
+    </linearGradient>
+  </defs>
+  <g style="" transform="matrix(1.577149, 0, 0, 1.649304, -64.771904, -50.477722)">
+    <polygon style="stroke: rgb(0, 0, 0); fill: rgb(207, 243, 94); stroke-linejoin: round; stroke-width: 7.43851px;" points="87.52 79.967 194.528 161.438 145.896 290.357 47.124 209.823"/>
+    <polygon style="stroke: rgb(0, 0, 0); fill: url(&quot;#gradient-0&quot;); stroke-linejoin: round; stroke-width: 7.43851px;" points="88.981 81.428 205.568 40.386 310.678 127.502 194.553 161.852"/>
+    <polygon style="stroke: rgb(0, 0, 0); fill: url(&quot;#gradient-1&quot;); stroke-linejoin: round; stroke-width: 7.43851px;" points="145.807 290.296 195.403 160.934 311.628 127.315 350.173 231.472 260.471 327.493"/>
+  </g>
+</svg>

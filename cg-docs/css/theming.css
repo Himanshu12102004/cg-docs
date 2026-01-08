@@ -3,8 +3,15 @@
   font-style: normal;
   src: url("../assets/Fonts/GoogleSansFlex.woff2") format("woff2");
 }
+
+@font-face {
+  font-family: "Google Sans Flex thin";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../assets/Fonts/GoogleSansFlex.woff2") format("woff2");
+}
 /* Dark mode */
-@media (prefers-color-scheme: dark) {
+
   :root {
     --background: #121213;
     --foreground: #e5e5e5;
@@ -28,8 +35,8 @@
     --highlight2: #10afa2;
     --highlight3: #34d399;
     --block-code: #0c1117;
+
   }
-}
 
 /* Light mode */
 .light {
@@ -54,4 +61,5 @@
   --highlight2: #14b8a6;
   --highlight3: #10b981;
   --block-code: #edeef3;
+
 }

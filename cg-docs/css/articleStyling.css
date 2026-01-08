@@ -14,6 +14,30 @@ body {
     background-color var(--transition-time) ease;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
 .layout {
   width: 100%;
   height: calc(100dvh - var(--navHeight));
@@ -26,9 +50,9 @@ svg {
 }
 .layout__content {
   overflow-y: scroll;
-  /* overflow-x: hidden; */
   padding: 0rem 1rem 2rem 0rem;
 }
+
 
 .whereAmI {
   color: var(--muted);
@@ -206,6 +230,8 @@ hr {
 .sidebarItems {
   overflow-y: scroll;
 }
+
+
 /* Media Query */
 @media screen and (max-width: 500px) {
   :root {

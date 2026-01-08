@@ -1,0 +1,229 @@
+
+  :root {
+    --grid-color: rgba(255, 255, 255, 0.1);
+
+    /* primary accent */
+    --accent-main: #00f5d4; /* electric teal */
+    --accent-strong: #00ffe1; /* hover / focus */
+    --accent-soft: rgba(0, 245, 212, 0.4);
+    --accent-glow: rgba(0, 255, 225, 0.9);
+
+    --btn-text: #eafffb;
+    --btn-bg: rgba(0, 245, 212, 0.1);
+  }
+
+.light {
+  --grid-color: rgba(0, 0, 0, 0.1);
+
+  --accent-main: #0057ff; /* main stroke */
+  --accent-strong: #003cff; /* hover / focus */
+  --accent-soft: rgba(0, 87, 255, 0.35);
+  --accent-glow: rgba(0, 60, 255, 0.8);
+  --btn-text: #001233;
+  --btn-bg: rgba(0, 87, 255, 0.08);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Google Sans Flex";
+
+  color: var(--foreground);
+  width: fit-content;
+  background-color: var(--background);
+  background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-color: var(--background);
+  background-size: 20px 20px;
+  background-position: 40px 40px;
+}
+
+.background1 {
+  inset: 0;
+  width: 100dvw;
+  height: 100dvh;
+  min-height: fit-content;
+}
+
+.theme-toggler {
+  cursor: pointer;
+}
+
+.theme-icon {
+  height: 30px;
+  width: 30px;
+  fill: var(--foreground);
+  transition: fill var(--transition-time) ease;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.content-box {
+  width: 70%;
+}
+
+.main-head {
+  font-size: 6.5rem;
+  font-weight: 100;
+}
+
+.intro {
+  font-size: 1.1rem;
+  margin-left: 0.5rem;
+  margin-top: 2rem;
+  line-height: 1.7;
+}
+
+.emptyBox {
+  height: 10rem;
+  width: 5rem;
+}
+
+.readDocsButton {
+  margin-top: 3rem;
+  position: relative;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  font-family: inherit;
+  color: var(--accent-main);
+  background: transparent;
+  border: 2px dashed var(--accent-soft);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  border-color: var(--accent-glow);
+  box-shadow: 0 0 18px var(--accent-glow), inset 0 0 12px var(--accent-soft);
+  color: var(--accent-strong);
+
+  transition: all 0.2s ease;
+}
+
+/* corner ticks */
+.readDocsButton::before,
+.readDocsButton::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent-main);
+}
+
+.readDocsButton::before {
+  top: -6px;
+  left: -6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.readDocsButton::after {
+  bottom: -6px;
+  right: -6px;
+  border-left: none;
+  border-top: none;
+}
+
+/* hover effect */
+.readDocsButton:hover {
+  color: var(--btn-text);
+  text-shadow: 0 0 5px var(--accent-glow), 0 0 12px var(--accent-soft);
+}
+
+.features {
+  margin:0 5rem;
+}
+.features h2 {
+  font-size: 3.5rem;
+  font-weight: 400;
+}
+.featureCard {
+  margin: 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+}
+.featureCard-odd {
+  flex-direction: row-reverse;
+  margin-right: 5rem;
+}
+.featureCard-even {
+  flex-direction: row;
+  margin-left: 5rem;
+}
+.featureCard-head {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+.featureCard-even .featureCard-imageSection {
+  background-color: var(--background);
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--grid-color) 0px,
+    var(--grid-color) 1px,
+    transparent 1px,
+    transparent 10px
+  );
+}
+
+.featureCard-odd .featureCard-imageSection {
+  background-color: var(--background);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--grid-color) 0px,
+    var(--grid-color) 1px,
+    transparent 1px,
+    transparent 10px
+  );
+}
+
+.featureCard-odd .featureCard-imageSection-wrapper {
+  margin: 2rem;
+  margin-left: 0;
+}
+
+.featureCard-even .featureCard-imageSection-wrapper{
+  margin: 2rem;
+  margin-right: 0;
+}
+
+.featureCard-imageSection img {
+  width: 45rem;
+}
+
+.featureCard-description {
+  font-size: 1rem;
+  margin-left: 0;
+  line-height: 1.6;
+}
+
+.featureCard-imageDescription {
+  font-style: italic;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+sup{
+  font-size: 1rem;
+  padding-left: 0.5rem ;
+
+}

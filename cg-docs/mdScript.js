@@ -113,7 +113,7 @@ if (savedTheme === "dark") {
 }
 function toggleTheme() {
   const lightNow = root.classList.toggle("light");
-
+  
   if (lightNow) {
     moonIcon.classList.add("hide");
     sunIcon.classList.remove("hide");

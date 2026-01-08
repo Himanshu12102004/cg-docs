@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <g style="" transform="matrix(1.773018, 0, 0, 1.541234, -53.864162, -45.993988)">
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(50, 185, 210);" points="208.254 35.601 126.27 145.383 239.238 172.408"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(51, 183, 208);" points="52.379 92.454 208.438 34.843 125.056 146.711"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(61, 224, 255);" points="209.19 35.857 238.848 172.583 309.768 138.977"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(53, 182, 207);" points="51.495 92.282 33.707 245.726 123.369 146.332"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(61, 224, 255);" points="124.587 147.868 32.918 246.353 141.314 278.737"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(61, 224, 255);" points="126.278 145.862 142.342 280.387 236.33 172.462"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(61, 224, 255);" points="238.927 171.996 143.772 280.273 267.958 303.636"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(61, 224, 255);" points="240.637 173.072 310.138 138.483 268.848 302.995"/>
+    <path style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(54, 182, 207);" d="M 31.886 247.146 L 142.656 280.531 L 135.605 350.487 L 31.886 247.146 Z"/>
+    <polygon style="stroke: rgb(0, 0, 0); stroke-width: 7.24145px; stroke-linejoin: round; fill: rgb(54, 194, 220);" points="144.118 280.466 134.525 351.428 267.308 303.954"/>
+  </g>
+</svg>
