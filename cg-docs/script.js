@@ -92,6 +92,7 @@ const imageSources = [
 </svg>`,
 ];
 function scatterSvgs({
+  allowUnderContent=false,
   container,
   svgs,
   count = svgs.length,
@@ -105,31 +106,52 @@ function scatterSvgs({
   const avoidRect = contentBox.getBoundingClientRect();
   const padding = 40;
 
-  const shuffled = [...svgs].sort(() => Math.random() - 0.5);
+  const placed = [];
 
   for (let i = 0; i < count; i++) {
     let attempts = 0;
 
-    while (attempts < 50) {
+    while (attempts < 60) {
       attempts++;
 
       const size = minSize + Math.random() * (maxSize - minSize);
       const x = Math.random() * w;
       const y = Math.random() * h;
+      const r = size / 2;
 
-      const half = size / 2;
-
+      // Avoid content box
+      if(!allowUnderContent){
       const overlapsContent =
-        x + half > avoidRect.left &&
-        x - half < avoidRect.right &&
-        y + half > avoidRect.top &&
-        y - half < avoidRect.bottom;
+        x + r > avoidRect.left - padding &&
+        x - r < avoidRect.right + padding &&
+        y + r > avoidRect.top - padding &&
+        y - r < avoidRect.bottom + padding;
 
-      if (overlapsContent) continue;
+        if(overlapsContent)continue;
+      }
 
+      // Avoid other SVGs
+      let overlapsOther = false;
+      for (const p of placed) {
+        const dx = x - p.x;
+        const dy = y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < r + p.r + padding) {
+          overlapsOther = true;
+          break;
+        }
+      }
+
+      if (overlapsOther) continue;
+
+      // Place SVG
       const el = document.createElement("div");
-      el.innerHTML = shuffled[i];
-
+      if (allowUnderContent) {
+        el.style.opacity = 0.3;
+        el.style.filter = "blur(2.5px)";
+      } 
+      el.innerHTML = svgs[i];
       el.style.position = "absolute";
       el.style.left = `${x}px`;
       el.style.top = `${y}px`;
@@ -139,16 +161,21 @@ function scatterSvgs({
       }deg)`;
       el.style.pointerEvents = "none";
       el.style.zIndex = "-1";
+
       const svgEl = el.querySelector("svg");
       svgEl.style.width = "100%";
       svgEl.style.height = "auto";
+
       container.appendChild(el);
+
+      placed.push({ x, y, r });
       break;
     }
   }
 }
 
 scatterSvgs({
+  allowUnderContent:innerWidth<500?true:false,
   container: svgBg,
   svgs: imageSources,
   count: 7,
