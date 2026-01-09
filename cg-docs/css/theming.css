@@ -29,9 +29,9 @@
     --transition-time: 0.3s;
     --navHeight: 101px;
 
-    --code-bg: #3e3b2e; /* subtle yellowish bg for code */
-    --code-fg: #fefcbf; /* light yellow text */
-    --highlight: #60a5fa; /* accent highlight */
+    --code-bg: #3e3b2e; 
+    --code-fg: #fefcbf;
+    --highlight: #60a5fa; 
     --highlight2: #10afa2;
     --highlight3: #34d399;
     --block-code: #0c1117;
@@ -54,9 +54,8 @@
   --descriptor: #f1f3f5;
   --hr: #d1d5db;
 
-  /* New palette colors */
-  --code-bg: #fef9c3; /* subtle yellow bg for code */
-  --code-fg: #78350f; /* dark brown text */
+  --code-bg: #fef9c3;
+  --code-fg: #78350f; 
   --highlight: #2563eb;
   --highlight2: #14b8a6;
   --highlight3: #10b981;

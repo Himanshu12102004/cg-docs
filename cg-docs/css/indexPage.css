@@ -1,9 +1,8 @@
 :root {
   --grid-color: rgba(255, 255, 255, 0.1);
 
-  /* primary accent */
-  --accent-main: #00f5d4; /* electric teal */
-  --accent-strong: #00ffe1; /* hover / focus */
+  --accent-main: #00f5d4;
+  --accent-strong: #00ffe1;
   --accent-soft: rgba(0, 245, 212, 0.4);
   --accent-glow: rgba(0, 255, 225, 0.9);
 
@@ -16,16 +15,15 @@
 .light {
   --grid-color: rgba(0, 0, 0, 0.1);
 
-  --accent-main: #0057ff; /* main stroke */
-  --accent-strong: #003cff; /* hover / focus */
+  --accent-main: #0057ff;
+  --accent-strong: #003cff;
   --accent-soft: rgba(0, 87, 255, 0.35);
   --accent-glow: rgba(0, 60, 255, 0.8);
   --btn-text: #001233;
   --btn-bg: rgba(0, 87, 255, 0.08);
 
-   --bounding-lines: #6d28d9;
+  --bounding-lines: #6d28d9;
 }
-
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -38,7 +36,7 @@ html {
 * {
   scrollbar-width: thin;
   scrollbar-color: #888 transparent;
-    margin: 0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -199,7 +197,7 @@ body {
 }
 .featureCard-descriptionSection {
   flex: 1;
-  position:relative;
+  position: relative;
 }
 .featureCard-imageSection {
   flex: 2;
@@ -231,38 +229,38 @@ body {
   text-align: center;
   margin-top: 1rem;
 }
-.featureCard-even .featureCard-description-horizontalLine{
-  top:-2rem;
-  left:-4rem;
-  height:0.1rem;
-  width:110%;
+.featureCard-even .featureCard-description-horizontalLine {
+  top: -2rem;
+  left: -4rem;
+  height: 0.1rem;
+  width: 110%;
   position: absolute;
   background-color: var(--accent-main);
 }
 
-.featureCard-even .featureCard-description-verticalLine{
-  top:-4rem;
-  left:-2rem;
-   width:0.1rem;
-  height:110%;
+.featureCard-even .featureCard-description-verticalLine {
+  top: -4rem;
+  left: -2rem;
+  width: 0.1rem;
+  height: 110%;
   position: absolute;
   background-color: var(--accent-main);
 }
 
-.featureCard-odd .featureCard-description-horizontalLine{
-  bottom:-2rem;
-  right:-4rem;
-  height:0.1rem;
-  width:110%;
+.featureCard-odd .featureCard-description-horizontalLine {
+  bottom: -2rem;
+  right: -4rem;
+  height: 0.1rem;
+  width: 110%;
   position: absolute;
   background-color: var(--accent-main);
 }
 
-.featureCard-odd .featureCard-description-verticalLine{
-  bottom:-4rem;
-  right:-2rem;
-   width:0.1rem;
-  height:110%;
+.featureCard-odd .featureCard-description-verticalLine {
+  bottom: -4rem;
+  right: -2rem;
+  width: 0.1rem;
+  height: 110%;
   position: absolute;
   background-color: var(--accent-main);
 }
@@ -313,10 +311,10 @@ sup {
 
 .socials svg {
   fill: var(--foreground);
+  stroke: var(--foreground);
   width: 1.5rem;
   height: 1.5rem;
 }
-
 
 /* Media Query */
 @media screen and (max-width: 1000px) {
@@ -327,7 +325,8 @@ sup {
   }
 }
 @media screen and (max-width: 500px) {
-  .featureCard-description-horizontalLine .featureCard-description-verticalLine{
+  .featureCard-description-horizontalLine,
+  .featureCard-description-verticalLine {
     display: none;
   }
   .main-head {
@@ -373,5 +372,15 @@ sup {
   }
   .readDocsButton {
     margin-top: 2rem;
+  }
+  .footer {
+    font-size: 0.8rem;
+  }
+  .diagonal-pattern {
+    display: none;
+  }
+  .socials svg {
+    height: 1rem;
+    width: 1rem;
   }
 }
