@@ -25,7 +25,9 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100dvw;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 * {
@@ -37,10 +39,9 @@ html {
 body {
   width: 100%;
   overflow-x: hidden;
-  box-sizing: border-box;
+  position: relative;
   font-family: "Google Sans Flex";
   color: var(--foreground);
-  width: fit-content;
   background-color: var(--background);
   background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
@@ -52,8 +53,7 @@ body {
 .background1 {
   inset: 0;
   height: 100dvh;
-  min-height: fit-content;
-  max-width: 100dvw;
+  min-height:fit-content;
 }
 
 .theme-toggler {
@@ -212,6 +212,13 @@ sup {
 }
 
 /* Media Query */
+@media screen and (max-width: 1000px) {
+.featureCard {
+    margin-right: 0;
+    margin-left: 0;
+  gap:1rem;
+  }
+}
 @media screen and (max-width: 500px) {
   .main-head {
     font-size: 3rem;
@@ -219,8 +226,8 @@ sup {
   .background1 {
     padding: 3rem 2rem;
   }
-  .intro{
-    font-size:1rem;
+  .intro {
+    font-size: 1rem;
   }
   .content-box {
     width: 100%;
@@ -234,27 +241,27 @@ sup {
   .featureCard {
     gap: 0;
     margin-right: 0;
-    margin-left:0;
+    margin-left: 0;
     flex-direction: column;
   }
-  .featureCard-imageSection-wrapper{
-    padding:0;
+  .featureCard-imageSection-wrapper {
+    padding: 0;
     background-image: none;
     background-color: transparent;
-    margin-top:1rem;
+    margin-top: 1rem;
   }
-  .featureCard-description{
+  .featureCard-description {
     font-size: 1rem;
   }
-  .features h2{
-    font-size:2.5rem;
-    margin-bottom:3rem;
+  .features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
   }
-  .featureCard-head{
-    font-size:1.8rem;
-    margin-bottom: 1rem;;
+  .featureCard-head {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
-  .readDocsButton{
-    margin-top:2rem;
+  .readDocsButton {
+    margin-top: 2rem;
   }
 }

@@ -1,4 +1,4 @@
-const svgBg = document.querySelector(".background1");
+const svgBg = document.querySelector("body");
 const contentBox = document.querySelector(".content-box");
 const imageSources = [
   `<?xml version="1.0" encoding="utf-8"?>
@@ -129,7 +129,7 @@ function scatterSvgs({
 
         if(overlapsContent)continue;
       }
-
+      
       // Avoid other SVGs
       let overlapsOther = false;
       for (const p of placed) {
@@ -149,7 +149,7 @@ function scatterSvgs({
       const el = document.createElement("div");
       if (allowUnderContent) {
         el.style.opacity = 0.3;
-        el.style.filter = "blur(2.5px)";
+        el.style.filter ="blur(2.5px)"
       } 
       el.innerHTML = svgs[i];
       el.style.position = "absolute";
@@ -161,13 +161,7 @@ function scatterSvgs({
       }deg)`;
       el.style.pointerEvents = "none";
       el.style.zIndex = "-1";
-
-      const svgEl = el.querySelector("svg");
-      svgEl.style.width = "100%";
-      svgEl.style.height = "auto";
-
       container.appendChild(el);
-
       placed.push({ x, y, r });
       break;
     }
