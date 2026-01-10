@@ -97,7 +97,7 @@ body {
 }
 
 .hide {
-  opacity: 0;
+  display: none;
   pointer-events: none;
 }
 
@@ -241,12 +241,17 @@ body {
   background-color: var(--bounding-lines);
 }
 
+.featureCard-imageSection-wrapper{
+  overflow: hidden;
+}
+
 sup {
   font-size: 0.8rem;
   padding-left: 0.5rem;
 }
 
 .footer {
+  margin-top: 7rem;
   display: flex;
 background-color: var(--background);
   background-image: repeating-linear-gradient(
@@ -257,8 +262,6 @@ background-color: var(--background);
     transparent 10px
   );
 }
-
-
 
 .infoSection {
   width:100%;
@@ -282,8 +285,8 @@ background-color: var(--background);
   display: flex;
   align-items: center;
   transition: all 0.2s;
-
 }
+
 .socials:hover svg,.socials:hover{
   color:var(--link-hover-color);
   fill: var(--link-hover-color);

@@ -171,13 +171,24 @@ scatterSvgs({
 
 const sunIcon = document.querySelector(".sun");
 const moonIcon = document.querySelector(".moon");
+const allImages = document.querySelectorAll(".featureImage");
+const allImagesLength = allImages.length;
+console.log(allImages)
 // Do not think that saved theme is undefined its in the template
 if (savedTheme === "dark") {
   sunIcon.classList.add("hide");
   moonIcon.classList.remove("hide");
+  for(let i=0;i<allImagesLength;i+=2){
+    allImages[i].classList.remove("hide");
+    allImages[i+1].classList.add("hide");
+  }
 } else {
   moonIcon.classList.add("hide");
   sunIcon.classList.remove("hide");
+  for(let i=0;i<allImagesLength;i+=2){
+    allImages[i].classList.add("hide");
+    allImages[i+1].classList.remove("hide");
+  }
 }
 function toggleTheme() {
   const lightNow = root.classList.toggle("light");
@@ -186,10 +197,18 @@ function toggleTheme() {
     moonIcon.classList.add("hide");
     sunIcon.classList.remove("hide");
     localStorage.setItem("theme", "light");
+    for(let i=0;i<allImagesLength;i+=2){
+    allImages[i].classList.add("hide");
+    allImages[i+1].classList.remove("hide");
+  }
   } else {
     sunIcon.classList.add("hide");
     moonIcon.classList.remove("hide");
     localStorage.setItem("theme", "dark");
+     for(let i=0;i<allImagesLength;i+=2){
+    allImages[i].classList.remove("hide");
+    allImages[i+1].classList.add("hide");
+  }
   }
 }
 
