@@ -1,28 +1,29 @@
 :root {
   --grid-color: rgba(255, 255, 255, 0.1);
 
-  --accent-main: #00f5d4;
-  --accent-strong: #00ffe1;
-  --accent-soft: rgba(0, 245, 212, 0.4);
-  --accent-glow: rgba(0, 255, 225, 0.9);
+  --btn-bg:#00ff8c;
+  --btn-text: #001B0A;
 
-  --btn-text: #eafffb;
-  --btn-bg: rgba(0, 245, 212, 0.1);
+  --btn-glow: 0 8px 24px rgba(0, 180, 120, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 
-  --bounding-lines: #8b5cf6;
+  --bounding-lines: #60ffb7;
+
+  --link-hover-color:#00E5FF
 }
-
 .light {
   --grid-color: rgba(0, 0, 0, 0.1);
 
-  --accent-main: #0057ff;
-  --accent-strong: #003cff;
-  --accent-soft: rgba(0, 87, 255, 0.35);
-  --accent-glow: rgba(0, 60, 255, 0.8);
-  --btn-text: #001233;
-  --btn-bg: rgba(0, 87, 255, 0.08);
+  --btn-bg: rgb(59, 130, 246);
+  --btn-text: #ffffff;
 
-  --bounding-lines: #6d28d9;
+  --btn-glow: 0 8px 24px  rgba(59, 130, 246, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+
+  --bounding-lines: rgb(59, 130, 246);
+
+  --link-hover-color:rgb(54, 112, 206);
+
 }
 
 html {
@@ -122,50 +123,25 @@ body {
 
 .readDocsButton {
   margin-top: 3rem;
-
   position: relative;
   padding: 0.9rem 2.2rem;
   font-size: 1.1rem;
   font-family: inherit;
-  color: var(--accent-main);
-  background: transparent;
-  border: 2px dashed var(--accent-soft);
+  background: var(--btn-bg);
   cursor: pointer;
   letter-spacing: 0.5px;
-  border-color: var(--accent-glow);
-  box-shadow: 0 0 18px var(--accent-glow), inset 0 0 12px var(--accent-soft);
-  color: var(--accent-strong);
-  transition: all 0.2s ease;
+  box-shadow: var(--btn-glow);
+  color: var(--btn-text);
+  border-radius: 8px;
+  border: none;
+  transition: all 0.2s;
 }
 
-/* corner ticks */
-.readDocsButton::before,
-.readDocsButton::after {
-  content: "";
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--accent-main);
-}
 
-.readDocsButton::before {
-  top: -6px;
-  left: -6px;
-  border-right: none;
-  border-bottom: none;
-}
-
-.readDocsButton::after {
-  bottom: -6px;
-  right: -6px;
-  border-left: none;
-  border-top: none;
-}
 
 /* hover effect */
 .readDocsButton:hover {
-  color: var(--btn-text);
-  text-shadow: 0 0 5px var(--accent-glow), 0 0 12px var(--accent-soft);
+  transform:scale(1.05);
 }
 
 .features {
@@ -235,7 +211,7 @@ body {
   height: 0.1rem;
   width: 110%;
   position: absolute;
-  background-color: var(--accent-main);
+  background-color: var(--bounding-lines);
 }
 
 .featureCard-even .featureCard-description-verticalLine {
@@ -244,7 +220,7 @@ body {
   width: 0.1rem;
   height: 110%;
   position: absolute;
-  background-color: var(--accent-main);
+  background-color: var(--bounding-lines);
 }
 
 .featureCard-odd .featureCard-description-horizontalLine {
@@ -253,7 +229,7 @@ body {
   height: 0.1rem;
   width: 110%;
   position: absolute;
-  background-color: var(--accent-main);
+  background-color: var(--bounding-lines);
 }
 
 .featureCard-odd .featureCard-description-verticalLine {
@@ -262,29 +238,17 @@ body {
   width: 0.1rem;
   height: 110%;
   position: absolute;
-  background-color: var(--accent-main);
+  background-color: var(--bounding-lines);
 }
 
 sup {
-  font-size: 1rem;
+  font-size: 0.8rem;
   padding-left: 0.5rem;
 }
 
 .footer {
   display: flex;
-  background-color: var(--background);
-  background-image: radial-gradient(
-    circle,
-    var(--grid-color) 2px,
-    transparent 1px
-  );
-  background-size: 20px 20px;
-}
-
-.diagonal-pattern {
-  width: 3rem;
-  background-color: var(--background);
-
+background-color: var(--background);
   background-image: repeating-linear-gradient(
     45deg,
     var(--grid-color) 0px,
@@ -294,11 +258,21 @@ sup {
   );
 }
 
+
+
 .infoSection {
-  margin: 2rem 2rem;
+  width:100%;
+  margin: 2rem 0 0 3rem;
+  padding:2rem;
   display: flex;
   flex-direction: column;
-
+    background-color: var(--background);
+  background-image: radial-gradient(
+    circle,
+    var(--grid-color) 2px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
   gap: 1rem;
 }
 .socials {
@@ -307,6 +281,13 @@ sup {
   gap: 1rem;
   display: flex;
   align-items: center;
+  transition: all 0.2s;
+
+}
+.socials:hover svg,.socials:hover{
+  color:var(--link-hover-color);
+  fill: var(--link-hover-color);
+  stroke: var(--link-hover-color);
 }
 
 .socials svg {
@@ -314,6 +295,8 @@ sup {
   stroke: var(--foreground);
   width: 1.5rem;
   height: 1.5rem;
+  transition: all 0.2s;
+
 }
 
 /* Media Query */
@@ -328,6 +311,9 @@ sup {
   .featureCard-description-horizontalLine,
   .featureCard-description-verticalLine {
     display: none;
+  }
+  .infoSection{
+    margin-left: 0;
   }
   .main-head {
     font-size: 3rem;
@@ -370,10 +356,9 @@ sup {
     font-size: 1.8rem;
     margin-bottom: 1rem;
   }
-  .readDocsButton {
-    margin-top: 2rem;
-  }
+  
   .footer {
+    
     font-size: 0.8rem;
   }
   .diagonal-pattern {
